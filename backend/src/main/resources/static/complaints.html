@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投诉管理</title>
+    <!-- 页面基础样式定义 -->
+    <style>
+        /* 全局重置样式，统一盒模型 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 页面主体样式：全屏渐变背景 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* 内容容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 页面头部区域 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        /* 页面主标题 */
+        .header h1 {
+            color: white;
+            font-size: 24px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* 通用按钮样式 */
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        /* 按钮悬停效果 */
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        /* 次要按钮样式（透明底白字） */
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* 卡片容器 */
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        /* 数据表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        /* 表格单元格通用样式 */
+        th, td {
+            padding: 14px 20px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        /* 表头样式 */
+        th {
+            background: #f8f9fa;
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 12px;
+        }
+
+        /* 表格行底部分隔线 */
+        tr:not(:last-child) td {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        /* 表格行悬停效果 */
+        tr:hover td {
+            background: #fafbfc;
+        }
+
+        /* 意见描述单元格：超长文本省略 */
+        td.description-cell {
+            max-width: 280px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* 回复内容单元格 */
+        td.reply-cell {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #27ae60;
+        }
+
+        /* 回复内容为空时的样式 */
+        td.reply-cell.empty {
+            color: #bbb;
+        }
+
+        /* 操作按钮组 */
+        .actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        /* 操作按钮样式 */
+        .actions button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .actions button:hover {
+            opacity: 0.85;
+        }
+
+        /* 回复按钮 */
+        .btn-reply {
+            background: #667eea;
+            color: white;
+        }
+
+        /* 标记已解决按钮 */
+        .btn-resolve {
+            background: #27ae60;
+            color: white;
+        }
+
+        /* 标记未解决按钮 */
+        .btn-unresolve {
+            background: #e67e22;
+            color: white;
+        }
+
+        /* 状态徽章 */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* 已解决状态样式 */
+        .status-resolved {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        /* 待处理状态样式 */
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        /* 空数据提示 */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #888;
+        }
+
+        /* 模态框遮罩层 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* 模态框激活状态 */
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        /* 模态框主体 */
+        .modal {
+            background: white;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: modalIn 0.2s ease;
+        }
+
+        /* 模态框进入动画 */
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 模态框标题 */
+        .modal h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* 详情行 */
+        .detail-row {
+            margin-bottom: 14px;
+            font-size: 14px;
+        }
+
+        /* 详情行标签 */
+        .detail-row label {
+            display: block;
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* 详情行值 */
+        .detail-row .value {
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* 表单分组 */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        /* 表单标签 */
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #555;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* 文本域样式 */
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 100px;
+            transition: border-color 0.3s;
+        }
+
+        /* 文本域聚焦效果 */
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* 模态框底部操作按钮 */
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        /* 取消按钮 */
+        .btn-cancel {
+            background: #f0f0f0;
+            color: #555;
+        }
+
+        /* 保存按钮 */
+        .btn-save {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Toast提示框 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            background: #2ecc71;
+        }
+
+        .toast.error {
+            background: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面内容容器 -->
+    <div class="container">
+        <!-- 页面头部标题与返回按钮 -->
+        <div class="header">
+            <h1>投诉管理</h1>
+            <button class="btn btn-secondary" id="backBtn">返回</button>
+        </div>
+
+        <!-- 投诉数据卡片 -->
+        <div class="card">
+            <table id="complaintTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>提交人员</th>
+                        <th>投诉老师</th>
+                        <th>意见描述</th>
+                        <th>回复内容</th>
+                        <th>状态</th>
+                        <th>提交时间</th>
+                        <th style="width: 200px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="complaintTableBody"></tbody>
+            </table>
+            <div class="empty-state" id="emptyState" style="display: none;">暂无投诉数据</div>
+        </div>
+    </div>
+
+    <!-- 回复投诉模态框 -->
+    <div class="modal-overlay" id="replyModalOverlay">
+        <div class="modal">
+            <h2>回复投诉</h2>
+            <div class="detail-row">
+                <label>投诉老师</label>
+                <div class="value" id="replyTeacherName">-</div>
+            </div>
+            <div class="detail-row">
+                <label>意见描述</label>
+                <div class="value" id="replyDescription">-</div>
+            </div>
+            <div class="form-group">
+                <label for="replyContent">回复内容</label>
+                <textarea id="replyContent" placeholder="请输入回复内容..."></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-cancel" id="cancelReplyBtn">取消</button>
+                <button class="btn btn-save" id="saveReplyBtn">保存回复</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast提示框容器 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // API基础地址配置
+        const API_BASE_URL = '/api';
+        // 从本地存储获取登录Token
+        const token = localStorage.getItem('token');
+
+        // 未登录则跳转到登录页
+        if (!token) {
+            window.location.href = 'index.html';
+        }
+
+        // 当前回复的投诉ID
+        let currentReplyId = null;
+        // 投诉数据缓存，用于快速查找
+        let complaintCache = new Map();
+
+        // 显示Toast提示消息
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type} show`;
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // 格式化日期时间
+        function formatDate(dateStr) {
+            if (!dateStr) return '-';
+            const d = new Date(dateStr);
+            return d.toLocaleString('zh-CN');
+        }
+
+        // HTML转义函数，防止XSS攻击
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // 加载投诉列表数据
+        async function loadComplaints() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/complaints`, {
+                    headers: { 'Authorization': token }
+                });
+                const complaints = await res.json();
+                const tbody = document.getElementById('complaintTableBody');
+                const empty = document.getElementById('emptyState');
+                const table = document.getElementById('complaintTable');
+
+                complaintCache.clear();
+                // 无数据时显示空状态
+                if (!complaints || complaints.length === 0) {
+                    tbody.innerHTML = '';
+                    empty.style.display = 'block';
+                    table.style.display = 'none';
+                    return;
+                }
+
+                // 渲染投诉数据表格
+                empty.style.display = 'none';
+                table.style.display = 'table';
+                tbody.innerHTML = complaints.map(c => {
+                    complaintCache.set(c.id, c);
+                    const resolved = c.resolved === true;
+                    const replyClass = c.reply ? 'reply-cell' : 'reply-cell empty';
+                    const replyText = c.reply ? escapeHtml(c.reply) : '暂无回复';
+                    return `
+                        <tr>
+                            <td>${c.id}</td>
+                            <td>${escapeHtml(c.submitterName)}</td>
+                            <td>${escapeHtml(c.teacherName)}</td>
+                            <td class="description-cell" title="${escapeHtml(c.description)}">${escapeHtml(c.description)}</td>
+                            <td class="${replyClass}" title="${escapeHtml(c.reply || '')}">${replyText}</td>
+                            <td><span class="status-badge ${resolved ? 'status-resolved' : 'status-pending'}">${resolved ? '已解决' : '待处理'}</span></td>
+                            <td>${formatDate(c.createdAt)}</td>
+                            <td>
+                                <div class="actions">
+                                    <button class="btn-reply" onclick="openReplyModal(${c.id})">回复</button>
+                                    <button class="${resolved ? 'btn-unresolve' : 'btn-resolve'}" onclick="toggleResolve(${c.id}, ${!resolved})">${resolved ? '标记未解决' : '标记已解决'}</button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            } catch (err) {
+                showToast('加载投诉列表失败', 'error');
+            }
+        }
+
+        // 打开回复模态框
+        window.openReplyModal = function(id) {
+            const c = complaintCache.get(id);
+            if (!c) return;
+            currentReplyId = id;
+            document.getElementById('replyTeacherName').textContent = c.teacherName;
+            document.getElementById('replyDescription').textContent = c.description;
+            document.getElementById('replyContent').value = c.reply || '';
+            document.getElementById('replyModalOverlay').classList.add('active');
+        };
+
+        // 关闭回复模态框
+        function closeReplyModal() {
+            document.getElementById('replyModalOverlay').classList.remove('active');
+            currentReplyId = null;
+        }
+
+        // 取消回复按钮点击事件
+        document.getElementById('cancelReplyBtn').addEventListener('click', closeReplyModal);
+        // 点击遮罩层关闭模态框
+        document.getElementById('replyModalOverlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('replyModalOverlay')) closeReplyModal();
+        });
+
+        // 保存回复按钮点击事件
+        document.getElementById('saveReplyBtn').addEventListener('click', async () => {
+            if (!currentReplyId) return;
+            const reply = document.getElementById('replyContent').value.trim();
+            if (!reply) {
+                showToast('请输入回复内容', 'error');
+                return;
+            }
+            try {
+                // 发送回复请求
+                const res = await fetch(`${API_BASE_URL}/complaints/${currentReplyId}/reply`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                    body: JSON.stringify({ reply })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast(data.message);
+                    closeReplyModal();
+                    loadComplaints();
+                } else {
+                    showToast(data.message || '回复失败', 'error');
+                }
+            } catch (err) {
+                showToast('网络错误', 'error');
+            }
+        });
+
+        // 切换投诉解决状态
+        window.toggleResolve = async function(id, resolved) {
+            try {
+                const res = await fetch(`${API_BASE_URL}/complaints/${id}/resolve`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                    body: JSON.stringify({ resolved })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast(data.message);
+                    loadComplaints();
+                } else {
+                    showToast(data.message || '操作失败', 'error');
+                }
+            } catch (err) {
+                showToast('网络错误', 'error');
+            }
+        };
+
+        // 返回按钮点击事件
+        document.getElementById('backBtn').addEventListener('click', () => {
+            window.location.href = 'success.html';
+        });
+
+        // 页面加载时获取投诉列表
+        loadComplaints();
+    </script>
+</body>
+</html>

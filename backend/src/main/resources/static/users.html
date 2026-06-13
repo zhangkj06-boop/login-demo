@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户管理</title>
+    <!-- 页面基础样式定义 -->
+    <style>
+        /* 全局重置样式，统一盒模型 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 页面主体样式：全屏渐变背景 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* 内容容器 */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* 页面头部区域 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        /* 页面主标题 */
+        .header h1 {
+            color: white;
+            font-size: 24px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* 头部操作按钮区域 */
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* 通用按钮样式 */
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        /* 按钮悬停效果 */
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        /* 主要按钮样式（白底紫字） */
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* 次要按钮样式（透明底白字） */
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* 卡片容器 */
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        /* 数据表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        /* 表格单元格通用样式 */
+        th, td {
+            padding: 14px 20px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        /* 表头样式 */
+        th {
+            background: #f8f9fa;
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 12px;
+        }
+
+        /* 表格行底部分隔线 */
+        tr:not(:last-child) td {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        /* 表格行悬停效果 */
+        tr:hover td {
+            background: #fafbfc;
+        }
+
+        /* 操作按钮组 */
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* 操作按钮样式 */
+        .actions button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .actions button:hover {
+            opacity: 0.85;
+        }
+
+        /* 编辑按钮 */
+        .btn-edit {
+            background: #667eea;
+            color: white;
+        }
+
+        /* 删除按钮 */
+        .btn-delete {
+            background: #e74c3c;
+            color: white;
+        }
+
+        /* 头像图片样式 */
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+            border: 2px solid #e1e1e1;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .avatar:hover {
+            opacity: 0.85;
+            transform: scale(1.05);
+        }
+
+        /* 头像占位符样式（无头像时显示） */
+        .avatar-placeholder {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            vertical-align: middle;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .avatar-placeholder:hover {
+            opacity: 0.85;
+            transform: scale(1.05);
+        }
+
+        /* 头像上传区域 */
+        .avatar-upload {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+            margin: 0 auto 10px;
+            position: relative;
+            background: #f8f9fa;
+        }
+
+        .avatar-upload img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-upload .upload-hint {
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            padding: 4px;
+        }
+
+        /* 头像上传隐藏文件输入框 */
+        .avatar-upload input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* 空数据提示 */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #888;
+        }
+
+        /* 模态框遮罩层 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* 模态框激活状态 */
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        /* 模态框主体 */
+        .modal {
+            background: white;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 420px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: modalIn 0.2s ease;
+        }
+
+        /* 模态框进入动画 */
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 模态框标题 */
+        .modal h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* 表单分组 */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        /* 表单标签 */
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #555;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* 表单输入框 */
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        /* 输入框聚焦效果 */
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* 表单提示文字 */
+        .form-hint {
+            font-size: 12px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        /* 模态框底部操作按钮 */
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        /* 取消按钮 */
+        .btn-cancel {
+            background: #f0f0f0;
+            color: #555;
+        }
+
+        /* 保存按钮 */
+        .btn-save {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Toast提示框 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            background: #2ecc71;
+        }
+
+        .toast.error {
+            background: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面内容容器 -->
+    <div class="container">
+        <!-- 页面头部标题与操作按钮 -->
+        <div class="header">
+            <h1>用户管理</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary" id="backBtn">返回</button>
+                <button class="btn btn-primary" id="addBtn">+ 新增用户</button>
+            </div>
+        </div>
+
+        <!-- 用户数据卡片 -->
+        <div class="card">
+            <table id="userTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>头像</th>
+                        <th>用户名</th>
+                        <th style="width: 160px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <!-- 数据行由JS动态渲染 -->
+                </tbody>
+            </table>
+            <div class="empty-state" id="emptyState" style="display: none;">暂无用户数据</div>
+        </div>
+    </div>
+
+    <!-- 新增/编辑用户模态框 -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <h2 id="modalTitle">新增用户</h2>
+            <div class="form-group">
+                <label>头像</label>
+                <div class="avatar-upload" id="avatarUpload">
+                    <div class="upload-hint" id="avatarHint">点击上传头像</div>
+                    <input type="file" id="avatarInput" accept="image/*">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="formUsername">用户名</label>
+                <input type="text" id="formUsername" placeholder="请输入用户名">
+            </div>
+            <div class="form-group">
+                <label for="formPassword">密码</label>
+                <input type="password" id="formPassword" placeholder="请输入密码">
+                <p class="form-hint" id="passwordHint">密码长度不少于6位</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-cancel" id="cancelBtn">取消</button>
+                <button class="btn btn-save" id="saveBtn">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 列表中头像上传的隐藏文件输入框 -->
+    <input type="file" id="listAvatarInput" accept="image/*" style="display:none">
+    <!-- Toast提示框容器 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // API基础地址配置
+        const API_BASE_URL = '/api';
+        // 从本地存储获取登录Token
+        const token = localStorage.getItem('token');
+
+        // 未登录则跳转到登录页
+        if (!token) {
+            window.location.href = 'index.html';
+        }
+
+        // 当前编辑的用户ID，null表示新增模式
+        let editingId = null;
+        // 当前头像URL
+        let currentAvatarUrl = '';
+        // 列表中头像上传的目标用户ID
+        let avatarUploadTargetId = null;
+
+        // 显示Toast提示消息
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type} show`;
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // 加载用户列表数据
+        async function loadUsers() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/users`, {
+                    headers: { 'Authorization': token }
+                });
+                const users = await res.json();
+                const tbody = document.getElementById('userTableBody');
+                const empty = document.getElementById('emptyState');
+
+                // 无数据时显示空状态
+                if (!users || users.length === 0) {
+                    tbody.innerHTML = '';
+                    empty.style.display = 'block';
+                    document.getElementById('userTable').style.display = 'none';
+                    return;
+                }
+
+                // 渲染用户数据表格
+                empty.style.display = 'none';
+                document.getElementById('userTable').style.display = 'table';
+                tbody.innerHTML = users.map(u => {
+                    const avatarHtml = u.avatar
+                        ? `<img src="${u.avatar}" class="avatar" alt="avatar" onclick="triggerAvatarUpload(${u.id})" title="点击更换头像">`
+                        : `<div class="avatar-placeholder" onclick="triggerAvatarUpload(${u.id})" title="点击上传头像">${escapeHtml(u.username.charAt(0).toUpperCase())}</div>`;
+                    return `
+                    <tr>
+                        <td>${u.id}</td>
+                        <td>${avatarHtml}</td>
+                        <td>${escapeHtml(u.username)}</td>
+                        <td>
+                            <div class="actions">
+                                <button class="btn-edit" onclick="editUser(${u.id}, '${escapeHtml(u.username)}', '${u.avatar || ''}')">编辑</button>
+                                <button class="btn-delete" onclick="deleteUser(${u.id})">删除</button>
+                            </div>
+                        </td>
+                    </tr>
+                `}).join('');
+            } catch (err) {
+                showToast('加载用户列表失败', 'error');
+            }
+        }
+
+        // HTML转义函数，防止XSS攻击
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // 更新头像预览
+        function updateAvatarPreview(url) {
+            currentAvatarUrl = url || '';
+            const uploadDiv = document.getElementById('avatarUpload');
+            if (url) {
+                uploadDiv.innerHTML = `<img src="${url}" alt="avatar"><input type="file" id="avatarInput" accept="image/*">`;
+            } else {
+                uploadDiv.innerHTML = `<div class="upload-hint" id="avatarHint">点击上传头像</div><input type="file" id="avatarInput" accept="image/*">`;
+            }
+            document.getElementById('avatarInput').addEventListener('change', handleAvatarUpload);
+        }
+
+        // 处理头像上传
+        async function handleAvatarUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const formData = new FormData();
+            formData.append('file', file);
+            try {
+                const res = await fetch(`${API_BASE_URL}/upload/avatar`, {
+                    method: 'POST',
+                    headers: { 'Authorization': token },
+                    body: formData
+                });
+                const data = await res.json();
+                if (data.success) {
+                    currentAvatarUrl = data.url;
+                    updateAvatarPreview(data.url);
+                    showToast('头像上传成功');
+                } else {
+                    showToast(data.message || '上传失败', 'error');
+                }
+            } catch (err) {
+                showToast('上传失败', 'error');
+            }
+        }
+
+        // 打开模态框
+        function openModal(title, username = '', passwordPlaceholder = '请输入密码', avatar = '') {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('formUsername').value = username;
+            document.getElementById('formPassword').value = '';
+            document.getElementById('formPassword').placeholder = passwordPlaceholder;
+            document.getElementById('passwordHint').textContent = editingId ? '留空表示不修改密码' : '密码长度不少于6位';
+            updateAvatarPreview(avatar);
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        // 关闭模态框
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            editingId = null;
+            currentAvatarUrl = '';
+        }
+
+        // 新增按钮点击事件
+        document.getElementById('addBtn').addEventListener('click', () => {
+            editingId = null;
+            openModal('新增用户');
+        });
+
+        // 取消按钮点击事件
+        document.getElementById('cancelBtn').addEventListener('click', closeModal);
+        // 点击遮罩层关闭模态框
+        document.getElementById('modalOverlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('modalOverlay')) closeModal();
+        });
+
+        // 返回按钮点击事件
+        document.getElementById('backBtn').addEventListener('click', () => {
+            window.location.href = 'success.html';
+        });
+
+        // 触发列表中头像上传
+        window.triggerAvatarUpload = function(userId) {
+            avatarUploadTargetId = userId;
+            document.getElementById('listAvatarInput').click();
+        };
+
+        // 列表中头像文件选择变更事件
+        document.getElementById('listAvatarInput').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file || !avatarUploadTargetId) return;
+            const formData = new FormData();
+            formData.append('file', file);
+            try {
+                // 上传头像文件
+                const uploadRes = await fetch(`${API_BASE_URL}/upload/avatar`, {
+                    method: 'POST',
+                    headers: { 'Authorization': token },
+                    body: formData
+                });
+                const uploadData = await uploadRes.json();
+                if (uploadData.success) {
+                    // 更新用户头像URL
+                    const updateRes = await fetch(`${API_BASE_URL}/users/${avatarUploadTargetId}/avatar`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token
+                        },
+                        body: JSON.stringify({ avatar: uploadData.url })
+                    });
+                    const updateData = await updateRes.json();
+                    if (updateData.success) {
+                        showToast('头像更新成功');
+                        loadUsers();
+                    } else {
+                        showToast(updateData.message || '头像更新失败', 'error');
+                    }
+                } else {
+                    showToast(uploadData.message || '上传失败', 'error');
+                }
+            } catch (err) {
+                showToast('上传失败', 'error');
+            } finally {
+                avatarUploadTargetId = null;
+                document.getElementById('listAvatarInput').value = '';
+            }
+        });
+
+        // 编辑用户按钮点击事件
+        window.editUser = function(id, username, avatar) {
+            editingId = id;
+            openModal('编辑用户', username, '留空表示不修改', avatar);
+        };
+
+        // 删除用户按钮点击事件
+        window.deleteUser = async function(id) {
+            if (!confirm('确定要删除该用户吗？')) return;
+            try {
+                const res = await fetch(`${API_BASE_URL}/users/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': token }
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('删除成功');
+                    loadUsers();
+                } else {
+                    showToast(data.message || '删除失败', 'error');
+                }
+            } catch (err) {
+                showToast('删除失败', 'error');
+            }
+        };
+
+        // 保存按钮点击事件（新增或编辑）
+        document.getElementById('saveBtn').addEventListener('click', async () => {
+            const username = document.getElementById('formUsername').value.trim();
+            const password = document.getElementById('formPassword').value;
+
+            // 表单验证
+            if (!username) {
+                showToast('请输入用户名', 'error');
+                return;
+            }
+
+            if (!editingId && password.length < 6) {
+                showToast('密码长度不能少于6位', 'error');
+                return;
+            }
+
+            const payload = { username, password };
+            const url = editingId ? `${API_BASE_URL}/users/${editingId}` : `${API_BASE_URL}/users`;
+            const method = editingId ? 'PUT' : 'POST';
+
+            try {
+                const res = await fetch(url, {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    const targetId = editingId || data.id;
+                    // 如果有头像URL，更新用户头像
+                    if (currentAvatarUrl && targetId) {
+                        await fetch(`${API_BASE_URL}/users/${targetId}/avatar`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': token
+                            },
+                            body: JSON.stringify({ avatar: currentAvatarUrl })
+                        });
+                    }
+                    showToast(editingId ? '更新成功' : '创建成功');
+                    closeModal();
+                    loadUsers();
+                } else {
+                    showToast(data.message || '操作失败', 'error');
+                }
+            } catch (err) {
+                showToast('网络错误', 'error');
+            }
+        });
+
+        // 页面加载时获取用户列表
+        loadUsers();
+    </script>
+</body>
+</html>

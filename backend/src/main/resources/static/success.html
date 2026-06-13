@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录成功</title>
+    <!-- 页面基础样式定义 -->
+    <style>
+        /* 全局重置样式，统一盒模型 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 页面主体样式：全屏渐变背景，侧边栏+主内容布局 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* 侧边栏容器样式 */
+        .sidebar {
+            width: 240px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 30px 20px;
+        }
+
+        /* 侧边栏标题 */
+        .sidebar-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        /* 侧边栏头像图片 */
+        .sidebar-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 12px;
+            display: block;
+            border: 3px solid rgba(102, 126, 234, 0.2);
+        }
+
+        /* 侧边栏头像占位符（无头像时显示） */
+        .sidebar-avatar-placeholder {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0 auto 12px;
+            border: 3px solid rgba(102, 126, 234, 0.2);
+        }
+
+        /* 侧边栏副标题（欢迎语） */
+        .sidebar-subtitle {
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* 导航列表 */
+        .nav-list {
+            list-style: none;
+            flex: 1;
+        }
+
+        /* 导航列表项 */
+        .nav-list li {
+            margin-bottom: 10px;
+        }
+
+        /* 导航按钮样式 */
+        .nav-btn {
+            width: 100%;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f5f6fa;
+            color: #555;
+        }
+
+        /* 导航按钮悬停效果 */
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.35);
+        }
+
+        /* 导航按钮点击效果 */
+        .nav-btn:active {
+            transform: translateX(2px);
+        }
+
+        /* 导航按钮激活状态 */
+        .nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.35);
+        }
+
+        /* 导航按钮图标 */
+        .nav-btn .icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        /* 侧边栏底部区域 */
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        /* 退出登录按钮 */
+        .logout-button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        /* 退出登录按钮悬停效果 */
+        .logout-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        /* 主内容区域 */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        /* 仪表盘卡片 */
+        .dashboard {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            min-height: calc(100vh - 60px);
+            padding: 40px;
+        }
+
+        /* 仪表盘头部 */
+        .dashboard-header {
+            margin-bottom: 30px;
+        }
+
+        /* 仪表盘主标题 */
+        .dashboard-header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        /* 仪表盘副标题 */
+        .dashboard-header p {
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* 统计卡片网格布局 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        /* 单个统计卡片 */
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            padding: 24px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.35);
+        }
+
+        /* 统计标签 */
+        .stat-card .stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        /* 统计数值 */
+        .stat-card .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        /* 区块标题 */
+        .section-title {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        /* 信息卡片 */
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        /* 信息卡片标题 */
+        .info-card h3 {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* 信息行 */
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e1e1e1;
+            font-size: 14px;
+        }
+
+        /* 最后一行信息去除下边框 */
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        /* 信息行左侧标签 */
+        .info-row span:first-child {
+            color: #666;
+        }
+
+        /* 信息行右侧值 */
+        .info-row span:last-child {
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* ========== 公告管理模块样式 ========== */
+        .view-section {
+            display: none;
+        }
+        .view-section.active {
+            display: block;
+        }
+
+        /* 搜索栏 */
+        .search-bar {
+            background: #f5f6fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 24px;
+            align-items: center;
+        }
+        .search-form .form-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1 1 240px;
+        }
+        .search-form .form-item label {
+            font-size: 13px;
+            color: #666;
+            white-space: nowrap;
+            min-width: 60px;
+            text-align: right;
+        }
+        .search-form .form-item input,
+        .search-form .form-item select {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid #dcdfe6;
+            border-radius: 4px;
+            font-size: 13px;
+            background: white;
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+        .search-form .form-item input:focus,
+        .search-form .form-item select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .search-actions {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+            align-items: center;
+        }
+        .btn-query {
+            padding: 8px 20px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn-query:hover {
+            opacity: 0.85;
+        }
+        .btn-reset {
+            padding: 8px 20px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn-reset:hover {
+            opacity: 0.85;
+        }
+        .btn-toggle {
+            font-size: 13px;
+            color: #667eea;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .btn-toggle:hover {
+            text-decoration: underline;
+        }
+
+        /* 操作按钮区域 */
+        .toolbar {
+            margin-bottom: 16px;
+        }
+        .btn-add {
+            padding: 8px 16px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: opacity 0.2s;
+        }
+        .btn-add:hover {
+            opacity: 0.85;
+        }
+
+        /* 数据表格 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .data-table thead th {
+            background: #f5f6fa;
+            color: #333;
+            font-weight: 600;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e1e1e1;
+        }
+        .data-table tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #555;
+            vertical-align: middle;
+        }
+        .data-table tbody tr:hover {
+            background: #fafafa;
+        }
+
+        /* 状态标签 */
+        .status-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        .status-tag.published {
+            background: #f0f9eb;
+            color: #67c23a;
+        }
+        .status-tag.draft {
+            background: #f4f4f5;
+            color: #909399;
+        }
+
+        /* 操作链接 */
+        .action-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .action-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .action-links a:hover {
+            text-decoration: underline;
+        }
+        .action-links a.danger {
+            color: #e74c3c;
+        }
+        .action-links a.danger:hover {
+            color: #c0392b;
+        }
+
+        /* ========== 首页公告滚动区域 ========== */
+        .announcement-section {
+            margin-bottom: 25px;
+        }
+        .announcement-section .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        .announcement-section .section-header span {
+            font-size: 16px;
+            color: #555;
+            font-weight: 600;
+        }
+        .announcement-section .section-header a {
+            font-size: 13px;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .announcement-section .section-header a:hover {
+            text-decoration: underline;
+        }
+        .announcement-marquee-wrap {
+            position: relative;
+            background: #fff8e6;
+            border: 1px solid #ffe4a1;
+            border-radius: 8px;
+            padding: 12px 40px;
+            overflow: hidden;
+        }
+        .announcement-marquee {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            white-space: nowrap;
+        }
+        .announcement-marquee::-webkit-scrollbar {
+            display: none;
+        }
+        .announcement-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #ffe4a1;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+            font-size: 13px;
+            color: #333;
+            max-width: 320px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .announcement-item:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        .announcement-item .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .announcement-item:hover .tag {
+            background: white;
+            color: #e74c3c;
+        }
+        .marquee-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            border: none;
+            background: rgba(0,0,0,0.05);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            color: #666;
+        }
+        .marquee-btn:hover {
+            background: rgba(0,0,0,0.15);
+        }
+        .marquee-btn.prev { left: 8px; }
+        .marquee-btn.next { right: 8px; }
+
+        /* 日期范围输入 */
+        .date-range {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex: 1;
+        }
+        .date-range input[type="date"] {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid #dcdfe6;
+            border-radius: 4px;
+            font-size: 13px;
+            background: white;
+            font-family: inherit;
+        }
+
+        /* 搜索区域收起状态 */
+        .search-bar.collapsed .search-form {
+            display: none;
+        }
+        .search-bar.collapsed {
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .search-bar.collapsed::before {
+            content: '搜索条件已收起';
+            color: #999;
+            font-size: 13px;
+        }
+
+        /* 分页 */
+        .pagination {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+        .pagination button {
+            padding: 6px 12px;
+            border: 1px solid #dcdfe6;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #555;
+        }
+        .pagination button:hover:not(:disabled) {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        .pagination button:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        .pagination .page-info {
+            color: #666;
+        }
+
+        /* 模态框遮罩层 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 模态框遮罩层激活状态 */
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        /* 模态框主体 */
+        .modal {
+            background: white;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 560px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        /* 模态框滑入动画 */
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 模态框头部 */
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        /* 模态框标题 */
+        .modal-header h2 {
+            font-size: 20px;
+            color: #333;
+        }
+
+        /* 模态框关闭按钮 */
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #888;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        /* 关闭按钮悬停效果 */
+        .modal-close:hover {
+            color: #333;
+        }
+
+        /* 模态框表单分组 */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        /* 模态框表单标签 */
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        /* 模态框下拉框、输入框与文本域 */
+        .form-group select,
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        /* 模态框输入框聚焦效果 */
+        .form-group select:focus,
+        .form-group input[type="text"]:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* 文本域样式 */
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* 提交按钮 */
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        /* 提交按钮悬停效果 */
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* 提交按钮禁用状态 */
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* 模态框底部按钮组 */
+        .modal-footer {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .modal-footer .submit-btn {
+            flex: 1;
+        }
+        .modal-footer .btn-cancel {
+            flex: 1;
+            padding: 12px;
+            background: #f5f6fa;
+            color: #555;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .modal-footer .btn-cancel:hover {
+            background: #e8e8e8;
+        }
+
+        /* Toast提示框样式 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 14px 24px;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.3s ease;
+        }
+
+        /* Toast显示状态 */
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Toast成功样式 */
+        .toast.success {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        }
+
+        /* Toast错误样式 */
+        .toast.error {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- 侧边栏导航区域 -->
+    <aside class="sidebar">
+        <div class="sidebar-title">管理系统</div>
+        <!-- 头像容器，由JS动态渲染 -->
+        <div id="sidebarAvatarContainer"></div>
+        <div class="sidebar-subtitle">欢迎，<span id="sidebarUsername">用户</span></div>
+        <!-- 动态导航列表 -->
+        <ul class="nav-list" id="navList"></ul>
+        <div class="sidebar-footer">
+            <button class="logout-button" id="logoutBtn">退出登录</button>
+        </div>
+    </aside>
+
+    <!-- 主内容区域 -->
+    <main class="main-content">
+        <div class="dashboard">
+            <!-- ========== 首页视图 ========== -->
+            <div id="homeView" class="view-section active">
+                <!-- 仪表盘头部欢迎信息 -->
+                <div class="dashboard-header">
+                    <h1>欢迎回来，<span id="usernameDisplay">用户</span>！</h1>
+                    <p>今天是 <span id="todayDate"></span>，祝您工作愉快</p>
+                </div>
+
+                <!-- 统计卡片网格 -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">用户总数</div>
+                        <div class="stat-value" id="statUsers">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">学生总数</div>
+                        <div class="stat-value" id="statStudents">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">教师总数</div>
+                        <div class="stat-value" id="statTeachers">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">商品总数</div>
+                        <div class="stat-value" id="statProducts">-</div>
+                    </div>
+                </div>
+
+                <!-- 最新公告滚动 -->
+                <div class="announcement-section" id="homeAnnouncementSection" style="display:none">
+                    <div class="section-header">
+                        <span>📢 最新公告</span>
+                        <a href="#" id="goToAnnouncementView">查看更多 →</a>
+                    </div>
+                    <div class="announcement-marquee-wrap">
+                        <button class="marquee-btn prev" id="marqueePrev">‹</button>
+                        <div class="announcement-marquee" id="announcementMarquee"></div>
+                        <button class="marquee-btn next" id="marqueeNext">›</button>
+                    </div>
+                </div>
+
+                <!-- 登录信息区块 -->
+                <div class="section-title">登录信息</div>
+                <div class="info-card">
+                    <div class="info-row">
+                        <span>用户名</span>
+                        <span id="infoUsername">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span>登录时间</span>
+                        <span id="loginTime">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span>Token</span>
+                        <span id="tokenDisplay" style="font-size: 12px; max-width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== 公告管理视图 ========== -->
+            <div id="announcementView" class="view-section">
+                <div class="dashboard-header">
+                    <h1>发送公告</h1>
+                    <p>管理系统公告的发布、编辑与推送</p>
+                </div>
+
+                <!-- 搜索区域 -->
+                <div class="search-bar" id="announcementSearchBar">
+                    <div class="search-form" id="announcementSearchForm">
+                        <div class="form-item">
+                            <label>标题名称</label>
+                            <input type="text" id="annSearchTitle" placeholder="请输入">
+                        </div>
+                        <div class="form-item">
+                            <label>推送对象</label>
+                            <select id="annSearchTarget">
+                                <option value="">全部</option>
+                                <option value="学生">学生</option>
+                                <option value="教师">教师</option>
+                                <option value="家长">家长</option>
+                                <option value="全部">全部</option>
+                            </select>
+                        </div>
+                        <div class="form-item">
+                            <label>发布人</label>
+                            <input type="text" id="annSearchPublisher" placeholder="请输入">
+                        </div>
+                        <div class="form-item">
+                            <label>发布状态</label>
+                            <select id="annSearchStatus">
+                                <option value="">全部</option>
+                                <option value="已发布">已发布</option>
+                                <option value="草稿">草稿</option>
+                            </select>
+                        </div>
+                        <div class="form-item">
+                            <label>发布时间</label>
+                            <div class="date-range">
+                                <input type="date" id="annSearchDateFrom">
+                                <span>至</span>
+                                <input type="date" id="annSearchDateTo">
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label>推送范围</label>
+                            <select id="annSearchScope">
+                                <option value="">全部</option>
+                                <option value="全局推送">全局推送</option>
+                                <option value="指定群体">指定群体</option>
+                            </select>
+                        </div>
+                        <div class="search-actions">
+                            <button class="btn-query" id="annSearchBtn">查询</button>
+                            <button class="btn-reset" id="annResetBtn">重置</button>
+                            <button class="btn-toggle" id="annToggleBtn">收起</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 工具栏 -->
+                <div class="toolbar">
+                    <button class="btn-add" id="annAddBtn" style="background:#1a1a1a;padding:10px 20px;font-size:14px;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.15)">
+                        <span style="font-size:16px;margin-right:4px">+</span> 新增公告
+                    </button>
+                </div>
+
+                <!-- 数据表格 -->
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width:60px">序号</th>
+                            <th>标题</th>
+                            <th style="width:100px">推送对象</th>
+                            <th style="width:140px">创建时间</th>
+                            <th style="width:140px">发布时间</th>
+                            <th style="width:100px">发布人</th>
+                            <th style="width:90px">发布状态</th>
+                            <th style="width:200px">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="announcementTableBody">
+                        <!-- 动态填充 -->
+                    </tbody>
+                </table>
+
+                <!-- 分页 -->
+                <div class="pagination" id="announcementPagination" style="display:none">
+                    <span class="page-info">共 <span id="annTotalCount">0</span> 条</span>
+                    <button id="annPrevPage" disabled>上一页</button>
+                    <span class="page-info">第 <span id="annCurrentPage">1</span> 页</span>
+                    <button id="annNextPage" disabled>下一页</button>
+                </div>
+
+                <!-- 空状态 -->
+                <div id="announcementEmpty" style="text-align:center;padding:60px 0;color:#999;font-size:14px;display:none">
+                    暂无公告数据
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 投诉反馈模态框 -->
+    <div class="modal-overlay" id="complaintModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>投诉反馈</h2>
+                <button class="modal-close" id="closeComplaintModal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="complaintTeacher">投诉老师</label>
+                <select id="complaintTeacher">
+                    <option value="">请选择老师</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="complaintDesc">意见描述</label>
+                <textarea id="complaintDesc" placeholder="请详细描述您的意见或投诉内容..."></textarea>
+            </div>
+            <button class="submit-btn" id="submitComplaint">提交投诉</button>
+        </div>
+    </div>
+
+    <!-- 公告模态框（新增/编辑） -->
+    <div class="modal-overlay" id="announcementModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="announcementModalTitle">发送公告</h2>
+                <button class="modal-close" id="closeAnnouncementModal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="annTitle">公告标题 <span style="color:#e74c3c">*</span></label>
+                <input type="text" id="annTitle" placeholder="请输入公告标题">
+            </div>
+            <div class="form-group">
+                <label for="annTarget">推送对象 <span style="color:#e74c3c">*</span></label>
+                <select id="annTarget">
+                    <option value="">请选择</option>
+                    <option value="学生">学生</option>
+                    <option value="教师">教师</option>
+                    <option value="家长">家长</option>
+                    <option value="全部">全部</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="annScope">推送范围 <span style="color:#e74c3c">*</span></label>
+                <select id="annScope">
+                    <option value="">请选择</option>
+                    <option value="全局推送">全局推送</option>
+                    <option value="指定群体">指定群体</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="annContent">公告内容 <span style="color:#e74c3c">*</span></label>
+                <textarea id="annContent" placeholder="请输入公告内容..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" id="annSaveDraft">保存草稿</button>
+                <button class="submit-btn" id="annPublishBtn">立即发布</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 查看公告模态框 -->
+    <div class="modal-overlay" id="viewAnnouncementModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="viewAnnTitle">公告详情</h2>
+                <button class="modal-close" id="closeViewAnnouncementModal">&times;</button>
+            </div>
+            <div style="margin-bottom:12px;font-size:13px;color:#888">
+                <span id="viewAnnMeta"></span>
+            </div>
+            <div style="background:#f8f9fa;border-radius:8px;padding:16px;font-size:14px;color:#555;line-height:1.7;white-space:pre-wrap" id="viewAnnContent"></div>
+            <div style="margin-top:20px;text-align:right">
+                <button class="submit-btn" id="closeViewAnnBtn" style="width:auto;padding:10px 30px">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast提示框容器 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 从本地存储读取登录信息
+        const username = localStorage.getItem('username') || '未知用户';
+        const token = localStorage.getItem('token') || '';
+        const role = localStorage.getItem('role') || 'ADMIN';
+        const loginType = localStorage.getItem('loginType') || 'user';
+
+        // 未登录则跳转到登录页
+        if (!token) {
+            window.location.href = 'index.html';
+        }
+
+        // ==================== 视图切换 ====================
+        function switchView(viewName) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn[data-view]').forEach(el => el.classList.remove('active'));
+
+            if (viewName === 'home') {
+                document.getElementById('homeView').classList.add('active');
+                document.getElementById('navHome').classList.add('active');
+            } else if (viewName === 'announcement') {
+                document.getElementById('announcementView').classList.add('active');
+                document.getElementById('navAnnouncement').classList.add('active');
+                loadAnnouncements();
+            }
+        }
+
+        // 根据角色权限设置侧边栏导航
+        async function setupNavByRole() {
+            const navList = document.getElementById('navList');
+            navList.innerHTML = '';
+
+            // 首页导航（固定）
+            const homeLi = document.createElement('li');
+            const homeBtn = document.createElement('button');
+            homeBtn.className = 'nav-btn active';
+            homeBtn.id = 'navHome';
+            homeBtn.dataset.view = 'home';
+            homeBtn.innerHTML = '<span class="icon">&#127968;</span>首页';
+            homeBtn.addEventListener('click', () => switchView('home'));
+            homeLi.appendChild(homeBtn);
+            navList.appendChild(homeLi);
+
+            // 公告管理导航（固定）
+            const annLi = document.createElement('li');
+            const annBtn = document.createElement('button');
+            annBtn.className = 'nav-btn';
+            annBtn.id = 'navAnnouncement';
+            annBtn.dataset.view = 'announcement';
+            annBtn.innerHTML = '<span class="icon">&#128226;</span>发送公告';
+            annBtn.addEventListener('click', () => switchView('announcement'));
+            annLi.appendChild(annBtn);
+            navList.appendChild(annLi);
+
+            try {
+                // 请求当前角色的权限数据
+                const res = await fetch('/api/role-permissions/role/' + role, {
+                    headers: { 'Authorization': token }
+                });
+                const permissions = await res.json();
+
+                // 模块与页面对应关系
+                const pageMap = {
+                    users: 'users.html',
+                    students: 'students.html',
+                    teachers: 'teachers.html',
+                    inventory: 'inventory.html',
+                    complaints: null,
+                    complaintManage: 'complaints.html',
+                    roles: 'roles.html',
+                    games: 'games.html',
+                    crawler: 'crawler.html'
+                };
+
+                // 渲染有查看权限的导航按钮（按 moduleKey 去重）
+                const seenKeys = new Set();
+                permissions.filter(p => p.canView).forEach(p => {
+                    if (seenKeys.has(p.moduleKey)) return;
+                    seenKeys.add(p.moduleKey);
+                    const li = document.createElement('li');
+                    const btn = document.createElement('button');
+                    btn.className = 'nav-btn';
+                    btn.innerHTML = '<span class="icon">' + (p.icon || '') + '</span>' + p.moduleLabel;
+
+                    // 投诉模块打开模态框，其他模块跳转页面
+                    if (p.moduleKey === 'complaints') {
+                        btn.addEventListener('click', () => {
+                            loadTeachers();
+                            complaintModal.classList.add('active');
+                        });
+                    } else if (pageMap[p.moduleKey]) {
+                        btn.addEventListener('click', () => {
+                            window.location.href = pageMap[p.moduleKey];
+                        });
+                    }
+
+                    li.appendChild(btn);
+                    navList.appendChild(li);
+                });
+            } catch (err) {
+                console.error('加载权限失败', err);
+            }
+
+            // 图片爬虫入口（固定，不依赖权限系统）
+            const crawlerLi = document.createElement('li');
+            const crawlerBtn = document.createElement('button');
+            crawlerBtn.className = 'nav-btn';
+            crawlerBtn.innerHTML = '<span class="icon">&#128248;</span>图片爬虫';
+            crawlerBtn.addEventListener('click', () => {
+                window.location.href = 'crawler.html';
+            });
+            crawlerLi.appendChild(crawlerBtn);
+            navList.appendChild(crawlerLi);
+
+            // 学生和教师角色显示修改密码入口
+            if (role === 'STUDENT' || role === 'TEACHER') {
+                const changePwdLi = document.createElement('li');
+                const changePwdBtn = document.createElement('button');
+                changePwdBtn.className = 'nav-btn';
+                changePwdBtn.innerHTML = '<span class="icon">&#128274;</span>修改密码';
+                changePwdBtn.addEventListener('click', () => {
+                    window.location.href = 'change-password.html?type=' + loginType;
+                });
+                changePwdLi.appendChild(changePwdBtn);
+                navList.appendChild(changePwdLi);
+            }
+        }
+        setupNavByRole();
+
+        // 渲染侧边栏头像
+        function renderAvatar(avatarUrl) {
+            const avatarContainer = document.getElementById('sidebarAvatarContainer');
+            if (avatarUrl) {
+                avatarContainer.innerHTML = `<img src="${avatarUrl}" class="sidebar-avatar" alt="avatar">`;
+            } else {
+                avatarContainer.innerHTML = `<div class="sidebar-avatar-placeholder">${username.charAt(0).toUpperCase()}</div>`;
+            }
+        }
+
+        // 加载当前用户信息并渲染头像
+        async function loadCurrentUser() {
+            try {
+                const res = await fetch('/api/users', { headers: { 'Authorization': token } });
+                const users = await res.json();
+                const current = users.find(u => u.username === username);
+                if (current) {
+                    const avatarUrl = current.avatar || '';
+                    localStorage.setItem('avatar', avatarUrl);
+                    renderAvatar(avatarUrl);
+                } else {
+                    renderAvatar(localStorage.getItem('avatar') || '');
+                }
+            } catch (err) {
+                renderAvatar(localStorage.getItem('avatar') || '');
+            }
+        }
+        loadCurrentUser();
+
+        // 填充页面上的用户信息
+        document.getElementById('usernameDisplay').textContent = username;
+        document.getElementById('sidebarUsername').textContent = username;
+        document.getElementById('infoUsername').textContent = username;
+        document.getElementById('loginTime').textContent = new Date().toLocaleString('zh-CN');
+        document.getElementById('tokenDisplay').textContent = token;
+        document.getElementById('tokenDisplay').title = token;
+
+        // 显示今天的日期和星期
+        const now = new Date();
+        const weekDays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        document.getElementById('todayDate').textContent = `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日 ${weekDays[now.getDay()]}`;
+
+        // 加载并显示统计数据
+        async function loadStats() {
+            try {
+                // 并行请求用户、学生、教师、商品数据
+                const [uRes, sRes, tRes, pRes] = await Promise.all([
+                    fetch('/api/users', { headers: { 'Authorization': token } }),
+                    fetch('/api/students', { headers: { 'Authorization': token } }),
+                    fetch('/api/teachers', { headers: { 'Authorization': token } }),
+                    fetch('/api/products', { headers: { 'Authorization': token } })
+                ]);
+                const users = await uRes.json();
+                const students = await sRes.json();
+                const teachers = await tRes.json();
+                const products = await pRes.json();
+                document.getElementById('statUsers').textContent = Array.isArray(users) ? users.length : '-';
+                document.getElementById('statStudents').textContent = Array.isArray(students) ? students.length : '-';
+                document.getElementById('statTeachers').textContent = Array.isArray(teachers) ? teachers.length : '-';
+                document.getElementById('statProducts').textContent = Array.isArray(products) ? products.length : '-';
+            } catch (err) {
+                console.error('加载统计数据失败', err);
+            }
+        }
+        loadStats();
+
+        // HTML转义工具函数
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // 加载首页公告滚动条（只显示已发布）
+        async function loadHomeAnnouncements() {
+            try {
+                const params = new URLSearchParams();
+                params.append('status', '已发布');
+                params.append('role', role);
+                const url = '/api/announcements?' + params.toString();
+                const res = await fetch(url, { headers: { 'Authorization': token } });
+                if (!res.ok) throw new Error('加载失败');
+                const data = await res.json();
+                const marquee = document.getElementById('announcementMarquee');
+                const section = document.getElementById('homeAnnouncementSection');
+                if (data.length === 0) {
+                    section.style.display = 'none';
+                    return;
+                }
+                section.style.display = 'block';
+                marquee.innerHTML = data.map(item => `
+                    <div class="announcement-item" onclick="viewAnnouncement(${item.id})">
+                        <span class="tag">公告</span>
+                        <span>${escapeHtml(item.title)}</span>
+                    </div>
+                `).join('');
+            } catch (err) {
+                console.error('加载首页公告失败', err);
+            }
+        }
+        loadHomeAnnouncements();
+
+        // 公告滚动按钮
+        document.getElementById('marqueePrev').addEventListener('click', function() {
+            document.getElementById('announcementMarquee').scrollBy({ left: -250, behavior: 'smooth' });
+        });
+        document.getElementById('marqueeNext').addEventListener('click', function() {
+            document.getElementById('announcementMarquee').scrollBy({ left: 250, behavior: 'smooth' });
+        });
+
+        // 查看更多跳转
+        document.getElementById('goToAnnouncementView').addEventListener('click', function(e) {
+            e.preventDefault();
+            switchView('announcement');
+        });
+
+        // 退出登录按钮点击事件
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('username');
+            localStorage.removeItem('avatar');
+            window.location.href = 'index.html';
+        });
+
+        // 投诉模态框相关DOM元素
+        const complaintModal = document.getElementById('complaintModal');
+        const closeComplaintModal = document.getElementById('closeComplaintModal');
+        const complaintTeacher = document.getElementById('complaintTeacher');
+        const complaintDesc = document.getElementById('complaintDesc');
+        const submitComplaint = document.getElementById('submitComplaint');
+        const toast = document.getElementById('toast');
+
+        // 显示Toast提示
+        function showToast(message, type) {
+            toast.textContent = message;
+            toast.className = 'toast ' + type;
+            setTimeout(() => toast.classList.add('show'), 10);
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // 加载教师列表到投诉下拉框
+        async function loadTeachers() {
+            try {
+                const res = await fetch('/api/teachers', { headers: { 'Authorization': token } });
+                const teachers = await res.json();
+                complaintTeacher.innerHTML = '<option value="">请选择老师</option>';
+                if (Array.isArray(teachers)) {
+                    teachers.forEach(t => {
+                        const option = document.createElement('option');
+                        option.value = t.name;
+                        option.textContent = t.name;
+                        complaintTeacher.appendChild(option);
+                    });
+                }
+            } catch (err) {
+                console.error('加载教师列表失败', err);
+            }
+        }
+
+        // 关闭投诉模态框
+        closeComplaintModal.addEventListener('click', function() {
+            complaintModal.classList.remove('active');
+        });
+
+        // 点击遮罩层关闭模态框
+        complaintModal.addEventListener('click', function(e) {
+            if (e.target === complaintModal) {
+                complaintModal.classList.remove('active');
+            }
+        });
+
+        // 提交投诉按钮点击事件
+        submitComplaint.addEventListener('click', async function() {
+            const teacher = complaintTeacher.value;
+            const desc = complaintDesc.value.trim();
+
+            // 表单验证
+            if (!teacher) {
+                showToast('请选择投诉老师', 'error');
+                return;
+            }
+            if (!desc) {
+                showToast('请填写意见描述', 'error');
+                return;
+            }
+
+            submitComplaint.disabled = true;
+            submitComplaint.textContent = '提交中...';
+
+            try {
+                // 发送投诉请求
+                const res = await fetch('/api/complaints', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                    body: JSON.stringify({
+                        submitterName: username,
+                        teacherName: teacher,
+                        description: desc
+                    })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast(data.message, 'success');
+                    complaintTeacher.value = '';
+                    complaintDesc.value = '';
+                    setTimeout(() => complaintModal.classList.remove('active'), 1000);
+                } else {
+                    showToast(data.message || '提交失败', 'error');
+                }
+            } catch (err) {
+                showToast('网络错误，请稍后重试', 'error');
+            } finally {
+                submitComplaint.disabled = false;
+                submitComplaint.textContent = '提交投诉';
+            }
+        });
+
+        // ==================== 公告管理模块（对接后端API） ====================
+        let announcementData = [];
+        let annEditId = null;
+
+        // 格式化 ISO 时间为本地显示格式
+        function formatDateTime(isoString) {
+            if (!isoString) return '-';
+            const d = new Date(isoString);
+            return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0') + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+        }
+
+        // 判断当前角色是否为管理员
+        const isAdmin = role === 'ADMIN';
+
+        // 根据角色控制公告管理页面的元素显示
+        function setupAnnouncementViewByRole() {
+            const toolbar = document.querySelector('#announcementView .toolbar');
+            const statusFilter = document.getElementById('annSearchStatus');
+            if (!isAdmin) {
+                // 学生/老师：隐藏新增按钮、禁用发布状态筛选
+                if (toolbar) toolbar.style.display = 'none';
+                if (statusFilter) {
+                    statusFilter.value = '已发布';
+                    statusFilter.disabled = true;
+                }
+            }
+        }
+        setupAnnouncementViewByRole();
+
+        // 从后端加载公告列表
+        async function loadAnnouncements() {
+            try {
+                const params = new URLSearchParams();
+                const title = document.getElementById('annSearchTitle').value.trim();
+                const target = document.getElementById('annSearchTarget').value;
+                const publisher = document.getElementById('annSearchPublisher').value.trim();
+                const status = document.getElementById('annSearchStatus').value;
+                const dateFrom = document.getElementById('annSearchDateFrom').value;
+                const dateTo = document.getElementById('annSearchDateTo').value;
+                const scope = document.getElementById('annSearchScope').value;
+
+                if (title) params.append('title', title);
+                if (target) params.append('target', target);
+                if (publisher) params.append('publisher', publisher);
+                // 学生/老师强制只看已发布
+                if (isAdmin && status) {
+                    params.append('status', status);
+                } else if (!isAdmin) {
+                    params.append('status', '已发布');
+                }
+                if (dateFrom) params.append('dateFrom', dateFrom);
+                if (dateTo) params.append('dateTo', dateTo);
+                if (scope) params.append('scope', scope);
+                params.append('role', role);
+
+                const url = '/api/announcements' + (params.toString() ? '?' + params.toString() : '');
+                const res = await fetch(url, { headers: { 'Authorization': token } });
+                if (!res.ok) throw new Error('加载失败');
+                announcementData = await res.json();
+                renderAnnouncementTable();
+            } catch (err) {
+                console.error('加载公告列表失败', err);
+                showToast('加载公告列表失败', 'error');
+            }
+        }
+
+        // 搜索条件
+        let annSearchCollapsed = false;
+
+        // 搜索区域收起/展开
+        document.getElementById('annToggleBtn').addEventListener('click', function() {
+            const bar = document.getElementById('announcementSearchBar');
+            const form = document.getElementById('announcementSearchForm');
+            annSearchCollapsed = !annSearchCollapsed;
+            if (annSearchCollapsed) {
+                form.style.display = 'none';
+                bar.style.padding = '12px 20px';
+                bar.style.display = 'flex';
+                bar.style.justifyContent = 'space-between';
+                bar.style.alignItems = 'center';
+                if (!bar.querySelector('.collapsed-tip')) {
+                    const tip = document.createElement('span');
+                    tip.className = 'collapsed-tip';
+                    tip.textContent = '搜索条件已收起';
+                    tip.style.color = '#999';
+                    tip.style.fontSize = '13px';
+                    bar.insertBefore(tip, bar.firstChild);
+                }
+                this.textContent = '展开';
+            } else {
+                form.style.display = 'flex';
+                bar.style.padding = '20px';
+                bar.style.display = 'block';
+                const tip = bar.querySelector('.collapsed-tip');
+                if (tip) tip.remove();
+                this.textContent = '收起';
+            }
+        });
+
+        // 查询
+        document.getElementById('annSearchBtn').addEventListener('click', function() {
+            loadAnnouncements();
+        });
+
+        // 重置
+        document.getElementById('annResetBtn').addEventListener('click', function() {
+            document.getElementById('annSearchTitle').value = '';
+            document.getElementById('annSearchTarget').value = '';
+            document.getElementById('annSearchPublisher').value = '';
+            document.getElementById('annSearchStatus').value = '';
+            document.getElementById('annSearchDateFrom').value = '';
+            document.getElementById('annSearchDateTo').value = '';
+            document.getElementById('annSearchScope').value = '';
+            loadAnnouncements();
+        });
+
+        // 渲染表格
+        function renderAnnouncementTable() {
+            const tbody = document.getElementById('announcementTableBody');
+            const empty = document.getElementById('announcementEmpty');
+            const pagination = document.getElementById('announcementPagination');
+
+            document.getElementById('annTotalCount').textContent = announcementData.length;
+
+            if (announcementData.length === 0) {
+                tbody.innerHTML = '';
+                empty.style.display = 'block';
+                pagination.style.display = 'none';
+                return;
+            }
+
+            empty.style.display = 'none';
+            pagination.style.display = 'flex';
+
+            tbody.innerHTML = announcementData.map((item, index) => {
+                const statusClass = item.status === '已发布' ? 'published' : 'draft';
+                // 管理员显示完整操作，学生/老师只能查看
+                let actionHtml;
+                if (isAdmin) {
+                    const publishActions = item.status === '已发布'
+                        ? `<a onclick="stopAnnouncement(${item.id})">停发</a>`
+                        : `<a onclick="publishAnnouncement(${item.id})">发布</a>`;
+                    actionHtml = `
+                        ${publishActions}
+                        <a onclick="viewAnnouncement(${item.id})">查看</a>
+                        <a onclick="editAnnouncement(${item.id})">编辑</a>
+                        <a class="danger" onclick="deleteAnnouncement(${item.id})">删除</a>`;
+                } else {
+                    actionHtml = `<a onclick="viewAnnouncement(${item.id})">查看</a>`;
+                }
+                return `<tr>
+                    <td>${index + 1}</td>
+                    <td>${escapeHtml(item.title)}</td>
+                    <td>${escapeHtml(item.target)}</td>
+                    <td>${formatDateTime(item.createTime)}</td>
+                    <td>${formatDateTime(item.publishTime)}</td>
+                    <td>${escapeHtml(item.publisher)}</td>
+                    <td><span class="status-tag ${statusClass}">${item.status}</span></td>
+                    <td>
+                        <div class="action-links">${actionHtml}</div>
+                    </td>
+                </tr>`;
+            }).join('');
+        }
+
+        // 打开新增模态框
+        document.getElementById('annAddBtn').addEventListener('click', function() {
+            annEditId = null;
+            document.getElementById('announcementModalTitle').textContent = '新增公告';
+            document.getElementById('annTitle').value = '';
+            document.getElementById('annTarget').value = '';
+            document.getElementById('annScope').value = '';
+            document.getElementById('annContent').value = '';
+            document.getElementById('announcementModal').classList.add('active');
+        });
+
+        // 关闭模态框
+        document.getElementById('closeAnnouncementModal').addEventListener('click', function() {
+            document.getElementById('announcementModal').classList.remove('active');
+        });
+        document.getElementById('announcementModal').addEventListener('click', function(e) {
+            if (e.target === document.getElementById('announcementModal')) {
+                document.getElementById('announcementModal').classList.remove('active');
+            }
+        });
+
+        // 保存草稿
+        document.getElementById('annSaveDraft').addEventListener('click', function() {
+            saveAnnouncement(false);
+        });
+
+        // 立即发布
+        document.getElementById('annPublishBtn').addEventListener('click', function() {
+            saveAnnouncement(true);
+        });
+
+        async function saveAnnouncement(isPublish) {
+            const title = document.getElementById('annTitle').value.trim();
+            const target = document.getElementById('annTarget').value;
+            const scope = document.getElementById('annScope').value;
+            const content = document.getElementById('annContent').value.trim();
+
+            if (!title) { showToast('请输入公告标题', 'error'); return; }
+            if (!target) { showToast('请选择推送对象', 'error'); return; }
+            if (!scope) { showToast('请选择推送范围', 'error'); return; }
+            if (!content) { showToast('请输入公告内容', 'error'); return; }
+
+            const payload = {
+                title,
+                target,
+                scope,
+                content,
+                publisher: username,
+                status: isPublish ? '已发布' : '草稿'
+            };
+
+            try {
+                let res;
+                if (annEditId) {
+                    res = await fetch('/api/announcements/' + annEditId, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                } else {
+                    res = await fetch('/api/announcements', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                }
+                const data = await res.json();
+                if (data.success) {
+                    showToast(data.message, 'success');
+                    document.getElementById('announcementModal').classList.remove('active');
+                    loadAnnouncements();
+                } else {
+                    showToast(data.message || '操作失败', 'error');
+                }
+            } catch (err) {
+                console.error('保存公告失败', err);
+                showToast('网络错误，请稍后重试', 'error');
+            }
+        }
+
+        // 查看
+        window.viewAnnouncement = async function(id) {
+            try {
+                const res = await fetch('/api/announcements/' + id, { headers: { 'Authorization': token } });
+                if (!res.ok) throw new Error('加载失败');
+                const item = await res.json();
+                document.getElementById('viewAnnTitle').textContent = item.title;
+                document.getElementById('viewAnnMeta').innerHTML = `
+                    <span style="margin-right:16px">发布人：${escapeHtml(item.publisher)}</span>
+                    <span style="margin-right:16px">推送对象：${escapeHtml(item.target)}</span>
+                    <span style="margin-right:16px">推送范围：${escapeHtml(item.scope)}</span>
+                    <span>状态：<span class="status-tag ${item.status === '已发布' ? 'published' : 'draft'}">${item.status}</span></span>
+                `;
+                document.getElementById('viewAnnContent').textContent = item.content;
+                document.getElementById('viewAnnouncementModal').classList.add('active');
+            } catch (err) {
+                console.error('查看公告失败', err);
+                showToast('加载公告详情失败', 'error');
+            }
+        };
+
+        document.getElementById('closeViewAnnouncementModal').addEventListener('click', function() {
+            document.getElementById('viewAnnouncementModal').classList.remove('active');
+        });
+        document.getElementById('closeViewAnnBtn').addEventListener('click', function() {
+            document.getElementById('viewAnnouncementModal').classList.remove('active');
+        });
+        document.getElementById('viewAnnouncementModal').addEventListener('click', function(e) {
+            if (e.target === document.getElementById('viewAnnouncementModal')) {
+                document.getElementById('viewAnnouncementModal').classList.remove('active');
+            }
+        });
+
+        // 编辑
+        window.editAnnouncement = async function(id) {
+            try {
+                const res = await fetch('/api/announcements/' + id, { headers: { 'Authorization': token } });
+                if (!res.ok) throw new Error('加载失败');
+                const item = await res.json();
+                annEditId = id;
+                document.getElementById('announcementModalTitle').textContent = '编辑公告';
+                document.getElementById('annTitle').value = item.title;
+                document.getElementById('annTarget').value = item.target;
+                document.getElementById('annScope').value = item.scope;
+                document.getElementById('annContent').value = item.content;
+                document.getElementById('announcementModal').classList.add('active');
+            } catch (err) {
+                console.error('加载公告详情失败', err);
+                showToast('加载公告详情失败', 'error');
+            }
+        };
+
+        // 删除
+        window.deleteAnnouncement = async function(id) {
+            if (!confirm('确定要删除这条公告吗？')) return;
+            try {
+                const res = await fetch('/api/announcements/' + id, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': token }
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('公告已删除', 'success');
+                    loadAnnouncements();
+                } else {
+                    showToast(data.message || '删除失败', 'error');
+                }
+            } catch (err) {
+                console.error('删除公告失败', err);
+                showToast('网络错误，请稍后重试', 'error');
+            }
+        };
+
+        // 发布（草稿->已发布）
+        window.publishAnnouncement = async function(id) {
+            try {
+                const res = await fetch('/api/announcements/' + id + '/publish', {
+                    method: 'PUT',
+                    headers: { 'Authorization': token }
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('公告已发布', 'success');
+                    loadAnnouncements();
+                } else {
+                    showToast(data.message || '操作失败', 'error');
+                }
+            } catch (err) {
+                console.error('发布公告失败', err);
+                showToast('网络错误，请稍后重试', 'error');
+            }
+        };
+
+        // 停发（已发布->草稿）
+        window.stopAnnouncement = async function(id) {
+            try {
+                const res = await fetch('/api/announcements/' + id + '/stop', {
+                    method: 'PUT',
+                    headers: { 'Authorization': token }
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('公告已停发', 'success');
+                    loadAnnouncements();
+                } else {
+                    showToast(data.message || '操作失败', 'error');
+                }
+            } catch (err) {
+                console.error('停发公告失败', err);
+                showToast('网络错误，请稍后重试', 'error');
+            }
+        };
+    </script>
+</body>
+</html>

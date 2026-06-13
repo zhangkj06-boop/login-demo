@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>落珠抽奖</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px;
+        }
+        .header {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .header h1 {
+            color: white;
+            font-size: 22px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            background: white;
+            color: #667eea;
+        }
+        .btn:hover { transform: translateY(-1px); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .main { display: flex; gap: 16px; max-width: 900px; width: 100%; }
+        .game-wrap {
+            background: #2d1b4e;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            flex-shrink: 0;
+        }
+        canvas { display: block; border-radius: 8px; background: #1a0f2e; }
+        .panel {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            width: 260px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .panel h3 { font-size: 16px; color: #333; margin-bottom: 4px; }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #555;
+        }
+        .stat-row .val { font-weight: 700; color: #667eea; }
+        .drop-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+        .drop-btns .btn {
+            flex: 1;
+            min-width: 70px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 14px;
+            padding: 10px;
+        }
+        .drop-btns .btn.batch { font-size: 13px; }
+        .history { flex: 1; overflow-y: auto; max-height: 300px; }
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 13px;
+        }
+        .history-item .score { font-weight: 700; }
+        .history-item .score.high { color: #e74c3c; }
+        .history-item .score.mid { color: #f39c12; }
+        .history-item .score.low { color: #27ae60; }
+        .legend { display: flex; flex-wrap: wrap; gap: 8px; }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #666;
+        }
+        .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .toast {
+            position: fixed; top: 20px; right: 20px;
+            padding: 12px 20px; border-radius: 8px;
+            color: white; font-size: 14px; font-weight: 600;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            z-index: 2000; opacity: 0; transform: translateX(100px);
+            transition: all 0.3s ease; pointer-events: none;
+        }
+        .toast.show { opacity: 1; transform: translateX(0); }
+        @media (max-width: 800px) {
+            .main { flex-direction: column; align-items: center; }
+            .panel { width: 100%; max-width: 600px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div><button class="btn" id="backBtn">← 返回</button></div>
+        <h1>⚽ 落珠抽奖</h1>
+        <div></div>
+    </div>
+    <div class="main">
+        <div class="game-wrap">
+            <canvas id="game" width="600" height="800"></canvas>
+        </div>
+        <div class="panel">
+            <div>
+                <h3>📊 统计数据</h3>
+                <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+                    <div class="stat-row"><span>当前积分</span><span class="val" id="totalScore">0</span></div>
+                    <div class="stat-row"><span>投放次数</span><span class="val" id="dropCount">0</span></div>
+                    <div class="stat-row"><span>当前弹珠</span><span class="val" id="ballCount">0</span></div>
+                </div>
+            </div>
+            <div>
+                <h3>🎮 投放控制</h3>
+                <div style="margin-top:10px;color:#888;font-size:12px;margin-bottom:10px">
+                    点击投放器左右移动位置，或直接点击下方按钮投放
+                </div>
+                <div class="drop-btns">
+                    <button class="btn" id="drop1">投放 1</button>
+                    <button class="btn batch" id="drop10">×10</button>
+                    <button class="btn batch" id="drop50">×50</button>
+                </div>
+            </div>
+            <div>
+                <h3>🏆 奖励说明</h3>
+                <div class="legend" style="margin-top:8px">
+                    <div class="legend-item"><div class="legend-dot" style="background:#e74c3c"></div>1000分</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#f39c12"></div>500分</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#3498db"></div>200分</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#27ae60"></div>100分</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#95a5a6"></div>50分及以下</div>
+                </div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;min-height:0">
+                <h3>📜 投放记录</h3>
+                <div class="history" id="history"></div>
+            </div>
+        </div>
+    </div>
+    <div class="toast" id="toast"></div>
+
+<script>
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+
+// ========== 钉子配置 ==========
+const ROWS = 10;
+const START_Y = 150;
+const ROW_GAP = 50;
+const PEG_R = 5;
+const PEG_SPACING = 50;
+const CENTER_X = W / 2;
+
+let pegs = [];
+for (let r = 0; r < ROWS; r++) {
+    const count = r + 3; // 3,4,5...12
+    const startX = CENTER_X - (count - 1) * PEG_SPACING / 2;
+    for (let c = 0; c < count; c++) {
+        pegs.push({
+            x: startX + c * PEG_SPACING,
+            y: START_Y + r * ROW_GAP,
+            r: PEG_R
+        });
+    }
+}
+
+// ========== 槽位配置 ==========
+const SLOT_COUNT = ROWS + 3; // 13个
+const SLOT_Y = START_Y + ROWS * ROW_GAP + 30;
+const SLOT_BOTTOM = H - 20;
+const SLOT_WIDTH = W / SLOT_COUNT;
+const slotScores = [10, 20, 50, 100, 200, 500, 1000, 500, 200, 100, 50, 20, 10];
+const slotColors = ['#95a5a6','#95a5a6','#27ae60','#3498db','#3498db','#f39c12','#e74c3c','#f39c12','#3498db','#3498db','#27ae60','#95a5a6','#95a5a6'];
+
+let slots = [];
+for (let i = 0; i < SLOT_COUNT; i++) {
+    slots.push({
+        x: i * SLOT_WIDTH,
+        width: SLOT_WIDTH,
+        score: slotScores[i],
+        color: slotColors[i],
+        label: slotScores[i] + '分',
+        balls: 0
+    });
+}
+
+// ========== 投放器 ==========
+let dropperX = CENTER_X;
+const DROPPER_Y = 60;
+let droppingQueue = 0;
+let dropInterval = null;
+
+// ========== 弹珠 ==========
+let balls = [];
+let particles = [];
+let floatTexts = [];
+
+// ========== 统计 ==========
+let totalScore = 0;
+let dropCount = 0;
+let history = [];
+
+function spawnBall() {
+    // 在投放器位置附近加一点随机偏移，更自然
+    const offset = (Math.random() - 0.5) * 16;
+    balls.push({
+        x: dropperX + offset,
+        y: DROPPER_Y + 30,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: 1,
+        r: 8,
+        settled: false,
+        color: `hsl(${Math.random()*360}, 80%, 60%)`
+    });
+    dropCount++;
+    updateUI();
+}
+
+function startBatch(count) {
+    if (dropInterval) return;
+    let dropped = 0;
+    dropInterval = setInterval(() => {
+        spawnBall();
+        dropped++;
+        if (dropped >= count) {
+            clearInterval(dropInterval);
+            dropInterval = null;
+        }
+    }, 100);
+}
+
+// ========== 物理 ==========
+function update() {
+    // 新弹珠投放队列
+    if (droppingQueue > 0 && !dropInterval) {
+        startBatch(Math.min(droppingQueue, 50));
+        droppingQueue = 0;
+    }
+
+    for (let b of balls) {
+        if (b.settled) continue;
+
+        b.vy += 0.18; // 重力
+        b.x += b.vx;
+        b.y += b.vy;
+
+        // 空气阻力
+        b.vx *= 0.995;
+        b.vy *= 0.998;
+
+        // 墙壁碰撞
+        if (b.x - b.r < 0) { b.x = b.r; b.vx = Math.abs(b.vx) * 0.6; }
+        if (b.x + b.r > W) { b.x = W - b.r; b.vx = -Math.abs(b.vx) * 0.6; }
+
+        // 钉子碰撞
+        for (let p of pegs) {
+            const dx = b.x - p.x;
+            const dy = b.y - p.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            const minDist = b.r + p.r;
+            if (dist < minDist && dist > 0) {
+                // 推开
+                const nx = dx / dist;
+                const ny = dy / dist;
+                b.x = p.x + nx * minDist;
+                b.y = p.y + ny * minDist;
+
+                // 反射 + 随机偏转
+                const dot = b.vx * nx + b.vy * ny;
+                b.vx -= 2 * dot * nx;
+                b.vy -= 2 * dot * ny;
+
+                // 随机左右偏转（核心玩法）
+                const bias = (Math.random() - 0.5) * 3.5;
+                b.vx += bias;
+                b.vy = -Math.abs(b.vy) * 0.5 - 0.5; // 向上弹跳一点
+
+                // 速度限制
+                const sp = Math.sqrt(b.vx*b.vx + b.vy*b.vy);
+                if (sp > 6) {
+                    b.vx = (b.vx/sp) * 6;
+                    b.vy = (b.vy/sp) * 6;
+                }
+
+                addParticles(p.x, p.y, '#ffd700', 4);
+            }
+        }
+
+        // 槽位分隔板碰撞（垂直线段）
+        for (let i = 1; i < SLOT_COUNT; i++) {
+            const bx = i * SLOT_WIDTH;
+            if (b.y > SLOT_Y && b.y < SLOT_BOTTOM) {
+                if (Math.abs(b.x - bx) < b.r + 3) {
+                    if (b.x < bx) b.x = bx - b.r - 3;
+                    else b.x = bx + b.r + 3;
+                    b.vx *= -0.5;
+                }
+            }
+        }
+
+        // 落入槽位
+        if (b.y > SLOT_Y + 20 && !b.settled) {
+            const slotIdx = Math.floor(b.x / SLOT_WIDTH);
+            if (slotIdx >= 0 && slotIdx < SLOT_COUNT) {
+                b.settled = true;
+                b.slotIdx = slotIdx;
+                const slot = slots[slotIdx];
+                slot.balls++;
+                totalScore += slot.score;
+                addScoreFloat(b.x, b.y, '+' + slot.score, slot.color);
+                addParticles(b.x, b.y, slot.color, 10);
+                addHistory(slot.score);
+                updateUI();
+
+                // 让弹珠堆叠在槽位底部
+                b.targetY = SLOT_BOTTOM - 12 - (slot.balls - 1) * 10;
+            }
+        }
+    }
+
+    // 已 settled 的弹珠平滑落到堆叠位置
+    for (let b of balls) {
+        if (b.settled && b.targetY !== undefined) {
+            b.y += (b.targetY - b.y) * 0.15;
+            b.vx = 0; b.vy = 0;
+        }
+    }
+
+    // 清理掉出画布的
+    for (let i = balls.length - 1; i >= 0; i--) {
+        if (balls[i].y > H + 50) balls.splice(i, 1);
+    }
+
+    // 粒子
+    for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx; p.y += p.vy; p.life--;
+        if (p.life <= 0) particles.splice(i, 1);
+    }
+
+    // 浮动文字
+    for (let i = floatTexts.length - 1; i >= 0; i--) {
+        const t = floatTexts[i];
+        t.y -= 1.5;
+        t.life--;
+        if (t.life <= 0) floatTexts.splice(i, 1);
+    }
+}
+
+function addParticles(x, y, color, count) {
+    for (let i = 0; i < count; i++) {
+        const a = Math.random() * Math.PI * 2;
+        const s = 1 + Math.random() * 3;
+        particles.push({ x, y, vx: Math.cos(a)*s, vy: Math.sin(a)*s, life: 25 + Math.random()*15, color });
+    }
+}
+
+function addScoreFloat(x, y, text, color) {
+    floatTexts.push({ x, y, text, color, life: 50 });
+}
+
+function addHistory(score) {
+    history.unshift({ time: new Date().toLocaleTimeString('zh-CN'), score });
+    if (history.length > 50) history.pop();
+    renderHistory();
+}
+
+function renderHistory() {
+    const el = document.getElementById('history');
+    el.innerHTML = history.slice(0, 20).map(h => {
+        let cls = 'low';
+        if (h.score >= 1000) cls = 'high';
+        else if (h.score >= 200) cls = 'mid';
+        return `<div class="history-item"><span>${h.time}</span><span class="score ${cls}">+${h.score}</span></div>`;
+    }).join('');
+}
+
+function updateUI() {
+    document.getElementById('totalScore').textContent = totalScore;
+    document.getElementById('dropCount').textContent = dropCount;
+    document.getElementById('ballCount').textContent = balls.filter(b => !b.settled).length;
+}
+
+// ========== 渲染 ==========
+function draw() {
+    // 背景
+    ctx.fillStyle = '#1a0f2e';
+    ctx.fillRect(0, 0, W, H);
+
+    // 外框装饰
+    ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(8, 8, W-16, H-16);
+
+    // 投放轨道（V形引导）
+    ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(dropperX - 30, DROPPER_Y + 20);
+    ctx.lineTo(dropperX - 4, DROPPER_Y + 45);
+    ctx.moveTo(dropperX + 30, DROPPER_Y + 20);
+    ctx.lineTo(dropperX + 4, DROPPER_Y + 45);
+    ctx.stroke();
+
+    // 钉子
+    for (let p of pegs) {
+        // 发光
+        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r + 6);
+        grad.addColorStop(0, 'rgba(255,215,0,0.3)');
+        grad.addColorStop(1, 'transparent');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r + 6, 0, Math.PI*2);
+        ctx.fill();
+        // 钉子本体
+        ctx.fillStyle = '#d4af37';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fill();
+        // 高光
+        ctx.fillStyle = 'rgba(255,255,255,0.4)';
+        ctx.beginPath();
+        ctx.arc(p.x - 2, p.y - 2, p.r * 0.4, 0, Math.PI*2);
+        ctx.fill();
+    }
+
+    // 槽位分隔板
+    ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+    ctx.lineWidth = 3;
+    for (let i = 1; i < SLOT_COUNT; i++) {
+        const bx = i * SLOT_WIDTH;
+        ctx.beginPath();
+        ctx.moveTo(bx, SLOT_Y);
+        ctx.lineTo(bx, SLOT_BOTTOM);
+        ctx.stroke();
+    }
+
+    // 槽位底板和标签
+    for (let i = 0; i < SLOT_COUNT; i++) {
+        const s = slots[i];
+        // 底板
+        ctx.fillStyle = s.color + '22';
+        ctx.fillRect(s.x + 2, SLOT_BOTTOM - 30, s.width - 4, 28);
+        // 标签背景
+        ctx.fillStyle = s.color + '44';
+        ctx.fillRect(s.x + 2, SLOT_BOTTOM - 2, s.width - 4, 18);
+        // 文字
+        ctx.fillStyle = s.color;
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(s.label, s.x + s.width/2, SLOT_BOTTOM + 8);
+        // 槽内球数
+        if (s.balls > 0) {
+            ctx.fillStyle = 'rgba(255,255,255,0.6)';
+            ctx.font = '10px sans-serif';
+            ctx.fillText('×' + s.balls, s.x + s.width/2, SLOT_BOTTOM - 18);
+        }
+    }
+
+    // 弹珠
+    for (let b of balls) {
+        // 阴影
+        ctx.fillStyle = 'rgba(0,0,0,0.3)';
+        ctx.beginPath();
+        ctx.arc(b.x + 2, b.y + 2, b.r, 0, Math.PI*2);
+        ctx.fill();
+        // 球体
+        const grad = ctx.createRadialGradient(b.x - 3, b.y - 3, 0, b.x, b.y, b.r);
+        grad.addColorStop(0, '#fff');
+        grad.addColorStop(0.3, b.color);
+        grad.addColorStop(1, b.color);
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI*2);
+        ctx.fill();
+    }
+
+    // 粒子
+    for (let p of particles) {
+        ctx.globalAlpha = p.life / 40;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2 + Math.random()*2, 0, Math.PI*2);
+        ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    // 浮动得分
+    for (let t of floatTexts) {
+        ctx.globalAlpha = Math.min(1, t.life / 15);
+        ctx.fillStyle = t.color;
+        ctx.font = 'bold 16px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(t.text, t.x, t.y);
+    }
+    ctx.globalAlpha = 1;
+
+    // 投放器
+    drawDropper();
+}
+
+function drawDropper() {
+    const x = dropperX, y = DROPPER_Y;
+    // 倒三角漏斗
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+    ctx.beginPath();
+    ctx.moveTo(x - 24, y - 10);
+    ctx.lineTo(x + 24, y - 10);
+    ctx.lineTo(x + 6, y + 25);
+    ctx.lineTo(x - 6, y + 25);
+    ctx.closePath();
+    ctx.fill();
+    // 边框
+    ctx.strokeStyle = '#667eea';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    // 投放点指示
+    ctx.fillStyle = '#e74c3c';
+    ctx.beginPath();
+    ctx.arc(x, y + 28, 4, 0, Math.PI*2);
+    ctx.fill();
+    // 提示文字
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('◀ 移动投放点 ▶', x, y - 18);
+}
+
+// ========== 交互 ==========
+let animId;
+function loop() {
+    update();
+    draw();
+    animId = requestAnimationFrame(loop);
+}
+
+// 点击画布移动投放器
+canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    if (y < 100) {
+        dropperX = Math.max(40, Math.min(W - 40, x));
+    }
+});
+
+// 也可以拖拽投放器
+let dragging = false;
+canvas.addEventListener('mousedown', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    if (y < 100 && Math.abs(x - dropperX) < 40) dragging = true;
+});
+canvas.addEventListener('mousemove', (e) => {
+    if (!dragging) return;
+    const rect = canvas.getBoundingClientRect();
+    dropperX = Math.max(40, Math.min(W - 40, e.clientX - rect.left));
+});
+canvas.addEventListener('mouseup', () => dragging = false);
+canvas.addEventListener('mouseleave', () => dragging = false);
+
+// 投放按钮
+document.getElementById('drop1').addEventListener('click', () => spawnBall());
+document.getElementById('drop10').addEventListener('click', () => startBatch(10));
+document.getElementById('drop50').addEventListener('click', () => startBatch(50));
+
+// 键盘控制投放器位置 + 空格投放
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') dropperX = Math.max(40, dropperX - 15);
+    if (e.key === 'ArrowRight') dropperX = Math.min(W - 40, dropperX + 15);
+    if (e.key === ' ') { e.preventDefault(); spawnBall(); }
+});
+
+document.getElementById('backBtn').addEventListener('click', () => {
+    cancelAnimationFrame(animId);
+    window.location.href = 'games.html';
+});
+
+loop();
+</script>
+</body>
+</html>

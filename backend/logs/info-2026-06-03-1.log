@@ -1,0 +1,234 @@
+2026-06-03 00:05:49.847 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-03 00:05:49.853 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-03 00:05:49.858 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-03 00:06:02.051 [main] INFO  com.example.demo.DemoApplication - 开始启动应用...
+2026-06-03 00:06:02.356 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2026-06-03 00:06:02.387 [main] INFO  com.example.demo.DemoApplication - Starting DemoApplication using Java 22.0.2 with PID 16900 (C:\Users\zhangkj\login-demo\backend\target\classes started by zhangkj in C:\Users\zhangkj\login-demo\backend)
+2026-06-03 00:06:02.391 [main] INFO  com.example.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-03 00:06:02.905 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-03 00:06:02.965 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 53 ms. Found 9 JPA repository interfaces.
+2026-06-03 00:06:03.577 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with ports 8443 (https), 8080 (http)
+2026-06-03 00:06:03.587 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-0.0.0.0-8443"]
+2026-06-03 00:06:03.589 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-03 00:06:03.590 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-03 00:06:03.590 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-06-03 00:06:03.640 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-03 00:06:03.640 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1217 ms
+2026-06-03 00:06:03.749 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-03 00:06:03.795 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-03 00:06:03.823 [main] INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-03 00:06:04.006 [main] INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-03 00:06:04.030 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-03 00:06:04.146 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@26d73519
+2026-06-03 00:06:04.147 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-03 00:06:05.017 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-03 00:06:05.082 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-03 00:06:05.306 [main] INFO  com.example.demo.config.AppConfig - 初始化密码加密器: BCryptPasswordEncoder
+2026-06-03 00:06:05.450 [main] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2026-06-03 00:06:05.577 [main] INFO  com.example.demo.config.WebConfig - 配置静态资源映射: /uploads/** -> file:C:\Users\zhangkj\login-demo\backend\uploads/
+2026-06-03 00:06:05.724 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-0.0.0.0-8443"]
+2026-06-03 00:06:05.882 [main] INFO  org.apache.tomcat.util.net.NioEndpoint.certificate - Connector [https-jsse-nio-0.0.0.0-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [C:\Users\zhangkj\.keystore] using alias [login-demo] with trust store [null]
+2026-06-03 00:06:05.892 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-06-03 00:06:05.895 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on ports 8443 (https), 8080 (http) with context path ''
+2026-06-03 00:06:05.900 [main] INFO  com.example.demo.DemoApplication - Started DemoApplication in 3.79 seconds (process running for 4.534)
+2026-06-03 00:06:05.903 [main] INFO  com.example.demo.config.DataInitializer - 开始执行数据初始化...
+2026-06-03 00:06:05.973 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-03 00:06:05.973 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-03 00:06:05.974 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-06-03 00:06:06.165 [main] INFO  com.example.demo.config.DataInitializer - 用户表中已有数据，跳过默认用户创建
+2026-06-03 00:06:06.165 [main] INFO  com.example.demo.config.DataInitializer - 数据初始化执行完毕
+2026-06-03 00:06:06.166 [main] INFO  com.example.demo.DemoApplication - 应用启动完成
+2026-06-03 00:06:20.347 [http-nio-8080-exec-4] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: admin, 登录类型: teacher
+2026-06-03 00:06:20.347 [http-nio-8080-exec-4] INFO  com.example.demo.controller.AuthController - 教师登录，账号: admin
+2026-06-03 00:06:28.401 [http-nio-8080-exec-7] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: 张老师, 登录类型: teacher
+2026-06-03 00:06:28.401 [http-nio-8080-exec-7] INFO  com.example.demo.controller.AuthController - 教师登录，账号: 张老师
+2026-06-03 00:06:28.497 [http-nio-8080-exec-7] INFO  com.example.demo.controller.AuthController - 教师登录成功: 张老师
+2026-06-03 00:06:30.055 [http-nio-8080-exec-10] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-03 00:06:30.058 [http-nio-8080-exec-9] INFO  com.example.demo.controller.RolePermissionController - 根据角色查询权限，角色: TEACHER
+2026-06-03 00:06:30.059 [http-nio-8080-exec-10] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 11 条记录
+2026-06-03 00:06:30.063 [http-nio-8080-exec-9] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限成功，角色: TEACHER, 共 7 条记录
+2026-06-03 00:06:30.067 [http-nio-8080-exec-1] INFO  com.example.demo.controller.StudentController - 查询所有学生列表
+2026-06-03 00:06:30.067 [http-nio-8080-exec-3] INFO  com.example.demo.controller.TeacherController - 查询所有教师列表
+2026-06-03 00:06:30.067 [http-nio-8080-exec-2] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-03 00:06:30.070 [http-nio-8080-exec-5] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-03 00:06:30.071 [http-nio-8080-exec-6] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表，筛选条件 - 标题: null, 推送对象: null, 发布人: null, 状态: 已发布
+2026-06-03 00:06:30.071 [http-nio-8080-exec-2] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 6 条记录
+2026-06-03 00:06:30.071 [http-nio-8080-exec-1] INFO  com.example.demo.controller.StudentController - 查询学生列表成功，共 7 条记录
+2026-06-03 00:06:30.073 [http-nio-8080-exec-5] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 11 条记录
+2026-06-03 00:06:30.075 [http-nio-8080-exec-3] INFO  com.example.demo.controller.TeacherController - 查询教师列表成功，共 5 条记录
+2026-06-03 00:06:30.075 [http-nio-8080-exec-6] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表成功，共 2 条记录
+2026-06-03 00:06:45.545 [http-nio-8080-exec-4] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表，筛选条件 - 标题: null, 推送对象: null, 发布人: null, 状态: 已发布
+2026-06-03 00:06:45.548 [http-nio-8080-exec-4] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表成功，共 2 条记录
+2026-06-03 00:06:48.809 [http-nio-8080-exec-7] INFO  com.example.demo.controller.AnnouncementController - 查询公告详情，ID: 1
+2026-06-03 00:06:51.528 [http-nio-8080-exec-8] INFO  com.example.demo.controller.AnnouncementController - 查询公告详情，ID: 2
+2026-06-03 00:06:55.617 [http-nio-8080-exec-9] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表，筛选条件 - 标题: null, 推送对象: null, 发布人: null, 状态: 已发布
+2026-06-03 00:06:55.620 [http-nio-8080-exec-9] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表成功，共 2 条记录
+2026-06-03 00:07:00.632 [http-nio-8080-exec-10] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表，筛选条件 - 标题: null, 推送对象: null, 发布人: null, 状态: 已发布
+2026-06-03 00:07:00.635 [http-nio-8080-exec-10] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表成功，共 2 条记录
+2026-06-03 00:10:32.595 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-03 00:10:32.596 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-03 00:10:32.601 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-03 00:10:38.369 [main] INFO  com.example.demo.DemoApplication - 开始启动应用...
+2026-06-03 00:10:38.664 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2026-06-03 00:10:38.696 [main] INFO  com.example.demo.DemoApplication - Starting DemoApplication using Java 22.0.2 with PID 16788 (C:\Users\zhangkj\login-demo\backend\target\classes started by zhangkj in C:\Users\zhangkj\login-demo\backend)
+2026-06-03 00:10:38.698 [main] INFO  com.example.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-03 00:10:39.189 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-03 00:10:39.245 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 50 ms. Found 9 JPA repository interfaces.
+2026-06-03 00:10:39.718 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with ports 8443 (https), 8080 (http)
+2026-06-03 00:10:39.728 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-0.0.0.0-8443"]
+2026-06-03 00:10:39.730 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-03 00:10:39.731 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-03 00:10:39.731 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-06-03 00:10:39.785 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-03 00:10:39.786 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1052 ms
+2026-06-03 00:10:39.910 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-03 00:10:39.959 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-03 00:10:39.988 [main] INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-03 00:10:40.181 [main] INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-03 00:10:40.206 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-03 00:10:40.322 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@32b95de
+2026-06-03 00:10:40.323 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-03 00:10:41.199 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-03 00:10:41.267 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-03 00:10:41.481 [main] INFO  com.example.demo.config.AppConfig - 初始化密码加密器: BCryptPasswordEncoder
+2026-06-03 00:10:41.608 [main] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2026-06-03 00:10:41.735 [main] INFO  com.example.demo.config.WebConfig - 配置静态资源映射: /uploads/** -> file:C:\Users\zhangkj\login-demo\backend\uploads/
+2026-06-03 00:10:41.863 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-0.0.0.0-8443"]
+2026-06-03 00:10:42.017 [main] INFO  org.apache.tomcat.util.net.NioEndpoint.certificate - Connector [https-jsse-nio-0.0.0.0-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [C:\Users\zhangkj\.keystore] using alias [login-demo] with trust store [null]
+2026-06-03 00:10:42.026 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-06-03 00:10:42.030 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on ports 8443 (https), 8080 (http) with context path ''
+2026-06-03 00:10:42.034 [main] INFO  com.example.demo.DemoApplication - Started DemoApplication in 3.605 seconds (process running for 4.348)
+2026-06-03 00:10:42.038 [main] INFO  com.example.demo.config.DataInitializer - 开始执行数据初始化...
+2026-06-03 00:10:42.134 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-03 00:10:42.134 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-03 00:10:42.136 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-06-03 00:10:42.293 [main] INFO  com.example.demo.config.DataInitializer - 用户表中已有数据，跳过默认用户创建
+2026-06-03 00:10:42.293 [main] INFO  com.example.demo.config.DataInitializer - 数据初始化执行完毕
+2026-06-03 00:10:42.294 [main] INFO  com.example.demo.DemoApplication - 应用启动完成
+2026-06-03 00:10:52.563 [http-nio-8080-exec-3] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: 张老师, 登录类型: teacher
+2026-06-03 00:10:52.563 [http-nio-8080-exec-3] INFO  com.example.demo.controller.AuthController - 教师登录，账号: 张老师
+2026-06-03 00:10:52.683 [http-nio-8080-exec-3] INFO  com.example.demo.controller.AuthController - 教师登录成功: 张老师
+2026-06-03 00:10:54.232 [http-nio-8080-exec-8] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-03 00:10:54.233 [http-nio-8080-exec-7] INFO  com.example.demo.controller.StudentController - 查询所有学生列表
+2026-06-03 00:10:54.233 [http-nio-8080-exec-6] INFO  com.example.demo.controller.TeacherController - 查询所有教师列表
+2026-06-03 00:10:54.235 [http-nio-8080-exec-10] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-03 00:10:54.241 [http-nio-8080-exec-10] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 6 条记录
+2026-06-03 00:10:54.241 [http-nio-8080-exec-7] INFO  com.example.demo.controller.StudentController - 查询学生列表成功，共 7 条记录
+2026-06-03 00:10:54.241 [http-nio-8080-exec-8] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 11 条记录
+2026-06-03 00:10:54.242 [http-nio-8080-exec-5] INFO  com.example.demo.controller.RolePermissionController - 根据角色查询权限，角色: TEACHER
+2026-06-03 00:10:54.244 [http-nio-8080-exec-9] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表，筛选条件 - 标题: null, 推送对象: null, 发布人: null, 状态: 已发布, 角色: TEACHER
+2026-06-03 00:10:54.246 [http-nio-8080-exec-6] INFO  com.example.demo.controller.TeacherController - 查询教师列表成功，共 5 条记录
+2026-06-03 00:10:54.250 [http-nio-8080-exec-5] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限成功，角色: TEACHER, 共 7 条记录
+2026-06-03 00:10:54.250 [http-nio-8080-exec-9] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表成功，共 1 条记录
+2026-06-03 00:10:54.256 [http-nio-8080-exec-1] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-03 00:10:54.260 [http-nio-8080-exec-1] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 11 条记录
+2026-06-03 00:11:07.120 [http-nio-8080-exec-2] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: 张玉, 登录类型: student
+2026-06-03 00:11:07.120 [http-nio-8080-exec-2] INFO  com.example.demo.controller.AuthController - 学生登录，账号: 张玉
+2026-06-03 00:11:07.191 [http-nio-8080-exec-2] INFO  com.example.demo.controller.AuthController - 学生登录成功: 张玉
+2026-06-03 00:11:08.714 [http-nio-8080-exec-4] INFO  com.example.demo.controller.RolePermissionController - 根据角色查询权限，角色: STUDENT
+2026-06-03 00:11:08.715 [http-nio-8080-exec-7] INFO  com.example.demo.controller.StudentController - 查询所有学生列表
+2026-06-03 00:11:08.715 [http-nio-8080-exec-10] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-03 00:11:08.715 [http-nio-8080-exec-5] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-03 00:11:08.715 [http-nio-8080-exec-8] INFO  com.example.demo.controller.TeacherController - 查询所有教师列表
+2026-06-03 00:11:08.716 [http-nio-8080-exec-9] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表，筛选条件 - 标题: null, 推送对象: null, 发布人: null, 状态: 已发布, 角色: STUDENT
+2026-06-03 00:11:08.719 [http-nio-8080-exec-10] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 6 条记录
+2026-06-03 00:11:08.720 [http-nio-8080-exec-7] INFO  com.example.demo.controller.StudentController - 查询学生列表成功，共 7 条记录
+2026-06-03 00:11:08.720 [http-nio-8080-exec-9] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表成功，共 1 条记录
+2026-06-03 00:11:08.720 [http-nio-8080-exec-5] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 11 条记录
+2026-06-03 00:11:08.721 [http-nio-8080-exec-4] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限成功，角色: STUDENT, 共 7 条记录
+2026-06-03 00:11:08.723 [http-nio-8080-exec-1] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-03 00:11:08.725 [http-nio-8080-exec-8] INFO  com.example.demo.controller.TeacherController - 查询教师列表成功，共 5 条记录
+2026-06-03 00:11:08.727 [http-nio-8080-exec-1] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 11 条记录
+2026-06-03 00:11:11.184 [http-nio-8080-exec-6] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表，筛选条件 - 标题: null, 推送对象: null, 发布人: null, 状态: 已发布, 角色: STUDENT
+2026-06-03 00:11:11.187 [http-nio-8080-exec-6] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表成功，共 1 条记录
+2026-06-03 00:11:23.417 [http-nio-8080-exec-2] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: admin, 登录类型: user
+2026-06-03 00:11:23.417 [http-nio-8080-exec-2] INFO  com.example.demo.controller.AuthController - 管理员登录，用户名: admin
+2026-06-03 00:11:23.492 [http-nio-8080-exec-2] INFO  com.example.demo.controller.AuthController - 管理员登录成功: admin
+2026-06-03 00:11:25.021 [http-nio-8080-exec-10] INFO  com.example.demo.controller.RolePermissionController - 根据角色查询权限，角色: ADMIN
+2026-06-03 00:11:25.023 [http-nio-8080-exec-7] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-03 00:11:25.023 [http-nio-8080-exec-9] INFO  com.example.demo.controller.StudentController - 查询所有学生列表
+2026-06-03 00:11:25.023 [http-nio-8080-exec-4] INFO  com.example.demo.controller.TeacherController - 查询所有教师列表
+2026-06-03 00:11:25.024 [http-nio-8080-exec-8] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-03 00:11:25.024 [http-nio-8080-exec-5] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表，筛选条件 - 标题: null, 推送对象: null, 发布人: null, 状态: 已发布, 角色: ADMIN
+2026-06-03 00:11:25.025 [http-nio-8080-exec-10] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限成功，角色: ADMIN, 共 7 条记录
+2026-06-03 00:11:25.028 [http-nio-8080-exec-5] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表成功，共 2 条记录
+2026-06-03 00:11:25.028 [http-nio-8080-exec-7] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 11 条记录
+2026-06-03 00:11:25.028 [http-nio-8080-exec-9] INFO  com.example.demo.controller.StudentController - 查询学生列表成功，共 7 条记录
+2026-06-03 00:11:25.028 [http-nio-8080-exec-8] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 6 条记录
+2026-06-03 00:11:25.031 [http-nio-8080-exec-1] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-03 00:11:25.034 [http-nio-8080-exec-4] INFO  com.example.demo.controller.TeacherController - 查询教师列表成功，共 5 条记录
+2026-06-03 00:11:25.035 [http-nio-8080-exec-1] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 11 条记录
+2026-06-03 00:11:27.679 [http-nio-8080-exec-6] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表，筛选条件 - 标题: null, 推送对象: null, 发布人: null, 状态: null, 角色: ADMIN
+2026-06-03 00:11:27.682 [http-nio-8080-exec-6] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表成功，共 2 条记录
+2026-06-03 00:11:33.000 [http-nio-8080-exec-2] INFO  com.example.demo.controller.AnnouncementController - 停发公告，ID: 1
+2026-06-03 00:11:33.037 [http-nio-8080-exec-2] INFO  com.example.demo.controller.AnnouncementController - 停发公告成功，ID: 1
+2026-06-03 00:11:33.043 [http-nio-8080-exec-3] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表，筛选条件 - 标题: null, 推送对象: null, 发布人: null, 状态: null, 角色: ADMIN
+2026-06-03 00:11:33.045 [http-nio-8080-exec-3] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表成功，共 2 条记录
+2026-06-03 00:11:51.865 [http-nio-8080-exec-10] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: 张玉, 登录类型: student
+2026-06-03 00:11:51.865 [http-nio-8080-exec-10] INFO  com.example.demo.controller.AuthController - 学生登录，账号: 张玉
+2026-06-03 00:11:51.941 [http-nio-8080-exec-10] INFO  com.example.demo.controller.AuthController - 学生登录成功: 张玉
+2026-06-03 00:11:53.484 [http-nio-8080-exec-9] INFO  com.example.demo.controller.RolePermissionController - 根据角色查询权限，角色: STUDENT
+2026-06-03 00:11:53.485 [http-nio-8080-exec-7] INFO  com.example.demo.controller.StudentController - 查询所有学生列表
+2026-06-03 00:11:53.485 [http-nio-8080-exec-8] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-03 00:11:53.486 [http-nio-8080-exec-1] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-03 00:11:53.486 [http-nio-8080-exec-4] INFO  com.example.demo.controller.TeacherController - 查询所有教师列表
+2026-06-03 00:11:53.486 [http-nio-8080-exec-6] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表，筛选条件 - 标题: null, 推送对象: null, 发布人: null, 状态: 已发布, 角色: STUDENT
+2026-06-03 00:11:53.488 [http-nio-8080-exec-9] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限成功，角色: STUDENT, 共 7 条记录
+2026-06-03 00:11:53.488 [http-nio-8080-exec-6] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表成功，共 0 条记录
+2026-06-03 00:11:53.489 [http-nio-8080-exec-1] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 6 条记录
+2026-06-03 00:11:53.489 [http-nio-8080-exec-7] INFO  com.example.demo.controller.StudentController - 查询学生列表成功，共 7 条记录
+2026-06-03 00:11:53.490 [http-nio-8080-exec-8] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 11 条记录
+2026-06-03 00:11:53.492 [http-nio-8080-exec-2] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-03 00:11:53.494 [http-nio-8080-exec-4] INFO  com.example.demo.controller.TeacherController - 查询教师列表成功，共 5 条记录
+2026-06-03 00:11:53.496 [http-nio-8080-exec-2] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 11 条记录
+2026-06-03 00:11:55.776 [http-nio-8080-exec-3] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表，筛选条件 - 标题: null, 推送对象: null, 发布人: null, 状态: 已发布, 角色: STUDENT
+2026-06-03 00:11:55.778 [http-nio-8080-exec-3] INFO  com.example.demo.controller.AnnouncementController - 查询公告列表成功，共 0 条记录
+2026-06-03 00:12:05.517 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-03 00:12:05.518 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-03 00:12:05.525 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-03 22:22:57.901 [main] INFO  com.example.demo.DemoApplication - 开始启动应用...
+2026-06-03 22:22:58.238 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2026-06-03 22:22:58.276 [main] INFO  com.example.demo.DemoApplication - Starting DemoApplication using Java 22.0.2 with PID 2928 (C:\Users\zhangkj\login-demo\backend\target\classes started by zhangkj in C:\Users\zhangkj\login-demo\backend)
+2026-06-03 22:22:58.279 [main] INFO  com.example.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-03 22:22:58.839 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-03 22:22:58.899 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 53 ms. Found 9 JPA repository interfaces.
+2026-06-03 22:22:59.426 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with ports 8443 (https), 8080 (http)
+2026-06-03 22:22:59.437 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-0.0.0.0-8443"]
+2026-06-03 22:22:59.445 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-03 22:22:59.447 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-03 22:22:59.448 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-06-03 22:22:59.496 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-03 22:22:59.496 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1178 ms
+2026-06-03 22:22:59.628 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-03 22:22:59.693 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-03 22:22:59.726 [main] INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-03 22:22:59.948 [main] INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-03 22:22:59.977 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-03 22:23:00.129 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4b09d1c3
+2026-06-03 22:23:00.130 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-03 22:23:01.053 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-03 22:23:01.140 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-03 22:23:01.368 [main] INFO  com.example.demo.config.AppConfig - 初始化密码加密器: BCryptPasswordEncoder
+2026-06-03 22:23:01.496 [main] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2026-06-03 22:23:01.621 [main] INFO  com.example.demo.config.WebConfig - 配置静态资源映射: /uploads/** -> file:C:\Users\zhangkj\login-demo\backend\uploads/
+2026-06-03 22:23:01.747 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-0.0.0.0-8443"]
+2026-06-03 22:23:01.939 [main] INFO  org.apache.tomcat.util.net.NioEndpoint.certificate - Connector [https-jsse-nio-0.0.0.0-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [C:\Users\zhangkj\.keystore] using alias [login-demo] with trust store [null]
+2026-06-03 22:23:01.949 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-06-03 22:23:01.953 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on ports 8443 (https), 8080 (http) with context path ''
+2026-06-03 22:23:01.958 [main] INFO  com.example.demo.DemoApplication - Started DemoApplication in 3.981 seconds (process running for 4.894)
+2026-06-03 22:23:01.961 [main] INFO  com.example.demo.config.DataInitializer - 开始执行数据初始化...
+2026-06-03 22:23:02.226 [main] INFO  com.example.demo.config.DataInitializer - 用户表中已有数据，跳过默认用户创建
+2026-06-03 22:23:02.227 [main] INFO  com.example.demo.config.DataInitializer - 数据初始化执行完毕
+2026-06-03 22:23:02.227 [main] INFO  com.example.demo.DemoApplication - 应用启动完成
+2026-06-03 22:24:43.553 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-03 22:24:43.553 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-03 22:24:43.554 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-06-03 22:24:43.655 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: admin, 登录类型: user
+2026-06-03 22:24:43.655 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.AuthController - 管理员登录，用户名: admin
+2026-06-03 22:24:43.762 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.AuthController - 管理员登录成功: admin
+2026-06-03 22:24:45.845 [https-jsse-nio-0.0.0.0-8443-exec-4] INFO  com.example.demo.controller.UserController - 创建用户，用户名: testuser_1780496685612
+2026-06-03 22:24:45.957 [https-jsse-nio-0.0.0.0-8443-exec-4] INFO  com.example.demo.controller.UserController - 创建用户成功，ID: 21
+2026-06-03 22:24:46.202 [https-jsse-nio-0.0.0.0-8443-exec-10] INFO  com.example.demo.controller.UserController - 创建用户，用户名: 
+2026-06-03 22:24:46.255 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.UserController - 创建用户，用户名: weakpassuser
+2026-06-03 22:24:46.321 [https-jsse-nio-0.0.0.0-8443-exec-3] INFO  com.example.demo.controller.UserController - 删除用户，ID: 21
+2026-06-03 22:24:46.362 [https-jsse-nio-0.0.0.0-8443-exec-3] INFO  com.example.demo.controller.UserController - 删除用户成功，ID: 21

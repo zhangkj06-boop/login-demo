@@ -1,0 +1,38 @@
+2026-06-13 13:26:05.430 [main] INFO  com.example.demo.DemoApplication - 开始启动应用...
+2026-06-13 13:26:05.790 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2026-06-13 13:26:05.833 [main] INFO  com.example.demo.DemoApplication - Starting DemoApplication using Java 22.0.2 with PID 5472 (C:\Users\zhangkj\login-demo\backend\target\classes started by zhangkj in C:\Users\zhangkj\login-demo\backend)
+2026-06-13 13:26:05.837 [main] INFO  com.example.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-13 13:26:06.430 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-13 13:26:06.505 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 65 ms. Found 11 JPA repository interfaces.
+2026-06-13 13:26:07.044 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with ports 8443 (https), 8080 (http)
+2026-06-13 13:26:07.062 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-0.0.0.0-8443"]
+2026-06-13 13:26:07.064 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-13 13:26:07.065 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-13 13:26:07.065 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-06-13 13:26:07.117 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-13 13:26:07.117 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1241 ms
+2026-06-13 13:26:07.245 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-13 13:26:07.318 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-13 13:26:07.353 [main] INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-13 13:26:07.579 [main] INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-13 13:26:07.608 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-13 13:26:07.752 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5ddb302
+2026-06-13 13:26:07.753 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-13 13:26:08.748 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-13 13:26:08.849 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-13 13:26:09.113 [main] INFO  com.example.demo.config.AppConfig - 初始化密码加密器: BCryptPasswordEncoder
+2026-06-13 13:26:09.250 [main] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2026-06-13 13:26:09.384 [main] INFO  com.example.demo.config.WebConfig - 配置静态资源映射: /uploads/** -> file:C:\Users\zhangkj\login-demo\backend\uploads/
+2026-06-13 13:26:09.385 [main] INFO  com.example.demo.config.WebConfig - 配置静态资源映射: /videos/** -> file:C:\Users\zhangkj\login-demo\backend\uploads\videos/ 及 classpath:/static/videos/
+2026-06-13 13:26:09.385 [main] INFO  com.example.demo.config.WebConfig - 配置静态资源映射: /crawler/** -> file:C:\Users\zhangkj\login-demo\backend\uploads\crawler/
+2026-06-13 13:26:09.525 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-0.0.0.0-8443"]
+2026-06-13 13:26:09.713 [main] INFO  org.apache.tomcat.util.net.NioEndpoint.certificate - Connector [https-jsse-nio-0.0.0.0-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [C:\Users\zhangkj\.keystore] using alias [login-demo] with trust store [null]
+2026-06-13 13:26:09.724 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-06-13 13:26:09.727 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on ports 8443 (https), 8080 (http) with context path ''
+2026-06-13 13:26:09.732 [main] INFO  com.example.demo.DemoApplication - Started DemoApplication in 4.217 seconds (process running for 5.187)
+2026-06-13 13:26:09.734 [main] INFO  com.example.demo.config.DataInitializer - 开始执行数据初始化...
+2026-06-13 13:26:10.002 [main] INFO  com.example.demo.config.DataInitializer - 用户表中已有数据，跳过默认用户创建
+2026-06-13 13:26:10.013 [main] INFO  com.example.demo.config.DataInitializer - 游戏表中已有数据，跳过默认游戏创建
+2026-06-13 13:26:10.026 [main] INFO  com.example.demo.config.DataInitializer - 权限表中已有数据，跳过默认权限创建
+2026-06-13 13:26:10.026 [main] INFO  com.example.demo.config.DataInitializer - 数据初始化执行完毕
+2026-06-13 13:26:10.026 [main] INFO  com.example.demo.DemoApplication - 应用启动完成

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>角色权限</title>
+    <!-- 页面基础样式定义 -->
+    <style>
+        /* 全局重置样式，统一盒模型 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 页面主体样式：全屏渐变背景 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* 内容容器 */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* 页面头部区域 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        /* 页面主标题 */
+        .header h1 {
+            color: white;
+            font-size: 24px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* 通用按钮样式 */
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        /* 按钮悬停效果 */
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        /* 次要按钮样式（透明底白字） */
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* 卡片容器 */
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        /* 卡片头部 */
+        .card-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 卡片头部标题 */
+        .card-header h2 {
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* 角色徽章 */
+        .role-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* 管理员徽章 */
+        .badge-admin {
+            background: #e8eaf6;
+            color: #667eea;
+        }
+
+        /* 教师徽章 */
+        .badge-teacher {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        /* 学生徽章 */
+        .badge-student {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        /* 数据表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        /* 表格单元格通用样式 */
+        th, td {
+            padding: 14px 25px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        /* 表头样式 */
+        th {
+            background: #f8f9fa;
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 12px;
+        }
+
+        /* 表格行底部分隔线 */
+        tr:not(:last-child) td {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        /* 表格行悬停效果 */
+        tr:hover td {
+            background: #fafbfc;
+        }
+
+        /* 权限名称区域 */
+        .perm-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 权限图标 */
+        .perm-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            background: #f5f6fa;
+        }
+
+        /* 权限开关 */
+        .toggle {
+            width: 44px;
+            height: 24px;
+            border-radius: 12px;
+            background: #ddd;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+
+        /* 权限开关激活状态 */
+        .toggle.active {
+            background: #667eea;
+        }
+
+        /* 权限开关圆点 */
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        /* 权限开关圆点激活状态 */
+        .toggle.active::after {
+            transform: translateX(20px);
+        }
+
+        /* Toast提示框 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            background: #2ecc71;
+        }
+
+        .toast.error {
+            background: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面内容容器 -->
+    <div class="container">
+        <!-- 页面头部标题与返回按钮 -->
+        <div class="header">
+            <h1>角色权限</h1>
+            <button class="btn btn-secondary" id="backBtn">返回</button>
+        </div>
+
+        <!-- 管理员权限卡片 -->
+        <div class="card">
+            <div class="card-header">
+                <h2>管理员</h2>
+                <span class="role-badge badge-admin">ADMIN</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 35%;">功能模块</th>
+                        <th style="width: 20%;">查看</th>
+                        <th style="width: 20%;">操作</th>
+                        <th style="width: 25%;">说明</th>
+                    </tr>
+                </thead>
+                <tbody id="adminTable"></tbody>
+            </table>
+        </div>
+
+        <!-- 教师权限卡片 -->
+        <div class="card">
+            <div class="card-header">
+                <h2>教师</h2>
+                <span class="role-badge badge-teacher">TEACHER</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 35%;">功能模块</th>
+                        <th style="width: 20%;">查看</th>
+                        <th style="width: 20%;">操作</th>
+                        <th style="width: 25%;">说明</th>
+                    </tr>
+                </thead>
+                <tbody id="teacherTable"></tbody>
+            </table>
+        </div>
+
+        <!-- 学生权限卡片 -->
+        <div class="card">
+            <div class="card-header">
+                <h2>学生</h2>
+                <span class="role-badge badge-student">STUDENT</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 35%;">功能模块</th>
+                        <th style="width: 20%;">查看</th>
+                        <th style="width: 20%;">操作</th>
+                        <th style="width: 25%;">说明</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Toast提示框容器 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // API基础地址配置
+        const API_BASE_URL = '/api';
+        // 从本地存储获取登录Token
+        const token = localStorage.getItem('token') || '';
+
+        // 未登录则跳转到登录页
+        if (!token) {
+            window.location.href = 'index.html';
+        }
+
+        // 显示Toast提示消息
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type} show`;
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // 加载权限数据
+        async function loadPermissions() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/role-permissions`, {
+                    headers: { 'Authorization': token }
+                });
+                const list = await res.json();
+                // 按角色分别渲染权限表格
+                renderTable('adminTable', list.filter(p => p.roleName === 'ADMIN'));
+                renderTable('teacherTable', list.filter(p => p.roleName === 'TEACHER'));
+                renderTable('studentTable', list.filter(p => p.roleName === 'STUDENT'));
+            } catch (err) {
+                showToast('加载权限数据失败', 'error');
+            }
+        }
+
+        // 渲染权限表格
+        function renderTable(tbodyId, permissions) {
+            const tbody = document.getElementById(tbodyId);
+            tbody.innerHTML = permissions.map(p => `
+                <tr>
+                    <td>
+                        <div class="perm-name">
+                            <span class="perm-icon">${p.icon || ''}</span>
+                            ${p.moduleLabel}
+                        </div>
+                    </td>
+                    <td>
+                        <span class="toggle ${p.canView ? 'active' : ''}" data-id="${p.id}" data-field="canView"></span>
+                    </td>
+                    <td>
+                        <span class="toggle ${p.canEdit ? 'active' : ''}" data-id="${p.id}" data-field="canEdit"></span>
+                    </td>
+                    <td>${p.canView ? (p.canEdit ? '可查看、可操作' : '仅查看') : '无权限'}</td>
+                </tr>
+            `).join('');
+
+            // 为每个权限开关绑定点击事件
+            tbody.querySelectorAll('.toggle').forEach(toggle => {
+                toggle.addEventListener('click', async function() {
+                    const id = this.getAttribute('data-id');
+                    const field = this.getAttribute('data-field');
+                    const newValue = !this.classList.contains('active');
+                    this.classList.toggle('active');
+
+                    try {
+                        // 发送权限更新请求
+                        const res = await fetch(`${API_BASE_URL}/role-permissions/${id}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': token
+                            },
+                            body: JSON.stringify({ [field]: newValue })
+                        });
+                        const data = await res.json();
+                        if (data.success) {
+                            showToast('更新成功');
+                            // 更新说明文字
+                            const row = this.closest('tr');
+                            const viewActive = row.querySelector('[data-field="canView"]').classList.contains('active');
+                            const editActive = row.querySelector('[data-field="canEdit"]').classList.contains('active');
+                            row.cells[3].textContent = viewActive ? (editActive ? '可查看、可操作' : '仅查看') : '无权限';
+                        } else {
+                            showToast(data.message || '更新失败', 'error');
+                            this.classList.toggle('active');
+                        }
+                    } catch (err) {
+                        showToast('网络错误', 'error');
+                        this.classList.toggle('active');
+                    }
+                });
+            });
+        }
+
+        // 返回按钮点击事件
+        document.getElementById('backBtn').addEventListener('click', () => {
+            window.location.href = 'success.html';
+        });
+
+        // 页面加载时获取权限数据
+        loadPermissions();
+    </script>
+</body>
+</html>

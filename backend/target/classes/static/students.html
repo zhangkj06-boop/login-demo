@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生管理</title>
+    <!-- 页面基础样式定义 -->
+    <style>
+        /* 全局重置样式，统一盒模型 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 页面主体样式：全屏渐变背景 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* 内容容器 */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* 页面头部区域 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        /* 页面主标题 */
+        .header h1 {
+            color: white;
+            font-size: 24px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* 头部操作按钮区域 */
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* 通用按钮样式 */
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        /* 按钮悬停效果 */
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        /* 主要按钮样式（白底紫字） */
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* 次要按钮样式（透明底白字） */
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* 卡片容器 */
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        /* 数据表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        /* 表格单元格通用样式 */
+        th, td {
+            padding: 14px 20px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        /* 表头样式 */
+        th {
+            background: #f8f9fa;
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 12px;
+        }
+
+        /* 表格行底部分隔线 */
+        tr:not(:last-child) td {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        /* 表格行悬停效果 */
+        tr:hover td {
+            background: #fafbfc;
+        }
+
+        /* 操作按钮组 */
+        .actions {
+            display: flex;
+            gap: 6px;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+        }
+
+        /* 操作按钮样式 */
+        .actions button {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .actions button:hover {
+            opacity: 0.85;
+        }
+
+        /* 编辑按钮 */
+        .btn-edit {
+            background: #667eea;
+            color: white;
+        }
+
+        /* 删除按钮 */
+        .btn-delete {
+            background: #e74c3c;
+            color: white;
+        }
+
+        /* 修改密码按钮 */
+        .btn-pwd {
+            background: #e67e22;
+            color: white;
+        }
+
+        /* 空数据提示 */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #888;
+        }
+
+        /* 模态框遮罩层 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* 模态框激活状态 */
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        /* 模态框主体 */
+        .modal {
+            background: white;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 460px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: modalIn 0.2s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        /* 模态框进入动画 */
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 模态框标题 */
+        .modal h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* 表单分组 */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        /* 表单标签 */
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #555;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* 表单输入框与下拉框 */
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        /* 输入框聚焦效果 */
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* 表单提示文字 */
+        .form-hint {
+            font-size: 12px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        /* 复选框组 */
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        /* 单个复选框项 */
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #555;
+            padding: 6px 10px;
+            border: 2px solid #e1e1e1;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .checkbox-item:hover {
+            border-color: #667eea;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #667eea;
+        }
+
+        /* 复选框选中状态 */
+        .checkbox-item.checked {
+            border-color: #667eea;
+            background: #f3f4ff;
+        }
+
+        /* 模态框底部操作按钮 */
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        /* 取消按钮 */
+        .btn-cancel {
+            background: #f0f0f0;
+            color: #555;
+        }
+
+        /* 保存按钮 */
+        .btn-save {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Toast提示框 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            background: #2ecc71;
+        }
+
+        .toast.error {
+            background: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面内容容器 -->
+    <div class="container">
+        <!-- 页面头部标题与操作按钮 -->
+        <div class="header">
+            <h1>学生管理</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary" id="backBtn">返回</button>
+                <button class="btn btn-primary" id="addBtn">+ 新增学生</button>
+            </div>
+        </div>
+
+        <!-- 学生数据卡片 -->
+        <div class="card">
+            <table id="studentTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>学生ID</th>
+                        <th>姓名</th>
+                        <th>年龄</th>
+                        <th>性别</th>
+                        <th>班级</th>
+                        <th style="width: 220px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTableBody"></tbody>
+            </table>
+            <div class="empty-state" id="emptyState" style="display: none;">暂无学生数据</div>
+        </div>
+    </div>
+
+    <!-- 新增/编辑学生模态框 -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <h2 id="modalTitle">新增学生</h2>
+            <div class="form-group">
+                <label for="formStudentId">学生ID</label>
+                <input type="text" id="formStudentId" placeholder="请输入学生ID">
+            </div>
+            <div class="form-group">
+                <label for="formName">姓名</label>
+                <input type="text" id="formName" placeholder="请输入姓名">
+            </div>
+            <div class="form-group">
+                <label for="formAge">年龄</label>
+                <input type="number" id="formAge" placeholder="请输入年龄" min="0" max="150">
+            </div>
+            <div class="form-group">
+                <label for="formGender">性别</label>
+                <select id="formGender">
+                    <option value="">请选择</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>班级</label>
+                <div class="checkbox-group" id="classCheckboxGroup">
+                    <label class="checkbox-item" data-value="高二1班">
+                        <input type="checkbox" value="高二1班"> 高二1班
+                    </label>
+                    <label class="checkbox-item" data-value="高二2班">
+                        <input type="checkbox" value="高二2班"> 高二2班
+                    </label>
+                    <label class="checkbox-item" data-value="高二3班">
+                        <input type="checkbox" value="高二3班"> 高二3班
+                    </label>
+                </div>
+            </div>
+            <div class="form-group" id="passwordGroup">
+                <label for="formPassword">密码<span id="pwdHint" style="color:#888;font-size:12px;margin-left:4px;">（新增时必填，编辑时留空则不修改）</span></label>
+                <input type="password" id="formPassword" placeholder="请输入密码（至少6位）">
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-cancel" id="cancelBtn">取消</button>
+                <button class="btn btn-save" id="saveBtn">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast提示框容器 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // API基础地址配置
+        const API_BASE_URL = '/api';
+        // 从本地存储获取登录Token
+        const token = localStorage.getItem('token');
+
+        // 未登录则跳转到登录页
+        if (!token) {
+            window.location.href = 'index.html';
+        }
+
+        // 当前编辑的学生ID，null表示新增模式
+        let editingId = null;
+
+        // 显示Toast提示消息
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type} show`;
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // 加载学生列表数据
+        async function loadStudents() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/students`, {
+                    headers: { 'Authorization': token }
+                });
+                const students = await res.json();
+                const tbody = document.getElementById('studentTableBody');
+                const empty = document.getElementById('emptyState');
+
+                // 无数据时显示空状态
+                if (!students || students.length === 0) {
+                    tbody.innerHTML = '';
+                    empty.style.display = 'block';
+                    document.getElementById('studentTable').style.display = 'none';
+                    return;
+                }
+
+                // 渲染学生数据表格
+                empty.style.display = 'none';
+                document.getElementById('studentTable').style.display = 'table';
+                tbody.innerHTML = students.map(s => `
+                    <tr>
+                        <td>${s.id}</td>
+                        <td>${escapeHtml(s.studentId)}</td>
+                        <td>${escapeHtml(s.name)}</td>
+                        <td>${s.age}</td>
+                        <td>${escapeHtml(s.gender)}</td>
+                        <td>${escapeHtml(s.className)}</td>
+                        <td>
+                            <div class="actions">
+                                <button class="btn-edit" onclick="editStudent(${s.id}, '${escapeHtml(s.studentId)}', '${escapeHtml(s.name)}', ${s.age}, '${escapeHtml(s.gender)}', '${escapeHtml(s.className)}')">编辑</button>
+                                <button class="btn-pwd" onclick="resetStudentPwd(${s.id}, '${escapeHtml(s.studentId)}')">修改密码</button>
+                                <button class="btn-delete" onclick="deleteStudent(${s.id})">删除</button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (err) {
+                showToast('加载学生列表失败', 'error');
+            }
+        }
+
+        // HTML转义函数，防止XSS攻击
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // 获取选中的班级（单选）
+        function getSelectedClass() {
+            const checked = document.querySelector('#classCheckboxGroup input[type="checkbox"]:checked');
+            return checked ? checked.value : '';
+        }
+
+        // 设置选中的班级
+        function setSelectedClass(className) {
+            document.querySelectorAll('#classCheckboxGroup input[type="checkbox"]').forEach(cb => {
+                cb.checked = cb.value === className;
+                cb.parentElement.classList.toggle('checked', cb.checked);
+            });
+        }
+
+        // 打开模态框
+        function openModal(title, studentId = '', name = '', age = '', gender = '', className = '') {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('formStudentId').value = studentId;
+            document.getElementById('formName').value = name;
+            document.getElementById('formAge').value = age;
+            document.getElementById('formGender').value = gender;
+            document.getElementById('formPassword').value = '';
+            document.getElementById('pwdHint').textContent = editingId ? '（留空则不修改）' : '（必填，至少6位）';
+            setSelectedClass(className);
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        // 关闭模态框
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            editingId = null;
+        }
+
+        // 新增按钮点击事件
+        document.getElementById('addBtn').addEventListener('click', () => {
+            editingId = null;
+            openModal('新增学生');
+        });
+
+        // 取消按钮点击事件
+        document.getElementById('cancelBtn').addEventListener('click', closeModal);
+        // 点击遮罩层关闭模态框
+        document.getElementById('modalOverlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('modalOverlay')) closeModal();
+        });
+
+        // 返回按钮点击事件
+        document.getElementById('backBtn').addEventListener('click', () => {
+            window.location.href = 'success.html';
+        });
+
+        // 班级复选框变更事件（单选逻辑）
+        document.querySelectorAll('#classCheckboxGroup input[type="checkbox"]').forEach(cb => {
+            cb.addEventListener('change', function() {
+                if (this.checked) {
+                    document.querySelectorAll('#classCheckboxGroup input[type="checkbox"]').forEach(other => {
+                        if (other !== this) {
+                            other.checked = false;
+                            other.parentElement.classList.remove('checked');
+                        }
+                    });
+                }
+                this.parentElement.classList.toggle('checked', this.checked);
+            });
+        });
+
+        // 编辑学生按钮点击事件
+        window.editStudent = function(id, studentId, name, age, gender, className) {
+            editingId = id;
+            openModal('编辑学生', studentId, name, age, gender, className);
+        };
+
+        // 重置学生密码
+        window.resetStudentPwd = async function(id, studentId) {
+            const newPwd = prompt(`重置学生 ${studentId} 的密码：\n请输入新密码（至少6位）：`);
+            if (!newPwd) return;
+            if (newPwd.length < 6) {
+                showToast('密码长度不能少于6位', 'error');
+                return;
+            }
+            try {
+                const res = await fetch(`${API_BASE_URL}/students/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                    body: JSON.stringify({ password: newPwd })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('密码重置成功');
+                } else {
+                    showToast(data.message || '重置失败', 'error');
+                }
+            } catch (err) {
+                showToast('网络错误', 'error');
+            }
+        };
+
+        // 删除学生按钮点击事件
+        window.deleteStudent = async function(id) {
+            if (!confirm('确定要删除该学生吗？')) return;
+            try {
+                const res = await fetch(`${API_BASE_URL}/students/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': token }
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('删除成功');
+                    loadStudents();
+                } else {
+                    showToast(data.message || '删除失败', 'error');
+                }
+            } catch (err) {
+                showToast('删除失败', 'error');
+            }
+        };
+
+        // 保存按钮点击事件（新增或编辑）
+        document.getElementById('saveBtn').addEventListener('click', async () => {
+            const studentId = document.getElementById('formStudentId').value.trim();
+            const name = document.getElementById('formName').value.trim();
+            const age = parseInt(document.getElementById('formAge').value, 10);
+            const gender = document.getElementById('formGender').value;
+            const className = getSelectedClass();
+
+            // 表单验证
+            if (!studentId) {
+                showToast('请输入学生ID', 'error');
+                return;
+            }
+            if (!name) {
+                showToast('请输入姓名', 'error');
+                return;
+            }
+            if (isNaN(age) || age < 0 || age > 150) {
+                showToast('请输入有效的年龄（0-150）', 'error');
+                return;
+            }
+            if (!gender) {
+                showToast('请选择性别', 'error');
+                return;
+            }
+            if (!className) {
+                showToast('请选择班级', 'error');
+                return;
+            }
+
+            const password = document.getElementById('formPassword').value;
+            if (!editingId && !password) {
+                showToast('请输入密码', 'error');
+                return;
+            }
+            if (password && password.length < 6) {
+                showToast('密码长度不能少于6位', 'error');
+                return;
+            }
+
+            // 构造请求数据
+            const payload = { studentId, name, age, gender, className };
+            if (password) payload.password = password;
+            const url = editingId ? `${API_BASE_URL}/students/${editingId}` : `${API_BASE_URL}/students`;
+            const method = editingId ? 'PUT' : 'POST';
+
+            try {
+                const res = await fetch(url, {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast(editingId ? '更新成功' : '创建成功');
+                    closeModal();
+                    loadStudents();
+                } else {
+                    showToast(data.message || '操作失败', 'error');
+                }
+            } catch (err) {
+                showToast('网络错误', 'error');
+            }
+        });
+
+        // 页面加载时获取学生列表
+        loadStudents();
+    </script>
+</body>
+</html>

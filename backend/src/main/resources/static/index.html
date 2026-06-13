@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户登录</title>
+    <!-- 页面基础样式定义 -->
+    <style>
+        /* 全局重置样式，统一盒模型 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 页面主体样式：全屏渐变背景，内容居中 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 登录卡片容器样式 */
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* 登录头部标题区域 */
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* 登录主标题 */
+        .login-header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        /* 登录副标题 */
+        .login-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* 表单分组容器 */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        /* 表单标签样式 */
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* 表单输入框样式 */
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        /* 输入框聚焦样式 */
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* 下拉选择框样式 */
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            background: white;
+        }
+
+        /* 输入框错误状态样式 */
+        .form-group input.error {
+            border-color: #e74c3c;
+        }
+
+        /* 错误提示文本样式 */
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* 登录按钮样式 */
+        .login-button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        /* 登录按钮悬停效果 */
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* 登录按钮点击效果 */
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        /* 登录按钮禁用状态 */
+        .login-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* 底部链接区域 */
+        .links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+
+        /* 链接样式 */
+        .links a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        /* 链接悬停效果 */
+        .links a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        /* Toast提示框样式 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        /* Toast显示状态 */
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Toast成功样式 */
+        .toast.success {
+            background: #2ecc71;
+        }
+
+        /* Toast错误样式 */
+        .toast.error {
+            background: #e74c3c;
+        }
+
+        /* 加载动画圆圈 */
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.8s linear infinite;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        /* 旋转动画定义 */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 登录卡片容器 -->
+    <div class="login-container">
+        <!-- 登录头部标题 -->
+        <div class="login-header">
+            <h1>欢迎登录</h1>
+            <p>请输入您的账号和密码</p>
+        </div>
+        <!-- 登录表单 -->
+        <form id="loginForm">
+            <!-- 登录身份选择 -->
+            <div class="form-group">
+                <label for="loginType">登录身份</label>
+                <select id="loginType" name="loginType">
+                    <option value="user">管理员</option>
+                    <option value="student">学生</option>
+                    <option value="teacher">教师</option>
+                </select>
+            </div>
+            <!-- 用户名输入区域 -->
+            <div class="form-group">
+                <label for="username" id="usernameLabel">用户名</label>
+                <input type="text" id="username" name="username" placeholder="请输入用户名" autocomplete="username">
+                <span class="error-message" id="usernameError">请输入用户名</span>
+            </div>
+            <!-- 密码输入区域 -->
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" name="password" placeholder="请输入密码" autocomplete="current-password">
+                <span class="error-message" id="passwordError">请输入密码</span>
+            </div>
+            <!-- 登录提交按钮 -->
+            <button type="submit" class="login-button" id="submitBtn">登 录</button>
+            <!-- 底部辅助链接 -->
+            <div class="links">
+                <a href="#">忘记密码？</a>
+                <a href="#">注册账号</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Toast提示框容器 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // API基础地址配置
+        const API_BASE_URL = '/api';
+        // 获取页面DOM元素引用
+        const loginForm = document.getElementById('loginForm');
+        const loginTypeSelect = document.getElementById('loginType');
+        const usernameInput = document.getElementById('username');
+        const usernameLabel = document.getElementById('usernameLabel');
+        const passwordInput = document.getElementById('password');
+        const submitBtn = document.getElementById('submitBtn');
+        const toast = document.getElementById('toast');
+
+        // 显示Toast提示消息
+        function showToast(message, type = 'success') {
+            toast.textContent = message;
+            toast.className = `toast ${type} show`;
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // 显示输入框错误提示
+        function showError(input, message) {
+            const errorEl = document.getElementById(input.id + 'Error');
+            input.classList.add('error');
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+        }
+
+        // 清除输入框错误提示
+        function clearError(input) {
+            const errorEl = document.getElementById(input.id + 'Error');
+            input.classList.remove('error');
+            errorEl.style.display = 'none';
+        }
+
+        // 表单验证函数
+        function validateForm() {
+            let isValid = true;
+
+            // 验证用户名是否为空
+            if (!usernameInput.value.trim()) {
+                showError(usernameInput, '请输入用户名');
+                isValid = false;
+            } else {
+                clearError(usernameInput);
+            }
+
+            // 验证密码是否为空及长度
+            if (!passwordInput.value) {
+                showError(passwordInput, '请输入密码');
+                isValid = false;
+            } else if (passwordInput.value.length < 6) {
+                showError(passwordInput, '密码长度不能少于6位');
+                isValid = false;
+            } else {
+                clearError(passwordInput);
+            }
+
+            return isValid;
+        }
+
+        // 用户名输入时清除错误提示
+        usernameInput.addEventListener('input', () => clearError(usernameInput));
+        // 密码输入时清除错误提示
+        passwordInput.addEventListener('input', () => clearError(passwordInput));
+
+        // 登录身份切换事件监听
+        loginTypeSelect.addEventListener('change', () => {
+            const type = loginTypeSelect.value;
+            if (type === 'student') {
+                usernameLabel.textContent = '学号 / 姓名';
+                usernameInput.placeholder = '请输入学号或姓名';
+            } else if (type === 'teacher') {
+                usernameLabel.textContent = '教师ID / 姓名';
+                usernameInput.placeholder = '请输入教师ID或姓名';
+            } else {
+                usernameLabel.textContent = '用户名';
+                usernameInput.placeholder = '请输入用户名';
+            }
+        });
+
+        // 登录表单提交事件监听
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // 表单验证不通过则返回
+            if (!validateForm()) return;
+
+            // 保存原始按钮文本并显示加载状态
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `登录中<span class="loading"></span>`;
+
+            try {
+                // 发送登录请求到后端API
+                const response = await fetch(`${API_BASE_URL}/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: usernameInput.value.trim(),
+                        password: passwordInput.value,
+                        loginType: loginTypeSelect.value
+                    })
+                });
+
+                const data = await response.json();
+
+                // 登录成功处理
+                if (response.ok && data.success) {
+                    showToast('登录成功！正在跳转...', 'success');
+                    // 将登录信息存入本地存储
+                    localStorage.setItem('token', data.token || '');
+                    localStorage.setItem('username', data.username || usernameInput.value.trim());
+                    localStorage.setItem('avatar', data.avatar || '');
+                    localStorage.setItem('role', data.role || 'ADMIN');
+                    localStorage.setItem('loginType', loginTypeSelect.value);
+                    setTimeout(() => {
+                        // 登录成功后跳转到成功页
+                        window.location.href = 'success.html';
+                    }, 1500);
+                } else {
+                    showToast(data.message || '登录失败，请检查账号密码', 'error');
+                }
+            } catch (error) {
+                // 网络错误处理
+                showToast('网络错误，请检查后端服务是否启动', 'error');
+                console.error('Login error:', error);
+            } finally {
+                // 恢复按钮状态
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        });
+    </script>
+</body>
+</html>

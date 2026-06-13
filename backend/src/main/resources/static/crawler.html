@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片爬虫</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .back-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .form-group label .required {
+            color: #e74c3c;
+            margin-left: 2px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group input[type="password"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 640px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .auth-tab {
+            padding: 6px 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            color: #555;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .auth-tab:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .auth-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .auth-panel {
+            display: none;
+        }
+
+        .auth-panel.active {
+            display: block;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-item .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-item .stat-label {
+            font-size: 13px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        .save-path {
+            background: #f0f9eb;
+            border: 1px solid #d1edc4;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: #67c23a;
+            margin-bottom: 20px;
+            word-break: break-all;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        .image-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f5f6fa;
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .image-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-item .img-fallback {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 12px;
+            text-align: center;
+            padding: 8px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 0;
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 14px 24px;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        }
+
+        .toast.error {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* 图片预览模态框 */
+        .preview-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .preview-overlay.active {
+            display: flex;
+        }
+
+        .preview-overlay img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .preview-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 36px;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* cURL 导入区域 */
+        .curl-area {
+            background: #f8f9fa;
+            border: 1px dashed #ccc;
+            border-radius: 8px;
+            padding: 12px;
+            font-family: 'SF Mono', Monaco, Inconsolata, 'Fira Code', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            min-height: 120px;
+            width: 100%;
+            resize: vertical;
+            color: #333;
+        }
+        .curl-area:focus {
+            outline: none;
+            border-color: #667eea;
+            background: #fff;
+        }
+        .curl-btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+        }
+        .curl-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            color: #555;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .curl-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        .curl-btn.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+        }
+        .curl-btn.primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.35);
+        }
+        .curl-btn.primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .curl-hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 8px;
+        }
+
+        /* 响应数据展示 */
+        .response-panel {
+            margin-top: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* 正则测试区域 */
+        .regex-test-panel {
+            margin-top: 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+        }
+        .regex-test-header {
+            background: #f5f6fa;
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+            border-bottom: 1px solid #eee;
+        }
+        .regex-test-body {
+            padding: 16px;
+        }
+        .regex-test-input-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .regex-test-input-row input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'SF Mono', Monaco, Inconsolata, 'Fira Code', monospace;
+        }
+        .regex-test-input-row input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .regex-apply-btn {
+            padding: 10px 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .regex-apply-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.35);
+        }
+        .regex-match-count {
+            font-size: 13px;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .regex-match-count.zero {
+            color: #e74c3c;
+        }
+        .regex-match-list {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            background: #fafafa;
+        }
+        .regex-match-item {
+            padding: 8px 12px;
+            font-size: 12px;
+            font-family: 'SF Mono', Monaco, Inconsolata, 'Fira Code', monospace;
+            color: #333;
+            border-bottom: 1px solid #f0f0f0;
+            word-break: break-all;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .regex-match-item:last-child {
+            border-bottom: none;
+        }
+        .regex-match-item:hover {
+            background: #e8f4fd;
+        }
+        .regex-match-item .match-num {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            line-height: 22px;
+            text-align: center;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        .regex-match-item .match-text {
+            color: #667eea;
+            font-weight: 600;
+        }
+        .regex-empty {
+            padding: 20px;
+            text-align: center;
+            color: #999;
+            font-size: 13px;
+        }
+        .response-header {
+            background: #f5f6fa;
+            padding: 10px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+        .response-header:hover {
+            background: #eef0f5;
+        }
+        .response-header .title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+        }
+        .response-header .toggle-icon {
+            font-size: 12px;
+            color: #999;
+            transition: transform 0.2s;
+        }
+        .response-header.expanded .toggle-icon {
+            transform: rotate(180deg);
+        }
+        .response-body {
+            display: none;
+            background: #fafafa;
+        }
+        .response-body.expanded {
+            display: block;
+        }
+        .response-body pre {
+            margin: 0;
+            padding: 16px;
+            font-family: 'SF Mono', Monaco, Inconsolata, 'Fira Code', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #333;
+            max-height: 400px;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .response-meta {
+            padding: 8px 16px;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #eee;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="back-btn" onclick="window.location.href='success.html'">← 返回首页</button>
+            <h1>🕷️ 图片爬虫</h1>
+        </div>
+
+        <!-- cURL 导入 -->
+        <div class="card">
+            <div class="card-title">📋 从 cURL 导入（可选）</div>
+            <div class="form-group" style="margin-bottom:0">
+                <textarea class="curl-area" id="curlInput" placeholder="在浏览器开发者工具 → Network → 右键请求 → Copy → Copy as cURL (bash)，粘贴到这里..."></textarea>
+            </div>
+            <div class="curl-hint">支持解析 URL、Method、Headers、Body、Cookie、Basic Auth、Authorization</div>
+            <div class="curl-btn-group">
+                <button class="curl-btn" id="parseToFormBtn">解析到表单</button>
+                <button class="curl-btn primary" id="parseAndCrawlBtn">解析并爬取</button>
+            </div>
+        </div>
+
+        <!-- 配置表单 -->
+        <div class="card">
+            <div class="card-title">爬虫配置</div>
+            <div class="form-group">
+                <label>目标页面 URL <span class="required">*</span></label>
+                <input type="text" id="targetUrl" placeholder="https://example.com/gallery">
+            </div>
+
+            <div class="form-group">
+                <label>认证方式</label>
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-auth="none">无需认证</button>
+                    <button class="auth-tab" data-auth="cookie">Cookie</button>
+                    <button class="auth-tab" data-auth="auth">Authorization</button>
+                    <button class="auth-tab" data-auth="basic">Basic Auth</button>
+                </div>
+                <div class="auth-panel active" id="panel-none">
+                    <p style="color:#999;font-size:13px">目标页面为公开访问，无需认证信息。</p>
+                </div>
+                <div class="auth-panel" id="panel-cookie">
+                    <textarea id="cookies" placeholder="sessionId=xxx; token=yyy"></textarea>
+                </div>
+                <div class="auth-panel" id="panel-auth">
+                    <input type="text" id="authorization" placeholder="Bearer eyJhbG... 或 Basic dXNlcjpwYXNz">
+                </div>
+                <div class="auth-panel" id="panel-basic">
+                    <div class="form-row">
+                        <div class="form-group" style="margin-bottom:0">
+                            <label>用户名</label>
+                            <input type="text" id="username" placeholder="username">
+                        </div>
+                        <div class="form-group" style="margin-bottom:0">
+                            <label>密码</label>
+                            <input type="password" id="password" placeholder="password">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>响应类型</label>
+                    <select id="responseType" onchange="toggleResponseType()">
+                        <option value="html" selected>HTML</option>
+                        <option value="json">JSON</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>URL 正则过滤 <small style="color:#999;font-weight:400">（在下方「接口返回原始数据」中选中文本可自动生成）</small></label>
+                    <input type="text" id="urlPattern" value=".*\.(jpg|jpeg|png|gif|webp|bmp).*" placeholder=".*\.(jpg|png).*">
+                </div>
+            </div>
+
+            <div id="htmlOptions">
+                <div class="form-group">
+                    <label>CSS 选择器</label>
+                    <input type="text" id="selector" value="img" placeholder="img 或 .gallery img">
+                </div>
+            </div>
+
+            <div id="jsonOptions" class="hidden">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>JSON 路径</label>
+                        <input type="text" id="jsonPath" placeholder="如：answerSheet 或 data.list">
+                    </div>
+                    <div class="form-group">
+                        <label>JSON 图片字段名</label>
+                        <input type="text" id="jsonImageUrlField" value="url" placeholder="默认 url">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>自定义名称字段 1 <small style="color:#999;font-weight:400">（可选，如：studentName）</small></label>
+                        <input type="text" id="nameField1" placeholder="从 JSON 中提取作为文件名前缀">
+                    </div>
+                    <div class="form-group">
+                        <label>自定义名称字段 2 <small style="color:#999;font-weight:400">（可选，如：id）</small></label>
+                        <input type="text" id="nameField2" placeholder="与字段1拼接组成文件名">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>最大下载数量</label>
+                <input type="number" id="maxCount" value="100" min="1" max="500">
+            </div>
+
+            <!-- 高级设置 -->
+            <div class="form-group">
+                <button type="button" id="toggleAdvanced" style="background:none;border:none;color:#667eea;font-size:13px;cursor:pointer;padding:0"
+                    onclick="document.getElementById('advancedPanel').classList.toggle('hidden')"
+                >
+                    ▼ 高级设置
+                </button>
+            </div>
+            <div id="advancedPanel" class="hidden">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>请求方式</label>
+                        <select id="method">
+                            <option value="GET" selected>GET</option>
+                            <option value="POST">POST</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Content-Type</label>
+                        <input type="text" id="contentType" value="application/json" placeholder="application/json">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>自定义 User-Agent</label>
+                        <input type="text" id="userAgent" placeholder="默认: Mozilla/5.0 ..." value="">
+                    </div>
+                    <div class="form-group">
+                        <label>Client ID</label>
+                        <input type="text" id="clientId" placeholder="客户端标识">
+                    </div>
+                    <div class="form-group">
+                        <label>Client ID Header 名</label>
+                        <input type="text" id="clientIdHeader" value="X-Client-Id" placeholder="X-Client-Id">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>自定义 Headers（JSON 格式）</label>
+                    <textarea id="headers" placeholder='{"Authorization":"Bearer xxx","X-Api-Key":"abc"}'></textarea>
+                </div>
+                <div class="form-group">
+                    <label>请求 Body（JSON 格式，POST 时有效）</label>
+                    <textarea id="body" placeholder='{"page":1,"category":"nature"}'></textarea>
+                </div>
+            </div>
+
+            <button class="submit-btn" id="startBtn">开始爬取</button>
+        </div>
+
+        <!-- 结果区域 -->
+        <div class="card hidden" id="resultCard">
+            <div class="card-title">爬取结果</div>
+            <div class="result-stats" id="resultStats"></div>
+            <div class="save-path" id="savePath"></div>
+            <div class="image-grid" id="imageGrid"></div>
+
+            <!-- 接口响应原始数据 -->
+            <div class="response-panel hidden" id="responsePanel">
+                <div class="response-header" id="responseHeader">
+                    <span class="title">📄 接口返回原始数据（🖱️ 选中图片 URL 可自动生成正则）</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="response-body" id="responseBody">
+                    <pre id="responsePre"></pre>
+                </div>
+                <div class="response-meta" id="responseMeta"></div>
+
+                <!-- 正则实时测试 -->
+                <div class="regex-test-panel" id="regexTestPanel">
+                    <div class="regex-test-header">🔍 正则实时测试</div>
+                    <div class="regex-test-body">
+                        <div class="regex-test-input-row">
+                            <input type="text" id="regexTestInput" placeholder="输入正则表达式，如：.*\.(jpg|png).*  或  url\":\"([^\"]+)" value="">
+                            <button class="regex-apply-btn" id="regexApplyBtn" title="将测试正则填入「URL 正则过滤」">应用此正则</button>
+                        </div>
+                        <div class="regex-match-count" id="regexMatchCount">输入正则后自动匹配</div>
+                        <div class="regex-match-list" id="regexMatchList">
+                            <div class="regex-empty">输入正则表达式后将在此显示匹配结果</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 图片预览 -->
+    <div class="preview-overlay" id="previewOverlay">
+        <button class="preview-close" id="previewClose">&times;</button>
+        <img src="" alt="preview" id="previewImg">
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const token = localStorage.getItem('token') || '';
+        if (!token) {
+            window.location.href = 'index.html';
+        }
+
+        // 当前接口返回的原始数据（用于正则实时测试）
+        let currentResponseBody = '';
+
+        // ========== 正则实时测试 ==========
+        function runRegexTest() {
+            const patternStr = document.getElementById('regexTestInput').value.trim();
+            const countEl = document.getElementById('regexMatchCount');
+            const listEl = document.getElementById('regexMatchList');
+
+            if (!patternStr || !currentResponseBody) {
+                countEl.textContent = currentResponseBody ? '输入正则后自动匹配' : '请先执行一次请求获取数据';
+                countEl.className = 'regex-match-count';
+                listEl.innerHTML = '<div class="regex-empty">输入正则表达式后将在此显示匹配结果</div>';
+                return;
+            }
+
+            let regex;
+            try {
+                regex = new RegExp(patternStr, 'gi');
+            } catch (e) {
+                countEl.textContent = '正则语法错误: ' + e.message;
+                countEl.className = 'regex-match-count zero';
+                listEl.innerHTML = '<div class="regex-empty">正则语法错误，请检查</div>';
+                return;
+            }
+
+            const matches = [];
+            const seen = new Set();
+            let match;
+            // 安全限制：最多匹配 200 次防止卡死
+            let safety = 0;
+            while ((match = regex.exec(currentResponseBody)) !== null && safety < 200) {
+                safety++;
+                // 如果有捕获组，取第一个捕获组；否则取完整匹配
+                const val = match[1] !== undefined ? match[1] : match[0];
+                if (!seen.has(val)) {
+                    seen.add(val);
+                    matches.push(val);
+                }
+                // 防止零宽匹配导致死循环
+                if (match[0].length === 0) {
+                    regex.lastIndex++;
+                }
+            }
+
+            countEl.textContent = `共匹配到 ${matches.length} 个唯一结果${matches.length >= 200 ? '（已限制最多显示 200 个）' : ''}`;
+            countEl.className = matches.length > 0 ? 'regex-match-count' : 'regex-match-count zero';
+
+            if (matches.length === 0) {
+                listEl.innerHTML = '<div class="regex-empty">未匹配到任何结果，请调整正则表达式</div>';
+            } else {
+                listEl.innerHTML = matches.slice(0, 50).map((m, i) => {
+                    // 截断过长文本
+                    const display = m.length > 200 ? m.substring(0, 200) + '...' : m;
+                    return `
+                        <div class="regex-match-item" title="点击复制">
+                            <span class="match-num">${i + 1}</span>
+                            <span class="match-text">${escapeHtml(display)}</span>
+                        </div>
+                    `;
+                }).join('');
+                if (matches.length > 50) {
+                    listEl.innerHTML += `<div class="regex-empty">还有 ${matches.length - 50} 个结果未显示</div>`;
+                }
+
+                // 点击复制
+                listEl.querySelectorAll('.regex-match-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const text = item.querySelector('.match-text').textContent;
+                        navigator.clipboard.writeText(text).then(() => {
+                            showToast('已复制: ' + text.substring(0, 50) + (text.length > 50 ? '...' : ''), 'success');
+                        });
+                    });
+                });
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        document.getElementById('regexTestInput').addEventListener('input', runRegexTest);
+
+        document.getElementById('regexApplyBtn').addEventListener('click', () => {
+            const val = document.getElementById('regexTestInput').value.trim();
+            if (!val) {
+                showToast('请先输入正则表达式', 'error');
+                return;
+            }
+            document.getElementById('urlPattern').value = val;
+            showToast('已应用到「URL 正则过滤」', 'success');
+            // 高亮提示
+            const input = document.getElementById('urlPattern');
+            input.style.borderColor = '#27ae60';
+            input.style.background = '#f0fff5';
+            setTimeout(() => {
+                input.style.borderColor = '';
+                input.style.background = '';
+            }, 1500);
+        });
+
+        // ========== cURL 解析 ==========
+        function parseCurlToObject(rawCurl) {
+            if (!rawCurl || !rawCurl.trim()) return null;
+            // 标准化：去掉行尾反斜杠，合并多行
+            let cmd = rawCurl.replace(/\\\s*\r?\n\s*/g, ' ').replace(/\s+/g, ' ').trim();
+
+            const result = {
+                targetUrl: '',
+                method: 'GET',
+                headers: {},
+                cookies: '',
+                authorization: '',
+                username: '',
+                password: '',
+                userAgent: '',
+                contentType: '',
+                body: ''
+            };
+
+            // 去掉开头的 curl
+            let afterCurl = cmd;
+            if (afterCurl.toLowerCase().startsWith('curl ')) {
+                afterCurl = afterCurl.substring(5).trim();
+            }
+
+            // 提取 URL（第一个引号包裹的或 bare token）
+            let url = extractFirstToken(afterCurl);
+            if (!url || !/^https?:\/\//.test(url)) {
+                const m = afterCurl.match(/(https?:\/\/[^\s"']+)/);
+                if (m) url = m[1];
+            }
+            if (!url) return null;
+            result.targetUrl = url;
+
+            // Tokenize
+            const tokens = tokenizeShell(cmd);
+            let i = 0;
+            while (i < tokens.length) {
+                const t = tokens[i].toLowerCase();
+                if (t === '-x' || t === '--request') {
+                    result.method = (tokens[++i] || 'GET').toUpperCase();
+                } else if (t === '-h' || t === '--header') {
+                    const h = tokens[++i] || '';
+                    const ci = h.indexOf(':');
+                    if (ci > 0) {
+                        const key = h.substring(0, ci).trim();
+                        const val = h.substring(ci + 1).trim();
+                        if (key.toLowerCase() === 'cookie') {
+                            result.cookies = result.cookies ? result.cookies + '; ' + val : val;
+                        } else if (key.toLowerCase() === 'authorization') {
+                            result.authorization = val;
+                        } else if (key.toLowerCase() === 'user-agent') {
+                            result.userAgent = val;
+                        } else if (key.toLowerCase() === 'content-type') {
+                            result.contentType = val;
+                        } else {
+                            result.headers[key] = val;
+                        }
+                    }
+                } else if (t === '-d' || t === '--data' || t === '--data-raw' || t === '--data-binary') {
+                    result.body = (result.body ? result.body + '&' : '') + (tokens[++i] || '');
+                    result.method = 'POST';
+                } else if (t === '-b' || t === '--cookie') {
+                    const c = tokens[++i] || '';
+                    result.cookies = result.cookies ? result.cookies + '; ' + c : c;
+                } else if (t === '-u' || t === '--user') {
+                    const u = tokens[++i] || '';
+                    const ci = u.indexOf(':');
+                    if (ci >= 0) {
+                        result.username = u.substring(0, ci);
+                        result.password = u.substring(ci + 1);
+                    } else {
+                        result.username = u;
+                        result.password = '';
+                    }
+                } else if (t === '--insecure' || t === '-k') {
+                    // 忽略
+                }
+                i++;
+            }
+            return result;
+        }
+
+        function extractFirstToken(s) {
+            s = s.trim();
+            if (s.startsWith("'")) {
+                const end = s.indexOf("'", 1);
+                return end > 0 ? s.substring(1, end) : s.substring(1);
+            }
+            if (s.startsWith('"')) {
+                const end = s.indexOf('"', 1);
+                return end > 0 ? s.substring(1, end) : s.substring(1);
+            }
+            const sp = s.indexOf(' ');
+            return sp > 0 ? s.substring(0, sp) : s;
+        }
+
+        function tokenizeShell(cmd) {
+            const tokens = [];
+            let cur = '';
+            let inSingle = false, inDouble = false;
+            for (let i = 0; i < cmd.length; i++) {
+                const c = cmd[i];
+                const prev = i > 0 ? cmd[i - 1] : '';
+                if (c === "'" && !inDouble && prev !== '\\') {
+                    if (inSingle) {
+                        tokens.push(cur); cur = ''; inSingle = false;
+                    } else {
+                        if (cur) { tokens.push(cur); cur = ''; }
+                        inSingle = true;
+                    }
+                    continue;
+                }
+                if (c === '"' && !inSingle && prev !== '\\') {
+                    if (inDouble) {
+                        tokens.push(cur); cur = ''; inDouble = false;
+                    } else {
+                        if (cur) { tokens.push(cur); cur = ''; }
+                        inDouble = true;
+                    }
+                    continue;
+                }
+                if ((c === ' ' || c === '\t') && !inSingle && !inDouble) {
+                    if (cur) { tokens.push(cur); cur = ''; }
+                    continue;
+                }
+                cur += c;
+            }
+            if (cur) tokens.push(cur);
+            return tokens;
+        }
+
+        function fillFormFromCurl(parsed) {
+            if (!parsed) return;
+            document.getElementById('targetUrl').value = parsed.targetUrl || '';
+            document.getElementById('method').value = parsed.method || 'GET';
+            if (parsed.contentType) document.getElementById('contentType').value = parsed.contentType;
+            if (parsed.userAgent) document.getElementById('userAgent').value = parsed.userAgent;
+            if (parsed.body) document.getElementById('body').value = parsed.body;
+
+            // headers（排除已单独处理的）
+            if (Object.keys(parsed.headers).length > 0) {
+                document.getElementById('headers').value = JSON.stringify(parsed.headers, null, 2);
+            }
+
+            // 认证方式
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
+            if (parsed.authorization) {
+                document.getElementById('authorization').value = parsed.authorization;
+                setAuthTab('auth');
+            } else if (parsed.username) {
+                document.getElementById('username').value = parsed.username;
+                document.getElementById('password').value = parsed.password;
+                setAuthTab('basic');
+            } else if (parsed.cookies) {
+                document.getElementById('cookies').value = parsed.cookies;
+                setAuthTab('cookie');
+            } else {
+                setAuthTab('none');
+            }
+
+            showToast('cURL 已解析并填充到表单，请确认图片提取参数后点击"开始爬取"', 'success');
+        }
+
+        function setAuthTab(type) {
+            document.querySelectorAll('.auth-tab').forEach(t => {
+                t.classList.toggle('active', t.dataset.auth === type);
+            });
+            document.querySelectorAll('.auth-panel').forEach(p => {
+                p.classList.toggle('active', p.id === 'panel-' + type);
+            });
+        }
+
+        async function submitFromCurl() {
+            const rawCurl = document.getElementById('curlInput').value.trim();
+            if (!rawCurl) {
+                showToast('请先粘贴 cURL 命令', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('parseAndCrawlBtn');
+            btn.disabled = true;
+            btn.textContent = '爬取中...';
+
+            const responseType = document.getElementById('responseType').value;
+            const payload = {
+                rawCurl: rawCurl,
+                urlPattern: document.getElementById('urlPattern').value.trim() || '.*',
+                maxCount: parseInt(document.getElementById('maxCount').value) || 100,
+                responseType: responseType
+            };
+            if (responseType === 'json') {
+                payload.jsonPath = document.getElementById('jsonPath').value.trim();
+                payload.jsonImageUrlField = document.getElementById('jsonImageUrlField').value.trim() || 'url';
+                const nf1 = document.getElementById('nameField1').value.trim();
+                const nf2 = document.getElementById('nameField2').value.trim();
+                if (nf1) payload.nameField1 = nf1;
+                if (nf2) payload.nameField2 = nf2;
+            } else {
+                payload.selector = document.getElementById('selector').value.trim() || 'img';
+            }
+
+            try {
+                const res = await fetch('/api/crawler/download-images-from-curl', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    showToast(data.message, 'success');
+                    renderResult(data);
+                } else {
+                    showToast(data.message || '爬取失败', 'error');
+                }
+            } catch (err) {
+                showToast('网络错误，请检查后端服务是否启动', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '解析并爬取';
+            }
+        }
+
+        document.getElementById('parseToFormBtn').addEventListener('click', () => {
+            const rawCurl = document.getElementById('curlInput').value.trim();
+            if (!rawCurl) {
+                showToast('请先粘贴 cURL 命令', 'error');
+                return;
+            }
+            const parsed = parseCurlToObject(rawCurl);
+            if (!parsed) {
+                showToast('无法解析 cURL 命令，请检查格式', 'error');
+                return;
+            }
+            fillFormFromCurl(parsed);
+        });
+
+        document.getElementById('parseAndCrawlBtn').addEventListener('click', submitFromCurl);
+
+        // 响应类型切换
+        function toggleResponseType() {
+            const type = document.getElementById('responseType').value;
+            if (type === 'json') {
+                document.getElementById('htmlOptions').classList.add('hidden');
+                document.getElementById('jsonOptions').classList.remove('hidden');
+            } else {
+                document.getElementById('htmlOptions').classList.remove('hidden');
+                document.getElementById('jsonOptions').classList.add('hidden');
+            }
+        }
+
+        // 认证方式切换
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('panel-' + tab.dataset.auth).classList.add('active');
+            });
+        });
+
+        const toast = document.getElementById('toast');
+        function showToast(message, type) {
+            toast.textContent = message;
+            toast.className = 'toast ' + type;
+            setTimeout(() => toast.classList.add('show'), 10);
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        document.getElementById('startBtn').addEventListener('click', async () => {
+            const targetUrl = document.getElementById('targetUrl').value.trim();
+            if (!targetUrl) {
+                showToast('请输入目标页面 URL', 'error');
+                return;
+            }
+            if (!targetUrl.startsWith('http://') && !targetUrl.startsWith('https://')) {
+                showToast('URL 必须以 http:// 或 https:// 开头', 'error');
+                return;
+            }
+
+            const activeAuth = document.querySelector('.auth-tab.active').dataset.auth;
+            const responseType = document.getElementById('responseType').value;
+            const payload = {
+                targetUrl: targetUrl,
+                responseType: responseType,
+                urlPattern: document.getElementById('urlPattern').value.trim() || '.*',
+                maxCount: parseInt(document.getElementById('maxCount').value) || 100,
+                method: document.getElementById('method').value,
+                contentType: document.getElementById('contentType').value.trim() || 'application/json'
+            };
+
+            if (responseType === 'json') {
+                payload.jsonPath = document.getElementById('jsonPath').value.trim();
+                payload.jsonImageUrlField = document.getElementById('jsonImageUrlField').value.trim() || 'url';
+                const nf1 = document.getElementById('nameField1').value.trim();
+                const nf2 = document.getElementById('nameField2').value.trim();
+                if (nf1) payload.nameField1 = nf1;
+                if (nf2) payload.nameField2 = nf2;
+            } else {
+                payload.selector = document.getElementById('selector').value.trim() || 'img';
+            }
+
+            // 高级设置
+            const userAgentVal = document.getElementById('userAgent').value.trim();
+            if (userAgentVal) payload.userAgent = userAgentVal;
+
+            const clientIdVal = document.getElementById('clientId').value.trim();
+            if (clientIdVal) {
+                payload.clientId = clientIdVal;
+                payload.clientIdHeader = document.getElementById('clientIdHeader').value.trim() || 'X-Client-Id';
+            }
+
+            const bodyVal = document.getElementById('body').value.trim();
+            if (bodyVal) payload.body = bodyVal;
+
+            const headersVal = document.getElementById('headers').value.trim();
+            if (headersVal) {
+                try {
+                    payload.headers = JSON.parse(headersVal);
+                } catch (e) {
+                    showToast('自定义 Headers JSON 格式错误', 'error');
+                    return;
+                }
+            }
+
+            // 认证方式
+            if (activeAuth === 'cookie') {
+                payload.cookies = document.getElementById('cookies').value.trim();
+            } else if (activeAuth === 'auth') {
+                payload.authorization = document.getElementById('authorization').value.trim();
+            } else if (activeAuth === 'basic') {
+                payload.username = document.getElementById('username').value.trim();
+                payload.password = document.getElementById('password').value;
+            }
+
+            const btn = document.getElementById('startBtn');
+            btn.disabled = true;
+            btn.textContent = '爬取中...';
+
+            try {
+                const res = await fetch('/api/crawler/download-images', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    showToast(data.message, 'success');
+                    renderResult(data);
+                } else {
+                    showToast(data.message || '爬取失败', 'error');
+                }
+            } catch (err) {
+                showToast('网络错误，请检查后端服务是否启动', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '开始爬取';
+            }
+        });
+
+        // 与后端 generateFileName 逻辑保持一致
+        function generateFileName(imageUrl) {
+            try {
+                const url = new URL(imageUrl);
+                let fileName = url.pathname.substring(url.pathname.lastIndexOf('/') + 1);
+                if (fileName.includes('?')) {
+                    fileName = fileName.substring(0, fileName.indexOf('?'));
+                }
+                if (!fileName) {
+                    fileName = 'image.jpg';
+                }
+                if (fileName.length > 100) {
+                    const dot = fileName.lastIndexOf('.');
+                    const ext = dot > 0 ? fileName.substring(dot) : '';
+                    fileName = fileName.substring(0, 100 - ext.length) + ext;
+                }
+                return fileName;
+            } catch (e) {
+                return 'image.jpg';
+            }
+        }
+
+        function renderResult(data) {
+            const resultCard = document.getElementById('resultCard');
+            resultCard.classList.remove('hidden');
+
+            // 统计卡片
+            const totalMatched = (data.images || []).length + (data.failedImages || []).length;
+            const statsHtml = `
+                <div class="stat-item">
+                    <div class="stat-value">${data.downloadedCount || 0}</div>
+                    <div class="stat-label">下载成功</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" style="color:#e74c3c">${data.failedCount || 0}</div>
+                    <div class="stat-label">下载失败</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" style="color:#f39c12">${totalMatched}</div>
+                    <div class="stat-label">匹配总数</div>
+                </div>
+            `;
+            document.getElementById('resultStats').innerHTML = statsHtml;
+
+            // 保存路径
+            const pathEl = document.getElementById('savePath');
+            if (data.savePath) {
+                pathEl.textContent = '保存路径：' + data.savePath;
+                pathEl.style.display = 'block';
+            } else {
+                pathEl.style.display = 'none';
+            }
+
+            // 图片网格
+            const grid = document.getElementById('imageGrid');
+            const images = data.images || [];
+            if (images.length === 0) {
+                grid.innerHTML = '<div class="empty-state">未匹配到符合规则的图片</div>';
+            } else {
+                // 提取保存目录名（从 /uploads/crawler/20250609_215433/ 中提取）
+                let dirName = '';
+                if (data.savePath) {
+                    const parts = data.savePath.replace(/\/$/, '').split('/');
+                    dirName = parts[parts.length - 1];
+                }
+
+                grid.innerHTML = images.map((url) => {
+                    const fileName = generateFileName(url);
+                    const localUrl = dirName ? `/uploads/crawler/${dirName}/${fileName}` : '';
+                    // 优先用本地 URL 预览，避免跨域；本地失败则回退到原 URL
+                    return `
+                        <div class="image-item" onclick="previewImage('${url}')" title="${url}">
+                            <img src="${localUrl || url}" alt="" loading="lazy"
+                                onerror="this.onerror=null;this.src='${url}';this.onerror=function(){this.parentElement.innerHTML='<div class=\'img-fallback\'>加载失败</div>';}"
+                            >
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // 接口返回原始数据
+            const responsePanel = document.getElementById('responsePanel');
+            if (data.responseBody) {
+                responsePanel.classList.remove('hidden');
+                currentResponseBody = data.responseBody;
+                const pre = document.getElementById('responsePre');
+                // 如果是 JSON，尝试格式化
+                let displayText = data.responseBody;
+                try {
+                    const parsed = JSON.parse(data.responseBody);
+                    displayText = JSON.stringify(parsed, null, 2);
+                } catch (e) {
+                    // 不是 JSON，保持原样
+                }
+                pre.textContent = displayText;
+
+                const meta = document.getElementById('responseMeta');
+                const len = data.responseBody.length;
+                meta.textContent = `长度: ${len.toLocaleString()} 字符 | ${len > 10000 ? '已截取前 10,000 字符显示' : '完整显示'}`;
+                if (len > 10000) {
+                    pre.textContent = displayText.substring(0, 10000) + '\n\n... (内容过长，已截取)';
+                }
+
+                // 自动运行正则测试（如果输入框已有值）
+                runRegexTest();
+            } else {
+                responsePanel.classList.add('hidden');
+                currentResponseBody = '';
+            }
+        }
+
+        // 响应数据面板展开/折叠
+        document.getElementById('responseHeader').addEventListener('click', () => {
+            const header = document.getElementById('responseHeader');
+            const body = document.getElementById('responseBody');
+            header.classList.toggle('expanded');
+            body.classList.toggle('expanded');
+        });
+
+        // ========== 智能正则生成：选中响应数据中的文本自动生成正则 ==========
+        function generateRegexFromSelection() {
+            const selection = window.getSelection();
+            const selectedText = selection.toString().trim();
+            if (!selectedText || selectedText.length < 3) return;
+
+            let generatedRegex = '';
+            let tip = '';
+
+            // 1. 检测是否是 JSON 字段格式："xxx":"yyy" 或 xxx":"yyy
+            const jsonFieldMatch = selectedText.match(/(["']?)([\w_-]+)\1":"([^"]*)"?/);
+            if (jsonFieldMatch) {
+                const fieldName = jsonFieldMatch[2];
+                generatedRegex = fieldName + '":"([^"]+)';
+                tip = `检测到 JSON 字段 "${fieldName}"，已生成捕获组正则`;
+            }
+            // 2. 检测是否是 "field":"value" 整体被选中（带引号）
+            else if (/"[\w_-]+":"/.test(selectedText)) {
+                const m = selectedText.match(/"([\w_-]+)":"/);
+                if (m) {
+                    generatedRegex = '"' + m[1] + '":"([^"]+)';
+                    tip = `检测到 JSON 字段 "${m[1]}"，已生成捕获组正则`;
+                }
+            }
+            // 3. 检测是否是完整 URL
+            else if (/^https?:\/\/\S+/.test(selectedText)) {
+                // 从 URL 中提取扩展名
+                const extMatch = selectedText.match(/\.(jpg|jpeg|png|gif|webp|bmp)(\?|$)/i);
+                if (extMatch) {
+                    generatedRegex = '.*\\.' + extMatch[1].toLowerCase() + '.*';
+                    tip = '检测到图片 URL，已生成按扩展名匹配的正则';
+                } else {
+                    generatedRegex = 'https?://\\S+';
+                    tip = '检测到 URL，已生成通用 URL 匹配正则';
+                }
+            }
+            // 4. 检测是否包含 URL 片段（如 //xxx.jpg）
+            else if (/[\w_-]+\.(jpg|jpeg|png|gif|webp|bmp)/i.test(selectedText)) {
+                const extMatch = selectedText.match(/\.(jpg|jpeg|png|gif|webp|bmp)/i);
+                generatedRegex = '.*\\.' + extMatch[1].toLowerCase() + '.*';
+                tip = '检测到图片扩展名，已生成正则';
+            }
+            // 5. 检测是否是带引号的纯字符串值（如 "http://..."）
+            else if (/^"https?:\/\/[^"]+"$/.test(selectedText)) {
+                generatedRegex = '"(https?://[^"]+)"';
+                tip = '检测到引号包裹的 URL，已生成捕获组正则';
+            }
+
+            if (generatedRegex) {
+                document.getElementById('urlPattern').value = generatedRegex;
+                document.getElementById('regexTestInput').value = generatedRegex;
+                showToast(tip + '：已填入「URL 正则过滤」并添加到正则测试', 'success');
+                runRegexTest();
+
+                // 高亮一下输入框提示用户
+                const input = document.getElementById('urlPattern');
+                input.style.borderColor = '#27ae60';
+                input.style.background = '#f0fff5';
+                setTimeout(() => {
+                    input.style.borderColor = '';
+                    input.style.background = '';
+                }, 1500);
+            }
+        }
+
+        // 监听响应数据区域的文本选择
+        document.getElementById('responsePre').addEventListener('mouseup', () => {
+            // 延迟一点，等选区完成
+            setTimeout(generateRegexFromSelection, 50);
+        });
+        document.getElementById('responsePre').addEventListener('keyup', (e) => {
+            if (e.key === 'Shift' || e.ctrlKey || e.metaKey) {
+                setTimeout(generateRegexFromSelection, 50);
+            }
+        });
+
+        // 图片预览
+        window.previewImage = function(url) {
+            document.getElementById('previewImg').src = url;
+            document.getElementById('previewOverlay').classList.add('active');
+        };
+
+        document.getElementById('previewClose').addEventListener('click', () => {
+            document.getElementById('previewOverlay').classList.remove('active');
+        });
+
+        document.getElementById('previewOverlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('previewOverlay')) {
+                document.getElementById('previewOverlay').classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

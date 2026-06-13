@@ -1,0 +1,356 @@
+2026-06-01 22:29:16.791 [main] INFO  com.example.demo.DemoApplication - 开始启动应用...
+2026-06-01 22:29:17.163 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2026-06-01 22:29:17.208 [main] INFO  com.example.demo.DemoApplication - Starting DemoApplication using Java 22.0.2 with PID 14364 (C:\Users\zhangkj\login-demo\backend\target\classes started by zhangkj in C:\Users\zhangkj\login-demo\backend)
+2026-06-01 22:29:17.212 [main] INFO  com.example.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-01 22:29:17.791 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-01 22:29:17.851 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 53 ms. Found 8 JPA repository interfaces.
+2026-06-01 22:29:18.397 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with ports 8443 (https), 8080 (http)
+2026-06-01 22:29:18.414 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-0.0.0.0-8443"]
+2026-06-01 22:29:18.417 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-01 22:29:18.418 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-01 22:29:18.418 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-06-01 22:29:18.467 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-01 22:29:18.467 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1217 ms
+2026-06-01 22:29:18.593 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-01 22:29:18.666 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-01 22:29:18.700 [main] INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-01 22:29:18.930 [main] INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-01 22:29:18.961 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-01 22:29:19.114 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7ffcb232
+2026-06-01 22:29:19.114 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-01 22:29:20.038 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-01 22:29:20.120 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-01 22:29:20.353 [main] INFO  com.example.demo.config.AppConfig - 初始化密码加密器: BCryptPasswordEncoder
+2026-06-01 22:29:20.477 [main] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2026-06-01 22:29:20.608 [main] INFO  com.example.demo.config.WebConfig - 配置静态资源映射: /uploads/** -> file:C:\Users\zhangkj\login-demo\backend\uploads/
+2026-06-01 22:29:20.744 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-0.0.0.0-8443"]
+2026-06-01 22:29:20.938 [main] INFO  org.apache.tomcat.util.net.NioEndpoint.certificate - Connector [https-jsse-nio-0.0.0.0-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [C:\Users\zhangkj\.keystore] using alias [login-demo] with trust store [null]
+2026-06-01 22:29:20.949 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-06-01 22:29:20.952 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on ports 8443 (https), 8080 (http) with context path ''
+2026-06-01 22:29:20.957 [main] INFO  com.example.demo.DemoApplication - Started DemoApplication in 4.085 seconds (process running for 5.101)
+2026-06-01 22:29:20.960 [main] INFO  com.example.demo.config.DataInitializer - 开始执行数据初始化...
+2026-06-01 22:29:21.222 [main] INFO  com.example.demo.config.DataInitializer - 用户表中已有数据，跳过默认用户创建
+2026-06-01 22:29:21.222 [main] INFO  com.example.demo.config.DataInitializer - 数据初始化执行完毕
+2026-06-01 22:29:21.222 [main] INFO  com.example.demo.DemoApplication - 应用启动完成
+2026-06-01 22:29:38.724 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-01 22:29:38.724 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-01 22:29:38.724 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2026-06-01 22:29:38.821 [http-nio-8080-exec-1] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: admin, 登录类型: user
+2026-06-01 22:29:38.821 [http-nio-8080-exec-1] INFO  com.example.demo.controller.AuthController - 管理员登录，用户名: admin
+2026-06-01 22:29:38.929 [http-nio-8080-exec-1] INFO  com.example.demo.controller.AuthController - 管理员登录成功: admin
+2026-06-01 22:29:39.904 [http-nio-8080-exec-3] INFO  com.example.demo.controller.RolePermissionController - 根据角色查询权限，角色: ADMIN
+2026-06-01 22:29:39.904 [http-nio-8080-exec-4] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 22:29:39.912 [http-nio-8080-exec-4] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 22:29:39.912 [http-nio-8080-exec-6] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-01 22:29:39.912 [http-nio-8080-exec-7] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 22:29:39.912 [http-nio-8080-exec-2] INFO  com.example.demo.controller.TeacherController - 查询所有教师列表
+2026-06-01 22:29:39.913 [http-nio-8080-exec-5] INFO  com.example.demo.controller.StudentController - 查询所有学生列表
+2026-06-01 22:29:39.913 [http-nio-8080-exec-7] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 22:29:39.920 [http-nio-8080-exec-3] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限成功，角色: ADMIN, 共 7 条记录
+2026-06-01 22:29:39.924 [http-nio-8080-exec-5] INFO  com.example.demo.controller.StudentController - 查询学生列表成功，共 7 条记录
+2026-06-01 22:29:39.924 [http-nio-8080-exec-6] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 6 条记录
+2026-06-01 22:29:39.959 [http-nio-8080-exec-2] INFO  com.example.demo.controller.TeacherController - 查询教师列表成功，共 5 条记录
+2026-06-01 22:29:46.836 [http-nio-8080-exec-1] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-01 22:29:46.836 [http-nio-8080-exec-10] INFO  com.example.demo.controller.TeacherController - 查询所有教师列表
+2026-06-01 22:29:46.836 [http-nio-8080-exec-9] INFO  com.example.demo.controller.ProductTypeController - 查询所有商品类型列表
+2026-06-01 22:29:46.836 [http-nio-8080-exec-1] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 6 条记录
+2026-06-01 22:29:46.840 [http-nio-8080-exec-10] INFO  com.example.demo.controller.TeacherController - 查询教师列表成功，共 5 条记录
+2026-06-01 22:29:46.848 [http-nio-8080-exec-9] INFO  com.example.demo.controller.ProductTypeController - 查询商品类型列表成功，共 4 条记录
+2026-06-01 22:29:48.451 [http-nio-8080-exec-7] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 22:29:48.451 [http-nio-8080-exec-6] INFO  com.example.demo.controller.TeacherController - 查询所有教师列表
+2026-06-01 22:29:48.451 [http-nio-8080-exec-4] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-01 22:29:48.451 [http-nio-8080-exec-3] INFO  com.example.demo.controller.RolePermissionController - 根据角色查询权限，角色: ADMIN
+2026-06-01 22:29:48.455 [http-nio-8080-exec-5] INFO  com.example.demo.controller.StudentController - 查询所有学生列表
+2026-06-01 22:29:48.455 [http-nio-8080-exec-2] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 22:29:48.456 [http-nio-8080-exec-3] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限成功，角色: ADMIN, 共 7 条记录
+2026-06-01 22:29:48.456 [http-nio-8080-exec-5] INFO  com.example.demo.controller.StudentController - 查询学生列表成功，共 7 条记录
+2026-06-01 22:29:48.456 [http-nio-8080-exec-7] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 22:29:48.456 [http-nio-8080-exec-2] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 22:29:48.456 [http-nio-8080-exec-4] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 6 条记录
+2026-06-01 22:29:48.459 [http-nio-8080-exec-6] INFO  com.example.demo.controller.TeacherController - 查询教师列表成功，共 5 条记录
+2026-06-01 22:29:49.358 [http-nio-8080-exec-8] INFO  com.example.demo.controller.StudentController - 查询所有学生列表
+2026-06-01 22:29:49.362 [http-nio-8080-exec-8] INFO  com.example.demo.controller.StudentController - 查询学生列表成功，共 7 条记录
+2026-06-01 22:29:50.376 [http-nio-8080-exec-1] INFO  com.example.demo.controller.RolePermissionController - 根据角色查询权限，角色: ADMIN
+2026-06-01 22:29:50.376 [http-nio-8080-exec-10] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 22:29:50.376 [http-nio-8080-exec-1] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限成功，角色: ADMIN, 共 7 条记录
+2026-06-01 22:29:50.380 [http-nio-8080-exec-10] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 22:29:50.380 [http-nio-8080-exec-9] INFO  com.example.demo.controller.StudentController - 查询所有学生列表
+2026-06-01 22:29:50.380 [http-nio-8080-exec-7] INFO  com.example.demo.controller.TeacherController - 查询所有教师列表
+2026-06-01 22:29:50.384 [http-nio-8080-exec-9] INFO  com.example.demo.controller.StudentController - 查询学生列表成功，共 7 条记录
+2026-06-01 22:29:50.384 [http-nio-8080-exec-5] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-01 22:29:50.384 [http-nio-8080-exec-5] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 6 条记录
+2026-06-01 22:29:50.384 [http-nio-8080-exec-7] INFO  com.example.demo.controller.TeacherController - 查询教师列表成功，共 5 条记录
+2026-06-01 22:29:50.388 [http-nio-8080-exec-4] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 22:29:50.392 [http-nio-8080-exec-4] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 22:29:51.093 [http-nio-8080-exec-2] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 22:29:51.097 [http-nio-8080-exec-2] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 22:29:51.957 [http-nio-8080-exec-8] INFO  com.example.demo.controller.StudentController - 查询所有学生列表
+2026-06-01 22:29:51.957 [http-nio-8080-exec-1] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-01 22:29:51.957 [http-nio-8080-exec-6] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 22:29:51.958 [http-nio-8080-exec-3] INFO  com.example.demo.controller.RolePermissionController - 根据角色查询权限，角色: ADMIN
+2026-06-01 22:29:51.957 [http-nio-8080-exec-9] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 22:29:51.957 [http-nio-8080-exec-10] INFO  com.example.demo.controller.TeacherController - 查询所有教师列表
+2026-06-01 22:29:51.958 [http-nio-8080-exec-3] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限成功，角色: ADMIN, 共 7 条记录
+2026-06-01 22:29:51.958 [http-nio-8080-exec-1] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 6 条记录
+2026-06-01 22:29:51.958 [http-nio-8080-exec-9] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 22:29:51.958 [http-nio-8080-exec-8] INFO  com.example.demo.controller.StudentController - 查询学生列表成功，共 7 条记录
+2026-06-01 22:29:51.962 [http-nio-8080-exec-6] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 22:29:51.962 [http-nio-8080-exec-10] INFO  com.example.demo.controller.TeacherController - 查询教师列表成功，共 5 条记录
+2026-06-01 22:30:02.399 [http-nio-8080-exec-5] INFO  com.example.demo.controller.ComplaintController - 查询所有投诉列表
+2026-06-01 22:30:02.414 [http-nio-8080-exec-5] INFO  com.example.demo.controller.ComplaintController - 查询投诉列表成功，共 6 条记录
+2026-06-01 22:30:17.664 [http-nio-8080-exec-4] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 22:30:17.664 [http-nio-8080-exec-7] INFO  com.example.demo.controller.RolePermissionController - 根据角色查询权限，角色: ADMIN
+2026-06-01 22:30:17.666 [http-nio-8080-exec-6] INFO  com.example.demo.controller.TeacherController - 查询所有教师列表
+2026-06-01 22:30:17.664 [http-nio-8080-exec-2] INFO  com.example.demo.controller.StudentController - 查询所有学生列表
+2026-06-01 22:30:17.666 [http-nio-8080-exec-7] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限成功，角色: ADMIN, 共 7 条记录
+2026-06-01 22:30:17.666 [http-nio-8080-exec-9] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 22:30:17.666 [http-nio-8080-exec-8] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-01 22:30:17.670 [http-nio-8080-exec-4] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 22:30:17.670 [http-nio-8080-exec-2] INFO  com.example.demo.controller.StudentController - 查询学生列表成功，共 7 条记录
+2026-06-01 22:30:17.670 [http-nio-8080-exec-8] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 6 条记录
+2026-06-01 22:30:17.670 [http-nio-8080-exec-9] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 22:30:17.670 [http-nio-8080-exec-6] INFO  com.example.demo.controller.TeacherController - 查询教师列表成功，共 5 条记录
+2026-06-01 22:30:19.287 [http-nio-8080-exec-3] INFO  com.example.demo.controller.RolePermissionController - 查询所有角色权限列表
+2026-06-01 22:30:19.295 [http-nio-8080-exec-3] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限列表成功，共 21 条记录
+2026-06-01 22:30:25.936 [http-nio-8080-exec-1] INFO  com.example.demo.controller.RolePermissionController - 根据角色查询权限，角色: ADMIN
+2026-06-01 22:30:25.936 [http-nio-8080-exec-10] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 22:30:25.939 [http-nio-8080-exec-1] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限成功，角色: ADMIN, 共 7 条记录
+2026-06-01 22:30:25.939 [http-nio-8080-exec-5] INFO  com.example.demo.controller.StudentController - 查询所有学生列表
+2026-06-01 22:30:25.939 [http-nio-8080-exec-10] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 22:30:25.939 [http-nio-8080-exec-7] INFO  com.example.demo.controller.TeacherController - 查询所有教师列表
+2026-06-01 22:30:25.939 [http-nio-8080-exec-4] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-01 22:30:25.939 [http-nio-8080-exec-5] INFO  com.example.demo.controller.StudentController - 查询学生列表成功，共 7 条记录
+2026-06-01 22:30:25.943 [http-nio-8080-exec-2] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 22:30:25.943 [http-nio-8080-exec-4] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 6 条记录
+2026-06-01 22:30:25.943 [http-nio-8080-exec-2] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 22:30:25.943 [http-nio-8080-exec-7] INFO  com.example.demo.controller.TeacherController - 查询教师列表成功，共 5 条记录
+2026-06-01 22:55:05.626 [http-nio-8080-exec-6] INFO  com.example.demo.controller.RolePermissionController - 根据角色查询权限，角色: ADMIN
+2026-06-01 22:55:05.626 [http-nio-8080-exec-8] INFO  com.example.demo.controller.StudentController - 查询所有学生列表
+2026-06-01 22:55:05.626 [http-nio-8080-exec-3] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 22:55:05.626 [http-nio-8080-exec-1] INFO  com.example.demo.controller.TeacherController - 查询所有教师列表
+2026-06-01 22:55:05.626 [http-nio-8080-exec-10] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-01 22:55:05.629 [http-nio-8080-exec-6] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限成功，角色: ADMIN, 共 7 条记录
+2026-06-01 22:55:05.629 [http-nio-8080-exec-10] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 6 条记录
+2026-06-01 22:55:05.629 [http-nio-8080-exec-8] INFO  com.example.demo.controller.StudentController - 查询学生列表成功，共 7 条记录
+2026-06-01 22:55:05.630 [http-nio-8080-exec-3] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 22:55:05.632 [http-nio-8080-exec-1] INFO  com.example.demo.controller.TeacherController - 查询教师列表成功，共 5 条记录
+2026-06-01 22:55:05.640 [http-nio-8080-exec-5] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 22:55:05.644 [http-nio-8080-exec-5] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 23:07:45.886 [http-nio-8080-exec-1] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 23:07:45.886 [http-nio-8080-exec-6] INFO  com.example.demo.controller.RolePermissionController - 根据角色查询权限，角色: ADMIN
+2026-06-01 23:07:45.887 [http-nio-8080-exec-4] INFO  com.example.demo.controller.TeacherController - 查询所有教师列表
+2026-06-01 23:07:45.887 [http-nio-8080-exec-2] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-01 23:07:45.887 [http-nio-8080-exec-5] INFO  com.example.demo.controller.StudentController - 查询所有学生列表
+2026-06-01 23:07:45.890 [http-nio-8080-exec-6] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限成功，角色: ADMIN, 共 7 条记录
+2026-06-01 23:07:45.890 [http-nio-8080-exec-5] INFO  com.example.demo.controller.StudentController - 查询学生列表成功，共 7 条记录
+2026-06-01 23:07:45.891 [http-nio-8080-exec-1] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 23:07:45.891 [http-nio-8080-exec-2] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 6 条记录
+2026-06-01 23:07:45.894 [http-nio-8080-exec-9] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 23:07:45.896 [http-nio-8080-exec-4] INFO  com.example.demo.controller.TeacherController - 查询教师列表成功，共 5 条记录
+2026-06-01 23:07:45.899 [http-nio-8080-exec-9] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 23:07:46.503 [http-nio-8080-exec-3] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 23:07:46.503 [http-nio-8080-exec-10] INFO  com.example.demo.controller.RolePermissionController - 根据角色查询权限，角色: ADMIN
+2026-06-01 23:07:46.503 [http-nio-8080-exec-8] INFO  com.example.demo.controller.StudentController - 查询所有学生列表
+2026-06-01 23:07:46.503 [http-nio-8080-exec-5] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-01 23:07:46.503 [http-nio-8080-exec-6] INFO  com.example.demo.controller.TeacherController - 查询所有教师列表
+2026-06-01 23:07:46.506 [http-nio-8080-exec-10] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限成功，角色: ADMIN, 共 7 条记录
+2026-06-01 23:07:46.506 [http-nio-8080-exec-5] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 6 条记录
+2026-06-01 23:07:46.506 [http-nio-8080-exec-8] INFO  com.example.demo.controller.StudentController - 查询学生列表成功，共 7 条记录
+2026-06-01 23:07:46.506 [http-nio-8080-exec-3] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 23:07:46.510 [http-nio-8080-exec-2] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 23:07:46.511 [http-nio-8080-exec-6] INFO  com.example.demo.controller.TeacherController - 查询教师列表成功，共 5 条记录
+2026-06-01 23:07:46.513 [http-nio-8080-exec-2] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 23:50:25.944 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-01 23:50:25.945 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-01 23:50:25.947 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-01 23:50:31.450 [main] INFO  com.example.demo.DemoApplication - 开始启动应用...
+2026-06-01 23:50:31.739 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2026-06-01 23:50:31.769 [main] INFO  com.example.demo.DemoApplication - Starting DemoApplication using Java 22.0.2 with PID 7416 (C:\Users\zhangkj\login-demo\backend\target\classes started by zhangkj in C:\Users\zhangkj\login-demo\backend)
+2026-06-01 23:50:31.773 [main] INFO  com.example.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-01 23:50:32.252 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-01 23:50:32.304 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 46 ms. Found 8 JPA repository interfaces.
+2026-06-01 23:50:32.761 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with ports 8080 (https), 8080 (http)
+2026-06-01 23:50:32.771 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-0.0.0.0-8080"]
+2026-06-01 23:50:32.778 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-01 23:50:32.780 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-01 23:50:32.780 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-06-01 23:50:32.824 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-01 23:50:32.825 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1019 ms
+2026-06-01 23:50:32.934 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-01 23:50:32.984 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-01 23:50:33.013 [main] INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-01 23:50:33.203 [main] INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-01 23:50:33.227 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-01 23:50:33.339 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@37cf91d8
+2026-06-01 23:50:33.340 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-01 23:50:34.179 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-01 23:50:34.245 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-01 23:50:34.450 [main] INFO  com.example.demo.config.AppConfig - 初始化密码加密器: BCryptPasswordEncoder
+2026-06-01 23:50:34.568 [main] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2026-06-01 23:50:34.678 [main] INFO  com.example.demo.config.WebConfig - 配置静态资源映射: /uploads/** -> file:C:\Users\zhangkj\login-demo\backend\uploads/
+2026-06-01 23:50:34.798 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-0.0.0.0-8080"]
+2026-06-01 23:50:34.948 [main] INFO  org.apache.tomcat.util.net.NioEndpoint.certificate - Connector [https-jsse-nio-0.0.0.0-8080], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [C:\Users\zhangkj\.keystore] using alias [login-demo] with trust store [null]
+2026-06-01 23:50:34.959 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-06-01 23:50:34.974 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["https-jsse-nio-0.0.0.0-8080"]
+2026-06-01 23:50:34.975 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8080"]
+2026-06-01 23:50:34.975 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+2026-06-01 23:50:34.978 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["https-jsse-nio-0.0.0.0-8080"]
+2026-06-01 23:50:34.982 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-01 23:50:34.983 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-01 23:50:34.989 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-01 23:50:34.993 [main] INFO  org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-06-01 23:51:18.194 [main] INFO  com.example.demo.DemoApplication - 开始启动应用...
+2026-06-01 23:51:18.484 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2026-06-01 23:51:18.514 [main] INFO  com.example.demo.DemoApplication - Starting DemoApplication using Java 22.0.2 with PID 2728 (C:\Users\zhangkj\login-demo\backend\target\classes started by zhangkj in C:\Users\zhangkj\login-demo\backend)
+2026-06-01 23:51:18.518 [main] INFO  com.example.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-01 23:51:18.990 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-01 23:51:19.043 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 47 ms. Found 8 JPA repository interfaces.
+2026-06-01 23:51:19.502 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with ports 8443 (https), 8080 (http)
+2026-06-01 23:51:19.511 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-0.0.0.0-8443"]
+2026-06-01 23:51:19.513 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-01 23:51:19.514 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-01 23:51:19.514 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-06-01 23:51:19.562 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-01 23:51:19.562 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1014 ms
+2026-06-01 23:51:19.673 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-01 23:51:19.723 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-01 23:51:19.751 [main] INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-01 23:51:19.940 [main] INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-01 23:51:19.964 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-01 23:51:20.076 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2d38db6f
+2026-06-01 23:51:20.077 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-01 23:51:20.897 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-01 23:51:20.952 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-01 23:51:21.167 [main] INFO  com.example.demo.config.AppConfig - 初始化密码加密器: BCryptPasswordEncoder
+2026-06-01 23:51:21.281 [main] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2026-06-01 23:51:21.393 [main] INFO  com.example.demo.config.WebConfig - 配置静态资源映射: /uploads/** -> file:C:\Users\zhangkj\login-demo\backend\uploads/
+2026-06-01 23:51:21.513 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-0.0.0.0-8443"]
+2026-06-01 23:51:21.661 [main] INFO  org.apache.tomcat.util.net.NioEndpoint.certificate - Connector [https-jsse-nio-0.0.0.0-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [C:\Users\zhangkj\.keystore] using alias [login-demo] with trust store [null]
+2026-06-01 23:51:21.672 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-06-01 23:51:21.675 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on ports 8443 (https), 8080 (http) with context path ''
+2026-06-01 23:51:21.680 [main] INFO  com.example.demo.DemoApplication - Started DemoApplication in 3.427 seconds (process running for 4.142)
+2026-06-01 23:51:21.682 [main] INFO  com.example.demo.config.DataInitializer - 开始执行数据初始化...
+2026-06-01 23:51:21.922 [main] INFO  com.example.demo.config.DataInitializer - 用户表中已有数据，跳过默认用户创建
+2026-06-01 23:51:21.922 [main] INFO  com.example.demo.config.DataInitializer - 数据初始化执行完毕
+2026-06-01 23:51:21.923 [main] INFO  com.example.demo.DemoApplication - 应用启动完成
+2026-06-01 23:53:40.934 [https-jsse-nio-0.0.0.0-8443-exec-4] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-01 23:53:40.935 [https-jsse-nio-0.0.0.0-8443-exec-4] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-01 23:53:40.935 [https-jsse-nio-0.0.0.0-8443-exec-4] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2026-06-01 23:53:41.024 [https-jsse-nio-0.0.0.0-8443-exec-4] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: admin, 登录类型: user
+2026-06-01 23:53:41.024 [https-jsse-nio-0.0.0.0-8443-exec-4] INFO  com.example.demo.controller.AuthController - 管理员登录，用户名: admin
+2026-06-01 23:53:41.129 [https-jsse-nio-0.0.0.0-8443-exec-4] INFO  com.example.demo.controller.AuthController - 管理员登录成功: admin
+2026-06-01 23:53:42.046 [https-jsse-nio-0.0.0.0-8443-exec-8] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 23:53:42.051 [https-jsse-nio-0.0.0.0-8443-exec-8] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-06-01 23:53:58.140 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: admin, 登录类型: user
+2026-06-01 23:53:58.140 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.AuthController - 管理员登录，用户名: admin
+2026-06-01 23:53:58.209 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.AuthController - 管理员登录成功: admin
+2026-06-01 23:53:59.205 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: admin, 登录类型: password
+2026-06-01 23:53:59.205 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.AuthController - 管理员登录，用户名: admin
+2026-06-01 23:53:59.276 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.AuthController - 管理员登录成功: admin
+2026-06-01 23:53:59.510 [https-jsse-nio-0.0.0.0-8443-exec-2] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: admin, 登录类型: password
+2026-06-01 23:53:59.510 [https-jsse-nio-0.0.0.0-8443-exec-2] INFO  com.example.demo.controller.AuthController - 管理员登录，用户名: admin
+2026-06-01 23:53:59.633 [https-jsse-nio-0.0.0.0-8443-exec-3] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: notexistuser999, 登录类型: password
+2026-06-01 23:53:59.633 [https-jsse-nio-0.0.0.0-8443-exec-3] INFO  com.example.demo.controller.AuthController - 管理员登录，用户名: notexistuser999
+2026-06-01 23:53:59.743 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.AuthController - 获取当前用户信息，token: f092c7e7f9b54d52baf1a160525c56ea
+2026-06-01 23:53:59.743 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.AuthController - 获取当前用户信息成功
+2026-06-01 23:53:59.780 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.AuthController - 用户注册，用户名: newuser_1780329239759
+2026-06-01 23:53:59.880 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.AuthController - 用户注册成功: newuser_1780329239759
+2026-06-01 23:53:59.921 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.AuthController - 用户注册，用户名: admin
+2026-06-01 23:53:59.984 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.ProductTypeController - 查询所有商品类型列表
+2026-06-01 23:53:59.988 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.ProductTypeController - 查询商品类型列表成功，共 4 条记录
+2026-06-01 23:54:00.065 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.ProductController - 创建商品，名称: 测试商品_1780329239995
+2026-06-01 23:54:00.070 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.ProductController - 创建商品成功，ID: 13
+2026-06-01 23:54:00.120 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.ProductController - 创建商品，名称: 
+2026-06-01 23:54:00.164 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.ProductController - 创建商品，名称: 非法价格商品
+2026-06-01 23:54:00.206 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.ProductController - 创建商品，名称: 非法数量商品
+2026-06-01 23:54:00.246 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-01 23:54:00.250 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 7 条记录
+2026-06-01 23:54:00.293 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-01 23:54:00.297 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 7 条记录
+2026-06-01 23:54:00.394 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.ProductController - 商品入库，ID: 13, 数量: 50
+2026-06-01 23:54:00.425 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.ProductController - 商品入库成功，ID: 13, 当前库存: 150
+2026-06-01 23:54:00.461 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.ProductController - 查询所有商品列表
+2026-06-01 23:54:00.464 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.ProductController - 查询商品列表成功，共 7 条记录
+2026-06-01 23:54:00.494 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.ProductController - 商品出库，ID: 13, 数量: 10
+2026-06-01 23:54:00.502 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.ProductController - 商品出库成功，ID: 13, 当前库存: 140
+2026-06-01 23:54:00.529 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.ProductController - 查询所有库存记录
+2026-06-01 23:54:00.534 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.ProductController - 查询库存记录成功，共 20 条记录
+2026-06-01 23:54:00.562 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.ProductController - 商品出库，ID: 13, 数量: 99999
+2026-06-01 23:54:00.604 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.ProductController - 更新商品，ID: 13
+2026-06-01 23:54:00.610 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.ProductController - 更新商品成功，ID: 13
+2026-06-01 23:54:00.646 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.ProductController - 删除商品，ID: 13
+2026-06-01 23:54:00.670 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.ProductController - 删除商品成功，ID: 13
+2026-06-01 23:54:00.730 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.UserController - 创建用户，用户名: testuser_1780329240694
+2026-06-01 23:54:00.804 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.UserController - 创建用户成功，ID: 17
+2026-06-01 23:54:00.844 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.UserController - 创建用户，用户名: 
+2026-06-01 23:54:00.880 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.UserController - 创建用户，用户名: weakpassuser
+2026-06-01 23:54:00.911 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+2026-06-01 23:54:00.915 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 11 条记录
+2026-06-01 23:54:00.937 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.UserController - 更新用户，ID: 17
+2026-06-01 23:54:00.944 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.UserController - 更新用户成功，ID: 17
+2026-06-01 23:54:00.973 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.UserController - 删除用户，ID: 17
+2026-06-01 23:54:00.980 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.UserController - 删除用户成功，ID: 17
+2026-06-01 23:54:01.025 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.ProductTypeController - 创建商品类型，名称: 类型_1780329241003
+2026-06-01 23:54:01.030 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.ProductTypeController - 创建商品类型成功，ID: 11
+2026-06-01 23:54:01.080 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.ProductTypeController - 查询所有商品类型列表
+2026-06-01 23:54:01.083 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.ProductTypeController - 查询商品类型列表成功，共 5 条记录
+2026-06-01 23:54:01.108 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.ProductTypeController - 创建商品类型，名称: 类型_1780329241003
+2026-06-01 23:54:01.147 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.ProductTypeController - 更新商品类型，ID: 11, 名称: 更新类型_1780329241133
+2026-06-01 23:54:01.153 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.ProductTypeController - 更新商品类型成功，ID: 11
+2026-06-01 23:54:01.186 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.ProductTypeController - 删除商品类型，ID: 11
+2026-06-01 23:54:01.193 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.ProductTypeController - 删除商品类型成功，ID: 11
+2026-06-01 23:54:01.226 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.ProductTypeController - 查询所有商品类型列表
+2026-06-01 23:54:01.229 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.ProductTypeController - 查询商品类型列表成功，共 4 条记录
+2026-06-01 23:54:01.259 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: admin, 登录类型: password
+2026-06-01 23:54:01.259 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.AuthController - 管理员登录，用户名: admin
+2026-06-01 23:54:01.332 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.AuthController - 管理员登录成功: admin
+2026-06-01 23:54:01.375 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.StudentController - 创建学生，姓名: 测试学生_1780329241351, 学生ID: 20251780329241351
+2026-06-01 23:54:01.449 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.StudentController - 创建学生成功，学生ID: 20251780329241351
+2026-06-01 23:54:01.493 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.StudentController - 创建学生，姓名: , 学生ID: 20250001
+2026-06-01 23:54:01.531 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.StudentController - 创建学生，姓名: 张三, 学生ID: 
+2026-06-01 23:54:01.572 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.StudentController - 查询学生详情，ID: 8
+2026-06-01 23:54:01.575 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.StudentController - 查询学生详情成功，ID: 8
+2026-06-01 23:54:01.602 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.StudentController - 查询所有学生列表
+2026-06-01 23:54:01.606 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.StudentController - 查询学生列表成功，共 8 条记录
+2026-06-01 23:54:01.628 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.StudentController - 更新学生，ID: 8
+2026-06-01 23:54:01.634 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.StudentController - 更新学生成功，ID: 8
+2026-06-01 23:54:01.664 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.StudentController - 删除学生，ID: 8
+2026-06-01 23:54:01.672 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.StudentController - 删除学生成功，ID: 8
+2026-06-01 23:54:01.712 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: admin, 登录类型: password
+2026-06-01 23:54:01.712 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.AuthController - 管理员登录，用户名: admin
+2026-06-01 23:54:01.782 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.AuthController - 管理员登录成功: admin
+2026-06-01 23:54:01.826 [https-jsse-nio-0.0.0.0-8443-exec-3] INFO  com.example.demo.controller.TeacherController - 创建教师，姓名: 测试教师_1780329241799, 教师ID: T1780329241799
+2026-06-01 23:54:01.911 [https-jsse-nio-0.0.0.0-8443-exec-3] INFO  com.example.demo.controller.TeacherController - 创建教师成功，教师ID: T1780329241799
+2026-06-01 23:54:01.948 [https-jsse-nio-0.0.0.0-8443-exec-4] INFO  com.example.demo.controller.TeacherController - 创建教师，姓名: , 教师ID: T20250001
+2026-06-01 23:54:01.979 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.TeacherController - 创建教师，姓名: 李老师, 教师ID: 
+2026-06-01 23:54:02.010 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.TeacherController - 查询教师详情，ID: 6
+2026-06-01 23:54:02.017 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.TeacherController - 查询教师详情成功，ID: 6
+2026-06-01 23:54:02.045 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.TeacherController - 查询所有教师列表
+2026-06-01 23:54:02.056 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.TeacherController - 查询教师列表成功，共 6 条记录
+2026-06-01 23:54:02.079 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.TeacherController - 更新教师，ID: 6
+2026-06-01 23:54:02.087 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.TeacherController - 更新教师成功，ID: 6
+2026-06-01 23:54:02.118 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.TeacherController - 删除教师，ID: 6
+2026-06-01 23:54:02.125 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.TeacherController - 删除教师成功，ID: 6
+2026-06-01 23:54:02.166 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: admin, 登录类型: password
+2026-06-01 23:54:02.166 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.AuthController - 管理员登录，用户名: admin
+2026-06-01 23:54:02.235 [https-jsse-nio-0.0.0.0-8443-exec-7] INFO  com.example.demo.controller.AuthController - 管理员登录成功: admin
+2026-06-01 23:54:02.275 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.ComplaintController - 提交投诉，老师: 张老师, 提交人: 测试提交人
+2026-06-01 23:54:02.280 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.ComplaintController - 投诉提交成功
+2026-06-01 23:54:02.325 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.ComplaintController - 提交投诉，老师: , 提交人: 测试提交人
+2026-06-01 23:54:02.359 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.ComplaintController - 提交投诉，老师: 李老师, 提交人: 测试提交人
+2026-06-01 23:54:02.388 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.ComplaintController - 查询所有投诉列表
+2026-06-01 23:54:02.391 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.ComplaintController - 查询投诉列表成功，共 7 条记录
+2026-06-01 23:54:02.452 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.AuthController - 用户登录，用户名: admin, 登录类型: password
+2026-06-01 23:54:02.452 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.AuthController - 管理员登录，用户名: admin
+2026-06-01 23:54:02.521 [https-jsse-nio-0.0.0.0-8443-exec-1] INFO  com.example.demo.controller.AuthController - 管理员登录成功: admin
+2026-06-01 23:54:02.556 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.RolePermissionController - 查询所有角色权限列表
+2026-06-01 23:54:02.562 [https-jsse-nio-0.0.0.0-8443-exec-5] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限列表成功，共 21 条记录
+2026-06-01 23:54:02.585 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.RolePermissionController - 根据角色查询权限，角色: ADMIN
+2026-06-01 23:54:02.589 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限成功，角色: ADMIN, 共 7 条记录
+2026-06-01 23:54:02.604 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.RolePermissionController - 根据角色查询权限，角色: ADMIN
+2026-06-01 23:54:02.606 [https-jsse-nio-0.0.0.0-8443-exec-9] INFO  com.example.demo.controller.RolePermissionController - 查询角色权限成功，角色: ADMIN, 共 7 条记录
+2026-06-01 23:54:02.633 [https-jsse-nio-0.0.0.0-8443-exec-10] INFO  com.example.demo.controller.RolePermissionController - 更新角色权限，ID: 1
+2026-06-01 23:54:02.636 [https-jsse-nio-0.0.0.0-8443-exec-10] INFO  com.example.demo.controller.RolePermissionController - 更新角色权限成功，ID: 1
+2026-06-01 23:54:02.664 [https-jsse-nio-0.0.0.0-8443-exec-6] INFO  com.example.demo.controller.RolePermissionController - 初始化默认角色权限数据

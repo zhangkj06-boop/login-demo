@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仓库管理</title>
+    <!-- 页面基础样式定义 -->
+    <style>
+        /* 全局重置样式，统一盒模型 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 页面主体样式：全屏渐变背景 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* 内容容器 */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* 页面头部区域 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        /* 页面主标题 */
+        .header h1 {
+            color: white;
+            font-size: 24px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* 头部操作按钮区域 */
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* 通用按钮样式 */
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        /* 按钮悬停效果 */
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        /* 主要按钮样式（白底紫字） */
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* 次要按钮样式（透明底白字） */
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* 卡片容器 */
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        /* 数据表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        /* 表格单元格通用样式 */
+        th, td {
+            padding: 14px 20px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        /* 表头样式 */
+        th {
+            background: #f8f9fa;
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 12px;
+        }
+
+        /* 表格行底部分隔线 */
+        tr:not(:last-child) td {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        /* 表格行悬停效果 */
+        tr:hover td {
+            background: #fafbfc;
+        }
+
+        /* 操作按钮组 */
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* 操作按钮样式 */
+        .actions button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .actions button:hover {
+            opacity: 0.85;
+        }
+
+        /* 编辑按钮 */
+        .btn-edit {
+            background: #667eea;
+            color: white;
+        }
+
+        /* 删除按钮 */
+        .btn-delete {
+            background: #e74c3c;
+            color: white;
+        }
+
+        /* 入库按钮 */
+        .btn-in {
+            background: #2ecc71;
+            color: white;
+        }
+
+        /* 领取按钮 */
+        .btn-out {
+            background: #f39c12;
+            color: white;
+        }
+
+        /* 记录按钮 */
+        .btn-record {
+            background: #3498db;
+            color: white;
+        }
+
+        /* 类型编辑按钮 */
+        .btn-type {
+            background: #9b59b6;
+            color: white;
+        }
+
+        /* 下载按钮 */
+        .btn-download {
+            background: #e67e22;
+            color: white;
+        }
+
+        /* 空数据提示 */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #888;
+        }
+
+        /* 模态框遮罩层 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* 模态框激活状态 */
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        /* 模态框主体 */
+        .modal {
+            background: white;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 420px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: modalIn 0.2s ease;
+        }
+
+        /* 模态框进入动画 */
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 模态框标题 */
+        .modal h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* 表单分组 */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        /* 表单标签 */
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #555;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* 表单输入框与下拉框 */
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        /* 输入框聚焦效果 */
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* 模态框底部操作按钮 */
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        /* 取消按钮 */
+        .btn-cancel {
+            background: #f0f0f0;
+            color: #555;
+        }
+
+        /* 保存按钮 */
+        .btn-save {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Toast提示框 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            background: #2ecc71;
+        }
+
+        .toast.error {
+            background: #e74c3c;
+        }
+
+        /* 库存信息提示 */
+        .stock-info {
+            font-size: 12px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        /* 筛选栏容器 */
+        .filter-bar {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        /* 筛选分组 */
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        /* 筛选标签 */
+        .filter-group label {
+            font-size: 12px;
+            color: #888;
+            font-weight: 500;
+        }
+
+        /* 筛选输入框与下拉框 */
+        .filter-group input, .filter-group select {
+            padding: 8px 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 160px;
+            transition: border-color 0.3s;
+        }
+
+        /* 筛选输入框聚焦效果 */
+        .filter-group input:focus, .filter-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* 范围筛选分组（横向排列） */
+        .filter-group.range {
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-group.range input {
+            width: 100px;
+        }
+
+        .filter-group.range span {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* 筛选操作按钮区域 */
+        .filter-actions {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        .filter-actions .btn {
+            padding: 10px 22px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        /* 查询按钮 */
+        .filter-actions .btn-query {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.35);
+        }
+
+        .filter-actions .btn-query:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(102, 126, 234, 0.45);
+        }
+
+        .filter-actions .btn-query:active {
+            transform: translateY(0);
+        }
+
+        /* 重置按钮 */
+        .filter-actions .btn-reset {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .filter-actions .btn-reset:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .filter-actions .btn-reset:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面内容容器 -->
+    <div class="container">
+        <!-- 页面头部标题与操作按钮 -->
+        <div class="header">
+            <h1>仓库管理</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary" id="backBtn">返回</button>
+                <button class="btn btn-record" id="recordBtn">领取记录</button>
+                <button class="btn btn-download" id="downloadBtn">下载记录</button>
+                <button class="btn btn-type" id="typeBtn">类型编辑</button>
+                <button class="btn btn-primary" id="addBtn">+ 新增商品</button>
+            </div>
+        </div>
+
+        <!-- 筛选栏 -->
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label>商品名称</label>
+                <select id="filterName">
+                    <option value="">全部</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>类型</label>
+                <select id="filterType">
+                    <option value="">全部</option>
+                </select>
+            </div>
+            <div class="filter-actions">
+                <button class="btn btn-query" id="filterBtn">查询</button>
+                <button class="btn btn-reset" id="resetBtn">重置</button>
+            </div>
+        </div>
+
+        <!-- 商品数据卡片 -->
+        <div class="card">
+            <table id="productTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>商品名称</th>
+                        <th>价格</th>
+                        <th>数量</th>
+                        <th>类型</th>
+                        <th style="width: 280px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="productTableBody">
+                </tbody>
+            </table>
+            <div class="empty-state" id="emptyState" style="display: none;">暂无商品数据</div>
+        </div>
+    </div>
+
+    <!-- 新增/编辑商品模态框 -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <h2 id="modalTitle">新增商品</h2>
+            <div class="form-group">
+                <label for="formName">商品名称</label>
+                <input type="text" id="formName" placeholder="请输入商品名称">
+            </div>
+            <div class="form-group">
+                <label for="formPrice">价格</label>
+                <input type="number" id="formPrice" placeholder="请输入价格" step="0.01" min="0">
+            </div>
+            <div class="form-group">
+                <label for="formQuantity">数量</label>
+                <input type="number" id="formQuantity" placeholder="请输入数量" min="0">
+            </div>
+            <div class="form-group">
+                <label for="formType">类型</label>
+                <select id="formType">
+                    <option value="">请选择类型</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-cancel" id="cancelBtn">取消</button>
+                <button class="btn btn-save" id="saveBtn">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 入库/领取模态框 -->
+    <div class="modal-overlay" id="stockModalOverlay">
+        <div class="modal">
+            <h2 id="stockModalTitle">入库</h2>
+            <p class="stock-info" id="stockProductName" style="margin-bottom: 12px; color: #333; font-weight: 500;"></p>
+            <div class="form-group">
+                <label for="stockAmount">数量</label>
+                <input type="number" id="stockAmount" placeholder="请输入数量" min="1">
+                <p class="stock-info" id="stockInfo"></p>
+            </div>
+            <div class="form-group" id="operatorGroup" style="display:none">
+                <label for="stockOperator">领取人</label>
+                <select id="stockOperator">
+                    <option value="">请选择领取人</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-cancel" id="stockCancelBtn">取消</button>
+                <button class="btn btn-save" id="stockConfirmBtn">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 领取记录模态框 -->
+    <div class="modal-overlay" id="recordModalOverlay">
+        <div class="modal" style="max-width: 720px;">
+            <h2>领取记录</h2>
+            <table id="recordTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>商品名称</th>
+                        <th>类型</th>
+                        <th>数量</th>
+                        <th>领取人</th>
+                        <th>时间</th>
+                    </tr>
+                </thead>
+                <tbody id="recordTableBody"></tbody>
+            </table>
+            <div class="empty-state" id="recordEmptyState" style="display: none;">暂无记录</div>
+            <div class="modal-actions">
+                <button class="btn btn-cancel" id="recordCloseBtn">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 类型编辑模态框 -->
+    <div class="modal-overlay" id="typeModalOverlay">
+        <div class="modal" style="max-width: 520px;">
+            <h2>类型编辑</h2>
+            <div class="form-group">
+                <label for="typeFormName">类型名称</label>
+                <input type="text" id="typeFormName" placeholder="请输入类型名称">
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-cancel" id="typeCancelBtn">取消</button>
+                <button class="btn btn-save" id="typeSaveBtn">保存</button>
+            </div>
+            <div style="margin-top: 20px;">
+                <table id="typeTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>类型名称</th>
+                            <th style="width: 120px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="typeTableBody"></tbody>
+                </table>
+                <div class="empty-state" id="typeEmptyState" style="display: none; padding: 20px;">暂无类型数据</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast提示框容器 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // API基础地址配置
+        const API_BASE_URL = '/api';
+        // 从本地存储获取登录Token
+        const token = localStorage.getItem('token');
+
+        // 未登录则跳转到登录页
+        if (!token) {
+            window.location.href = 'index.html';
+        }
+
+        // 当前编辑的商品ID，null表示新增模式
+        let editingId = null;
+        // 当前库存操作的目标商品ID
+        let stockTargetId = null;
+        // 当前库存操作模式：'in'入库 / 'out'领取
+        let stockMode = 'in';
+        // 当前库存数量
+        let currentStock = 0;
+        // 当前商品名称
+        let currentProductName = '';
+        // 当前编辑的类型ID
+        let editingTypeId = null;
+        // 所有商品数据（用于筛选）
+        let allProducts = [];
+
+        // 显示Toast提示消息
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type} show`;
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // 加载商品列表数据
+        async function loadProducts() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/products`, {
+                    headers: { 'Authorization': token }
+                });
+                allProducts = await res.json();
+                renderProducts(allProducts);
+                loadFilterNames();
+            } catch (err) {
+                showToast('加载商品列表失败', 'error');
+            }
+        }
+
+        // 渲染商品表格
+        function renderProducts(products) {
+            const tbody = document.getElementById('productTableBody');
+            const empty = document.getElementById('emptyState');
+
+            // 无数据时显示空状态
+            if (!products || products.length === 0) {
+                tbody.innerHTML = '';
+                empty.style.display = 'block';
+                document.getElementById('productTable').style.display = 'none';
+                return;
+            }
+
+            // 渲染商品数据表格
+            empty.style.display = 'none';
+            document.getElementById('productTable').style.display = 'table';
+            tbody.innerHTML = products.map(p => `
+                <tr>
+                    <td>${p.id}</td>
+                    <td>${escapeHtml(p.name)}</td>
+                    <td>￥${Number(p.price).toFixed(2)}</td>
+                    <td>${p.quantity}</td>
+                    <td>${escapeHtml(p.type)}</td>
+                    <td>
+                        <div class="actions">
+                            <button class="btn-in" onclick="stockIn(${p.id}, ${p.quantity}, '${escapeHtml(p.name)}')">入库</button>
+                            <button class="btn-out" onclick="stockOut(${p.id}, ${p.quantity}, '${escapeHtml(p.name)}')">领取</button>
+                            <button class="btn-edit" onclick="editProduct(${p.id}, '${escapeHtml(p.name)}', ${p.price}, ${p.quantity}, '${escapeHtml(p.type)}')">编辑</button>
+                            <button class="btn-delete" onclick="deleteProduct(${p.id})">删除</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // 加载筛选栏的类型选项
+        async function loadFilterTypes() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/product-types`, {
+                    headers: { 'Authorization': token }
+                });
+                const types = await res.json();
+                const select = document.getElementById('filterType');
+                select.innerHTML = '<option value="">全部</option>';
+                types.forEach(t => {
+                    const option = document.createElement('option');
+                    option.value = t.name;
+                    option.textContent = t.name;
+                    select.appendChild(option);
+                });
+            } catch (err) {
+                console.error('加载筛选类型失败', err);
+            }
+        }
+
+        // 加载筛选栏的商品名称选项
+        function loadFilterNames() {
+            const select = document.getElementById('filterName');
+            select.innerHTML = '<option value="">全部</option>';
+            allProducts.forEach(p => {
+                const option = document.createElement('option');
+                option.value = p.name;
+                option.textContent = p.name;
+                select.appendChild(option);
+            });
+        }
+
+        // 应用筛选条件
+        function applyFilters() {
+            const name = document.getElementById('filterName').value;
+            const type = document.getElementById('filterType').value;
+
+            const filtered = allProducts.filter(p => {
+                if (name && p.name !== name) return false;
+                if (type && p.type !== type) return false;
+                return true;
+            });
+
+            renderProducts(filtered);
+        }
+
+        // 重置筛选条件
+        function resetFilters() {
+            document.getElementById('filterName').value = '';
+            document.getElementById('filterType').value = '';
+            renderProducts(allProducts);
+        }
+
+        // HTML转义函数，防止XSS攻击
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // 打开商品模态框
+        async function openModal(title, name = '', price = '', quantity = '', type = '') {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('formName').value = name;
+            document.getElementById('formPrice').value = price;
+            document.getElementById('formQuantity').value = quantity;
+            await renderTypeSelect(type);
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        // 关闭商品模态框
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            editingId = null;
+        }
+
+        // 打开库存操作模态框
+        async function openStockModal(title, info, productName) {
+            document.getElementById('stockModalTitle').textContent = title;
+            document.getElementById('stockProductName').textContent = '商品：' + productName;
+            document.getElementById('stockInfo').textContent = info;
+            document.getElementById('stockAmount').value = '';
+            document.getElementById('operatorGroup').style.display = stockMode === 'out' ? 'block' : 'none';
+            if (stockMode === 'out') {
+                await loadTeachersForSelect();
+            }
+            document.getElementById('stockModalOverlay').classList.add('active');
+        }
+
+        // 关闭库存操作模态框
+        function closeStockModal() {
+            document.getElementById('stockModalOverlay').classList.remove('active');
+            stockTargetId = null;
+            stockMode = 'in';
+            currentProductName = '';
+        }
+
+        // 打开领取记录模态框
+        function openRecordModal() {
+            document.getElementById('recordModalOverlay').classList.add('active');
+            loadRecords();
+        }
+
+        // 关闭领取记录模态框
+        function closeRecordModal() {
+            document.getElementById('recordModalOverlay').classList.remove('active');
+        }
+
+        // 打开类型编辑模态框
+        function openTypeModal() {
+            editingTypeId = null;
+            document.getElementById('typeFormName').value = '';
+            document.getElementById('typeModalOverlay').classList.add('active');
+            loadTypesForManage();
+        }
+
+        // 关闭类型编辑模态框
+        function closeTypeModal() {
+            document.getElementById('typeModalOverlay').classList.remove('active');
+            editingTypeId = null;
+        }
+
+        // 加载教师列表到领取人下拉框
+        async function loadTeachersForSelect() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/teachers`, {
+                    headers: { 'Authorization': token }
+                });
+                const teachers = await res.json();
+                const select = document.getElementById('stockOperator');
+                select.innerHTML = '<option value="">请选择领取人</option>';
+                teachers.forEach(t => {
+                    const option = document.createElement('option');
+                    option.value = t.name;
+                    option.textContent = t.name;
+                    select.appendChild(option);
+                });
+            } catch (err) {
+                console.error('加载老师列表失败', err);
+            }
+        }
+
+        // 渲染商品类型下拉框
+        async function renderTypeSelect(selectedValue = '') {
+            try {
+                const res = await fetch(`${API_BASE_URL}/product-types`, {
+                    headers: { 'Authorization': token }
+                });
+                const types = await res.json();
+                const select = document.getElementById('formType');
+                select.innerHTML = '<option value="">请选择类型</option>';
+                types.forEach(t => {
+                    const option = document.createElement('option');
+                    option.value = t.name;
+                    option.textContent = t.name;
+                    if (t.name === selectedValue) option.selected = true;
+                    select.appendChild(option);
+                });
+            } catch (err) {
+                console.error('加载类型失败', err);
+            }
+        }
+
+        // 加载类型管理列表
+        async function loadTypesForManage() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/product-types`, {
+                    headers: { 'Authorization': token }
+                });
+                const types = await res.json();
+                const tbody = document.getElementById('typeTableBody');
+                const empty = document.getElementById('typeEmptyState');
+                const table = document.getElementById('typeTable');
+
+                // 无数据时显示空状态
+                if (!types || types.length === 0) {
+                    tbody.innerHTML = '';
+                    empty.style.display = 'block';
+                    table.style.display = 'none';
+                    return;
+                }
+
+                // 渲染类型数据表格
+                empty.style.display = 'none';
+                table.style.display = 'table';
+                tbody.innerHTML = types.map(t => `
+                    <tr>
+                        <td>${t.id}</td>
+                        <td>${escapeHtml(t.name)}</td>
+                        <td>
+                            <div class="actions">
+                                <button class="btn-edit" onclick="editType(${t.id}, '${escapeHtml(t.name)}')">编辑</button>
+                                <button class="btn-delete" onclick="deleteType(${t.id})">删除</button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (err) {
+                showToast('加载类型列表失败', 'error');
+            }
+        }
+
+        // 编辑类型按钮点击事件
+        window.editType = function(id, name) {
+            editingTypeId = id;
+            document.getElementById('typeFormName').value = name;
+        };
+
+        // 删除类型按钮点击事件
+        window.deleteType = async function(id) {
+            if (!confirm('确定要删除该类型吗？')) return;
+            try {
+                const res = await fetch(`${API_BASE_URL}/product-types/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': token }
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('删除成功');
+                    loadTypesForManage();
+                    await renderTypeSelect();
+                } else {
+                    showToast(data.message || '删除失败', 'error');
+                }
+            } catch (err) {
+                showToast('删除失败', 'error');
+            }
+        };
+
+        // 新增商品按钮点击事件
+        document.getElementById('addBtn').addEventListener('click', () => {
+            editingId = null;
+            openModal('新增商品');
+        });
+
+        // 取消按钮点击事件
+        document.getElementById('cancelBtn').addEventListener('click', closeModal);
+        // 点击遮罩层关闭模态框
+        document.getElementById('modalOverlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('modalOverlay')) closeModal();
+        });
+
+        // 库存操作取消按钮点击事件
+        document.getElementById('stockCancelBtn').addEventListener('click', closeStockModal);
+        document.getElementById('stockModalOverlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('stockModalOverlay')) closeStockModal();
+        });
+
+        // 返回按钮点击事件
+        document.getElementById('backBtn').addEventListener('click', () => {
+            window.location.href = 'success.html';
+        });
+
+        // 领取记录按钮点击事件
+        document.getElementById('recordBtn').addEventListener('click', openRecordModal);
+        document.getElementById('recordCloseBtn').addEventListener('click', closeRecordModal);
+        document.getElementById('recordModalOverlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('recordModalOverlay')) closeRecordModal();
+        });
+
+        // 下载记录按钮点击事件
+        document.getElementById('downloadBtn').addEventListener('click', async () => {
+            try {
+                const token = localStorage.getItem('token') || '';
+                const res = await fetch(`${API_BASE_URL}/products/records/export`, {
+                    headers: { 'Authorization': token }
+                });
+                if (!res.ok) {
+                    showToast('下载失败', 'error');
+                    return;
+                }
+                const blob = await res.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'stock_records.xlsx';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+                showToast('下载成功', 'success');
+            } catch (err) {
+                showToast('下载失败', 'error');
+            }
+        });
+
+        // 类型编辑按钮点击事件
+        document.getElementById('typeBtn').addEventListener('click', openTypeModal);
+        document.getElementById('typeCancelBtn').addEventListener('click', closeTypeModal);
+        document.getElementById('typeModalOverlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('typeModalOverlay')) closeTypeModal();
+        });
+
+        // 保存类型按钮点击事件
+        document.getElementById('typeSaveBtn').addEventListener('click', async () => {
+            const name = document.getElementById('typeFormName').value.trim();
+            if (!name) {
+                showToast('请输入类型名称', 'error');
+                return;
+            }
+            const url = editingTypeId ? `${API_BASE_URL}/product-types/${editingTypeId}` : `${API_BASE_URL}/product-types`;
+            const method = editingTypeId ? 'PUT' : 'POST';
+            try {
+                const res = await fetch(url, {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                    body: JSON.stringify({ name })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast(editingTypeId ? '更新成功' : '创建成功');
+                    document.getElementById('typeFormName').value = '';
+                    editingTypeId = null;
+                    loadTypesForManage();
+                    await renderTypeSelect();
+                } else {
+                    showToast(data.message || '操作失败', 'error');
+                }
+            } catch (err) {
+                showToast('网络错误', 'error');
+            }
+        });
+
+        // 入库按钮点击事件
+        window.stockIn = function(id, quantity, productName) {
+            stockTargetId = id;
+            stockMode = 'in';
+            currentStock = quantity;
+            currentProductName = productName;
+            openStockModal('入库', `当前库存: ${quantity}`, productName);
+        };
+
+        // 领取按钮点击事件
+        window.stockOut = function(id, quantity, productName) {
+            stockTargetId = id;
+            stockMode = 'out';
+            currentStock = quantity;
+            currentProductName = productName;
+            openStockModal('领取', `当前库存: ${quantity}`, productName);
+        };
+
+        // 库存操作确认按钮点击事件
+        document.getElementById('stockConfirmBtn').addEventListener('click', async () => {
+            const amount = parseInt(document.getElementById('stockAmount').value);
+            if (!amount || amount <= 0) {
+                showToast('数量必须大于0', 'error');
+                return;
+            }
+            const payload = { amount };
+            // 领取模式需要选择领取人
+            if (stockMode === 'out') {
+                const operator = document.getElementById('stockOperator').value.trim();
+                if (!operator) {
+                    showToast('请选择领取人', 'error');
+                    return;
+                }
+                payload.operator = operator;
+            }
+            try {
+                // 发送库存操作请求
+                const res = await fetch(`${API_BASE_URL}/products/${stockTargetId}/stock/${stockMode}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast(data.message);
+                    closeStockModal();
+                    loadProducts();
+                } else {
+                    showToast(data.message || '操作失败', 'error');
+                }
+            } catch (err) {
+                showToast('网络错误', 'error');
+            }
+        });
+
+        // 加载领取记录
+        async function loadRecords() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/products/records`, {
+                    headers: { 'Authorization': token }
+                });
+                const records = await res.json();
+                const tbody = document.getElementById('recordTableBody');
+                const empty = document.getElementById('recordEmptyState');
+                const table = document.getElementById('recordTable');
+
+                // 无数据时显示空状态
+                if (!records || records.length === 0) {
+                    tbody.innerHTML = '';
+                    empty.style.display = 'block';
+                    table.style.display = 'none';
+                    return;
+                }
+
+                // 渲染领取记录表格
+                empty.style.display = 'none';
+                table.style.display = 'table';
+                tbody.innerHTML = records.map(r => `
+                    <tr>
+                        <td>${r.id}</td>
+                        <td>${escapeHtml(r.productName)}</td>
+                        <td>${r.type === 'in' ? '入库' : '领取'}</td>
+                        <td>${r.amount}</td>
+                        <td>${escapeHtml(r.operator || '-')}</td>
+                        <td>${r.createdAt ? new Date(r.createdAt).toLocaleString('zh-CN') : '-'}</td>
+                    </tr>
+                `).join('');
+            } catch (err) {
+                showToast('加载记录失败', 'error');
+            }
+        }
+
+        // 编辑商品按钮点击事件
+        window.editProduct = function(id, name, price, quantity, type) {
+            editingId = id;
+            openModal('编辑商品', name, price, quantity, type);
+        };
+
+        // 删除商品按钮点击事件
+        window.deleteProduct = async function(id) {
+            if (!confirm('确定要删除该商品吗？')) return;
+            try {
+                const res = await fetch(`${API_BASE_URL}/products/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': token }
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('删除成功');
+                    loadProducts();
+                } else {
+                    showToast(data.message || '删除失败', 'error');
+                }
+            } catch (err) {
+                showToast('删除失败', 'error');
+            }
+        };
+
+        // 保存商品按钮点击事件（新增或编辑）
+        document.getElementById('saveBtn').addEventListener('click', async () => {
+            const name = document.getElementById('formName').value.trim();
+            const price = parseFloat(document.getElementById('formPrice').value);
+            const quantity = parseInt(document.getElementById('formQuantity').value);
+            const type = document.getElementById('formType').value.trim();
+
+            // 表单验证
+            if (!name) {
+                showToast('请输入商品名称', 'error');
+                return;
+            }
+            if (isNaN(price) || price < 0) {
+                showToast('请输入有效的价格', 'error');
+                return;
+            }
+            if (isNaN(quantity) || quantity < 0) {
+                showToast('请输入有效的数量', 'error');
+                return;
+            }
+            if (!type) {
+                showToast('请选择类型', 'error');
+                return;
+            }
+
+            // 构造请求数据
+            const payload = { name, price, quantity, type };
+            const url = editingId ? `${API_BASE_URL}/products/${editingId}` : `${API_BASE_URL}/products`;
+            const method = editingId ? 'PUT' : 'POST';
+
+            try {
+                const res = await fetch(url, {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast(editingId ? '更新成功' : '创建成功');
+                    closeModal();
+                    loadProducts();
+                } else {
+                    showToast(data.message || '操作失败', 'error');
+                }
+            } catch (err) {
+                showToast('网络错误', 'error');
+            }
+        });
+
+        // 查询与重置按钮事件绑定
+        document.getElementById('filterBtn').addEventListener('click', applyFilters);
+        document.getElementById('resetBtn').addEventListener('click', resetFilters);
+
+        // 页面加载时初始化数据
+        loadFilterTypes();
+        loadProducts();
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+2026-05-31 02:39:25.430 [main] INFO  com.example.demo.DemoApplication - 开始启动应用...
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+2026-05-31 02:39:25.802 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+ :: Spring Boot ::                (v3.2.5)
+
+2026-05-31 02:39:25.964 [main] INFO  com.example.demo.DemoApplication - Starting DemoApplication v1.0.0 using Java 22.0.2 with PID 9852 (C:\Users\zhangkj\login-demo\backend\target\login-demo-1.0.0.jar started by zhangkj in C:\Users\zhangkj\login-demo\backend)
+2026-05-31 02:39:25.972 [main] DEBUG com.example.demo.DemoApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-05-31 02:39:25.973 [main] INFO  com.example.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-31 02:39:26.797 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-31 02:39:26.901 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 87 ms. Found 8 JPA repository interfaces.
+2026-05-31 02:39:27.539 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-31 02:39:27.559 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-0.0.0.0-8080"]
+2026-05-31 02:39:27.562 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-31 02:39:27.562 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-05-31 02:39:27.605 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-31 02:39:27.607 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1564 ms
+2026-05-31 02:39:27.780 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-31 02:39:27.859 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-05-31 02:39:27.904 [main] INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-05-31 02:39:28.161 [main] INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-31 02:39:28.203 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-31 02:39:28.363 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@356341c9
+2026-05-31 02:39:28.364 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-31 02:39:28.408 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-31 02:39:28.409 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-05-31 02:39:29.407 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-31 02:39:29.474 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-31 02:39:29.790 [main] INFO  com.example.demo.config.AppConfig - 初始化密码加密器: BCryptPasswordEncoder
+2026-05-31 02:39:29.926 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-31 02:39:29.946 [main] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2026-05-31 02:39:30.095 [main] INFO  com.example.demo.config.WebConfig - 配置静态资源映射: /uploads/** -> file:C:\Users\zhangkj\login-demo\backend\uploads/
+2026-05-31 02:39:30.095 [main] DEBUG com.example.demo.config.WebConfig - 静态资源映射配置完成
+2026-05-31 02:39:30.237 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-0.0.0.0-8080"]
+2026-05-31 02:39:30.259 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-05-31 02:39:30.273 [main] INFO  com.example.demo.DemoApplication - Started DemoApplication in 4.761 seconds (process running for 5.806)
+2026-05-31 02:39:30.277 [main] INFO  com.example.demo.config.DataInitializer - 开始执行数据初始化...
+2026-05-31 02:39:30.567 [http-nio-0.0.0.0-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-31 02:39:30.567 [http-nio-0.0.0.0-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-31 02:39:30.568 [http-nio-0.0.0.0-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-05-31 02:39:30.620 [http-nio-0.0.0.0-8080-exec-1] INFO  com.example.demo.controller.UserController - 查询所有用户列表
+Hibernate: select u1_0.id,u1_0.avatar,u1_0.password,u1_0.role,u1_0.username from users u1_0
+Hibernate: select count(*) from users u1_0
+2026-05-31 02:39:30.675 [main] INFO  com.example.demo.config.DataInitializer - 用户表中已有数据，跳过默认用户创建
+2026-05-31 02:39:30.675 [main] INFO  com.example.demo.config.DataInitializer - 数据初始化执行完毕
+2026-05-31 02:39:30.676 [main] INFO  com.example.demo.DemoApplication - 应用启动完成
+2026-05-31 02:39:30.679 [http-nio-0.0.0.0-8080-exec-1] INFO  com.example.demo.controller.UserController - 查询用户列表成功，共 9 条记录
+2026-05-31 02:40:15.789 [http-nio-0.0.0.0-8080-exec-3] INFO  com.example.demo.controller.StudentController - 创建学生，姓名: Test, 学生ID: TEST999
+Hibernate: select s1_0.id from students s1_0 where s1_0.student_id=? limit ?
+Hibernate: insert into students (age,class_name,gender,name,password,student_id) values (?,?,?,?,?,?)
+2026-05-31 02:40:15.901 [http-nio-0.0.0.0-8080-exec-3] INFO  com.example.demo.controller.StudentController - 创建学生成功，学生ID: TEST999
+2026-05-31 03:01:12.331 [http-nio-0.0.0.0-8080-exec-4] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `com.example.demo.entity.ClassEnum` from String "??1?": not one of the values accepted for Enum class: [高二1班, 高二3班, 高二2班]]
+2026-05-31 03:01:12.413 [http-nio-0.0.0.0-8080-exec-6] INFO  com.example.demo.controller.ComplaintController - 提交投诉，老师: ???, 提交人: Tester
+Hibernate: insert into complaints (created_at,description,reply,resolved,submitter_name,teacher_name) values (?,?,?,?,?,?)
+2026-05-31 03:01:12.422 [http-nio-0.0.0.0-8080-exec-6] INFO  com.example.demo.controller.ComplaintController - 投诉提交成功
+2026-05-31 03:01:28.011 [http-nio-0.0.0.0-8080-exec-8] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `com.example.demo.entity.ClassEnum` from String "??1?": not one of the values accepted for Enum class: [高二1班, 高二3班, 高二2班]]
