@@ -1,0 +1,127 @@
+{
+    "schedules": [
+        {
+            "className": "高二1班",
+            "items": [
+                {
+                    "dayOfWeek": 1,
+                    "period": 1,
+                    "teacherId": 1,
+                    "subject": "${subjectyuwen}"
+                },
+                {
+                    "dayOfWeek": 1,
+                    "period": 2,
+                    "teacherId": 1,
+                    "subject": "${subjectyuwen}"
+                },
+                {
+                    "dayOfWeek": 1,
+                    "period": 3,
+                    "teacherId": 1,
+                    "subject": "${subjectyuwen}"
+                },
+                {
+                    "dayOfWeek": 2,
+                    "period": 1,
+                    "teacherId": 2,
+                    "subject": "${subjectshuxue}"
+                },
+                {
+                    "dayOfWeek": 2,
+                    "period": 2,
+                    "teacherId": 1,
+                    "subject": "${subjectshuxue}"
+                },
+                {
+                    "dayOfWeek": 2,
+                    "period": 3,
+                    "teacherId": 1,
+                    "subject": "${subjectshuxue}"
+                }
+            ]
+        },
+        {
+            "className": "高二2班",
+            "items": [
+                {
+                    "dayOfWeek": 1,
+                    "period": 1,
+                    "teacherId": 2,
+                    "subject": "${subjectshuxue}"
+                },
+                {
+                    "dayOfWeek": 1,
+                    "period": 2,
+                    "teacherId": 1,
+                    "subject": "${subjectshuxue}"
+                },
+                {
+                    "dayOfWeek": 1,
+                    "period": 3,
+                    "teacherId": 1,
+                    "subject": "${subjectshuxue}"
+                },
+                {
+                    "dayOfWeek": 2,
+                    "period": 1,
+                    "teacherId": 2,
+                    "subject": "${subjectyuwen}"
+                },
+                {
+                    "dayOfWeek": 2,
+                    "period": 2,
+                    "teacherId": 1,
+                    "subject": "${subjectyuwen}"
+                },
+                {
+                    "dayOfWeek": 2,
+                    "period": 3,
+                    "teacherId": 2,
+                    "subject": "${subjectyuwen}"
+                }
+            ]
+        },
+        {
+            "className": "高二3班",
+            "items": [
+                {
+                    "dayOfWeek": 1,
+                    "period": 1,
+                    "teacherId": 1,
+                    "subject": "数学"
+                },
+                {
+                    "dayOfWeek": 1,
+                    "period": 2,
+                    "teacherId": 3,
+                    "subject": "数学"
+                },
+                {
+                    "dayOfWeek": 1,
+                    "period": 3,
+                    "teacherId": 4,
+                    "subject": "英语"
+                },
+                {
+                    "dayOfWeek": 2,
+                    "period": 1,
+                    "teacherId": 2,
+                    "subject": "英语"
+                },
+                {
+                    "dayOfWeek": 2,
+                    "period": 2,
+                    "teacherId": 2,
+                    "subject": "语文"
+                },
+                {
+                    "dayOfWeek": 2,
+                    "period": 3,
+                    "teacherId": 4,
+                    "subject": "英语"
+                }
+            ]
+        }
+    ]
+}

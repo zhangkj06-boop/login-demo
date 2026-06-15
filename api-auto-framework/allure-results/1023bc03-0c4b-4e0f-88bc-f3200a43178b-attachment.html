@@ -1,0 +1,34 @@
+<div>PUT to http://localhost:8080/api/students/1</div>
+
+    <h4>Body</h4>
+    <div>
+    <pre class="preformated-text">
+{
+    &quot;studentId&quot;: &quot;A1&quot;,
+    &quot;name&quot;: &quot;张玉&quot;,
+    &quot;age&quot;: &quot;55&quot;,
+    &quot;gender&quot;: &quot;男&quot;,
+    &quot;className&quot;: &quot;高二1班&quot;
+}    </pre>
+    </div>
+
+    <h4>Headers</h4>
+    <div>
+            <div>Authorization: Bearer 615f010eb8ed41e7a0292e02f4776685</div>
+            <div>Accept: */*</div>
+            <div>Content-Type: application/json; charset=UTF-8</div>
+    </div>
+
+
+
+    <h4>Curl</h4>
+    <div>
+        curl -v -X PUT &#39;http://localhost:8080/api/students/1&#39; -H &#39;Authorization: Bearer 615f010eb8ed41e7a0292e02f4776685&#39; -H &#39;Accept: */*&#39; -H &#39;Content-Type: application/json; charset=UTF-8&#39; -d &#39;{
+    &quot;studentId&quot;: &quot;A1&quot;,
+    &quot;name&quot;: &quot;张玉&quot;,
+    &quot;age&quot;: &quot;55&quot;,
+    &quot;gender&quot;: &quot;男&quot;,
+    &quot;className&quot;: &quot;高二1班&quot;
+}&#39;
+    </div>
+

@@ -1,0 +1,1 @@
+{"timestamp":"2026-06-14T15:37:08.330+00:00","status":500,"error":"Internal Server Error","path":"/api/teacher-schedules/batch"}

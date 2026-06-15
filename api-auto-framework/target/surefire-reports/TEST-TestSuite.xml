@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="TestSuite" time="3.569" tests="4" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="22"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.class.path" value="C:\Users\zhangkj\login-demo\api-auto-framework\target\test-classes;C:\Users\zhangkj\login-demo\api-auto-framework\target\classes;C:\Users\zhangkj\.m2\repository\org\springframework\boot\spring-boot-starter\3.2.5\spring-boot-starter-3.2.5.jar;C:\Users\zhangkj\.m2\repository\org\springframework\boot\spring-boot\3.2.5\spring-boot-3.2.5.jar;C:\Users\zhangkj\.m2\repository\org\springframework\spring-context\6.1.6\spring-context-6.1.6.jar;C:\Users\zhangkj\.m2\repository\org\springframework\spring-aop\6.1.6\spring-aop-6.1.6.jar;C:\Users\zhangkj\.m2\repository\org\springframework\spring-beans\6.1.6\spring-beans-6.1.6.jar;C:\Users\zhangkj\.m2\repository\org\springframework\spring-expression\6.1.6\spring-expression-6.1.6.jar;C:\Users\zhangkj\.m2\repository\io\micrometer\micrometer-observation\1.12.5\micrometer-observation-1.12.5.jar;C:\Users\zhangkj\.m2\repository\io\micrometer\micrometer-commons\1.12.5\micrometer-commons-1.12.5.jar;C:\Users\zhangkj\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.2.5\spring-boot-autoconfigure-3.2.5.jar;C:\Users\zhangkj\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.2.5\spring-boot-starter-logging-3.2.5.jar;C:\Users\zhangkj\.m2\repository\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Users\zhangkj\.m2\repository\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Users\zhangkj\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.21.1\log4j-to-slf4j-2.21.1.jar;C:\Users\zhangkj\.m2\repository\org\slf4j\jul-to-slf4j\2.0.13\jul-to-slf4j-2.0.13.jar;C:\Users\zhangkj\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\zhangkj\.m2\repository\org\springframework\spring-core\6.1.6\spring-core-6.1.6.jar;C:\Users\zhangkj\.m2\repository\org\springframework\spring-jcl\6.1.6\spring-jcl-6.1.6.jar;C:\Users\zhangkj\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\zhangkj\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.2.5\spring-boot-starter-test-3.2.5.jar;C:\Users\zhangkj\.m2\repository\org\springframework\boot\spring-boot-test\3.2.5\spring-boot-test-3.2.5.jar;C:\Users\zhangkj\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.2.5\spring-boot-test-autoconfigure-3.2.5.jar;C:\Users\zhangkj\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\zhangkj\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\zhangkj\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\zhangkj\.m2\repository\net\minidev\json-smart\2.5.1\json-smart-2.5.1.jar;C:\Users\zhangkj\.m2\repository\net\minidev\accessors-smart\2.5.1\accessors-smart-2.5.1.jar;C:\Users\zhangkj\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\zhangkj\.m2\repository\org\awaitility\awaitility\4.2.1\awaitility-4.2.1.jar;C:\Users\zhangkj\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\zhangkj\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\zhangkj\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\zhangkj\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\zhangkj\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\zhangkj\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\zhangkj\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\zhangkj\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\zhangkj\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\zhangkj\.m2\repository\org\mockito\mockito-core\5.7.0\mockito-core-5.7.0.jar;C:\Users\zhangkj\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.13\byte-buddy-agent-1.14.13.jar;C:\Users\zhangkj\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\zhangkj\.m2\repository\org\mockito\mockito-junit-jupiter\5.7.0\mockito-junit-jupiter-5.7.0.jar;C:\Users\zhangkj\.m2\repository\org\skyscreamer\jsonassert\1.5.1\jsonassert-1.5.1.jar;C:\Users\zhangkj\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\zhangkj\.m2\repository\org\springframework\spring-test\6.1.6\spring-test-6.1.6.jar;C:\Users\zhangkj\.m2\repository\org\xmlunit\xmlunit-core\2.9.1\xmlunit-core-2.9.1.jar;C:\Users\zhangkj\.m2\repository\org\testng\testng\7.10.2\testng-7.10.2.jar;C:\Users\zhangkj\.m2\repository\org\slf4j\slf4j-api\2.0.13\slf4j-api-2.0.13.jar;C:\Users\zhangkj\.m2\repository\com\beust\jcommander\1.82\jcommander-1.82.jar;C:\Users\zhangkj\.m2\repository\org\webjars\jquery\3.7.1\jquery-3.7.1.jar;C:\Users\zhangkj\.m2\repository\io\rest-assured\rest-assured\5.5.0\rest-assured-5.5.0.jar;C:\Users\zhangkj\.m2\repository\org\apache\groovy\groovy\4.0.21\groovy-4.0.21.jar;C:\Users\zhangkj\.m2\repository\org\apache\groovy\groovy-xml\4.0.21\groovy-xml-4.0.21.jar;C:\Users\zhangkj\.m2\repository\org\apache\httpcomponents\httpclient\4.5.13\httpclient-4.5.13.jar;C:\Users\zhangkj\.m2\repository\org\apache\httpcomponents\httpcore\4.4.16\httpcore-4.4.16.jar;C:\Users\zhangkj\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\zhangkj\.m2\repository\commons-codec\commons-codec\1.16.1\commons-codec-1.16.1.jar;C:\Users\zhangkj\.m2\repository\org\apache\httpcomponents\httpmime\4.5.13\httpmime-4.5.13.jar;C:\Users\zhangkj\.m2\repository\org\ccil\cowan\tagsoup\tagsoup\1.2.1\tagsoup-1.2.1.jar;C:\Users\zhangkj\.m2\repository\io\rest-assured\xml-path\5.5.0\xml-path-5.5.0.jar;C:\Users\zhangkj\.m2\repository\org\apache\commons\commons-lang3\3.13.0\commons-lang3-3.13.0.jar;C:\Users\zhangkj\.m2\repository\io\rest-assured\json-path\5.5.0\json-path-5.5.0.jar;C:\Users\zhangkj\.m2\repository\org\apache\groovy\groovy-json\4.0.21\groovy-json-4.0.21.jar;C:\Users\zhangkj\.m2\repository\io\rest-assured\rest-assured-common\5.5.0\rest-assured-common-5.5.0.jar;C:\Users\zhangkj\.m2\repository\io\qameta\allure\allure-testng\2.29.0\allure-testng-2.29.0.jar;C:\Users\zhangkj\.m2\repository\io\qameta\allure\allure-java-commons\2.29.0\allure-java-commons-2.29.0.jar;C:\Users\zhangkj\.m2\repository\io\qameta\allure\allure-model\2.29.0\allure-model-2.29.0.jar;C:\Users\zhangkj\.m2\repository\io\qameta\allure\allure-test-filter\2.29.0\allure-test-filter-2.29.0.jar;C:\Users\zhangkj\.m2\repository\io\qameta\allure\allure-rest-assured\2.29.0\allure-rest-assured-2.29.0.jar;C:\Users\zhangkj\.m2\repository\io\qameta\allure\allure-attachments\2.29.0\allure-attachments-2.29.0.jar;C:\Users\zhangkj\.m2\repository\org\freemarker\freemarker\2.3.32\freemarker-2.3.32.jar;C:\Users\zhangkj\.m2\repository\org\assertj\assertj-core\3.26.3\assertj-core-3.26.3.jar;C:\Users\zhangkj\.m2\repository\net\bytebuddy\byte-buddy\1.14.13\byte-buddy-1.14.13.jar;C:\Users\zhangkj\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.4\jackson-databind-2.15.4.jar;C:\Users\zhangkj\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.4\jackson-annotations-2.15.4.jar;C:\Users\zhangkj\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.4\jackson-core-2.15.4.jar;C:\Users\zhangkj\.m2\repository\org\apache\poi\poi-ooxml\5.2.5\poi-ooxml-5.2.5.jar;C:\Users\zhangkj\.m2\repository\org\apache\poi\poi\5.2.5\poi-5.2.5.jar;C:\Users\zhangkj\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\zhangkj\.m2\repository\com\zaxxer\SparseBitSet\1.3\SparseBitSet-1.3.jar;C:\Users\zhangkj\.m2\repository\org\apache\poi\poi-ooxml-lite\5.2.5\poi-ooxml-lite-5.2.5.jar;C:\Users\zhangkj\.m2\repository\org\apache\xmlbeans\xmlbeans\5.2.0\xmlbeans-5.2.0.jar;C:\Users\zhangkj\.m2\repository\org\apache\commons\commons-compress\1.25.0\commons-compress-1.25.0.jar;C:\Users\zhangkj\.m2\repository\commons-io\commons-io\2.15.0\commons-io-2.15.0.jar;C:\Users\zhangkj\.m2\repository\com\github\virtuald\curvesapi\1.08\curvesapi-1.08.jar;C:\Users\zhangkj\.m2\repository\org\apache\logging\log4j\log4j-api\2.21.1\log4j-api-2.21.1.jar;C:\Users\zhangkj\.m2\repository\org\apache\commons\commons-collections4\4.4\commons-collections4-4.4.jar;C:\Users\zhangkj\.m2\repository\org\projectlombok\lombok\1.18.32\lombok-1.18.32.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="22"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-22\bin"/>
+    <property name="sun.java.command" value="C:\Users\zhangkj\AppData\Local\Temp\surefire1763123580142857446\surefirebooter-20260614185954144_3.jar C:\Users\zhangkj\AppData\Local\Temp\surefire1763123580142857446 2026-06-14T18-59-54_055-jvmRun1 surefire-20260614185954144_1tmp surefire_0-20260614185954144_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\zhangkj\login-demo\api-auto-framework\target\test-classes;C:\Users\zhangkj\login-demo\api-auto-framework\target\classes;C:\Users\zhangkj\.m2\repository\org\springframework\boot\spring-boot-starter\3.2.5\spring-boot-starter-3.2.5.jar;C:\Users\zhangkj\.m2\repository\org\springframework\boot\spring-boot\3.2.5\spring-boot-3.2.5.jar;C:\Users\zhangkj\.m2\repository\org\springframework\spring-context\6.1.6\spring-context-6.1.6.jar;C:\Users\zhangkj\.m2\repository\org\springframework\spring-aop\6.1.6\spring-aop-6.1.6.jar;C:\Users\zhangkj\.m2\repository\org\springframework\spring-beans\6.1.6\spring-beans-6.1.6.jar;C:\Users\zhangkj\.m2\repository\org\springframework\spring-expression\6.1.6\spring-expression-6.1.6.jar;C:\Users\zhangkj\.m2\repository\io\micrometer\micrometer-observation\1.12.5\micrometer-observation-1.12.5.jar;C:\Users\zhangkj\.m2\repository\io\micrometer\micrometer-commons\1.12.5\micrometer-commons-1.12.5.jar;C:\Users\zhangkj\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.2.5\spring-boot-autoconfigure-3.2.5.jar;C:\Users\zhangkj\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.2.5\spring-boot-starter-logging-3.2.5.jar;C:\Users\zhangkj\.m2\repository\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Users\zhangkj\.m2\repository\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Users\zhangkj\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.21.1\log4j-to-slf4j-2.21.1.jar;C:\Users\zhangkj\.m2\repository\org\slf4j\jul-to-slf4j\2.0.13\jul-to-slf4j-2.0.13.jar;C:\Users\zhangkj\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\zhangkj\.m2\repository\org\springframework\spring-core\6.1.6\spring-core-6.1.6.jar;C:\Users\zhangkj\.m2\repository\org\springframework\spring-jcl\6.1.6\spring-jcl-6.1.6.jar;C:\Users\zhangkj\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\zhangkj\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.2.5\spring-boot-starter-test-3.2.5.jar;C:\Users\zhangkj\.m2\repository\org\springframework\boot\spring-boot-test\3.2.5\spring-boot-test-3.2.5.jar;C:\Users\zhangkj\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.2.5\spring-boot-test-autoconfigure-3.2.5.jar;C:\Users\zhangkj\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\zhangkj\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\zhangkj\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\zhangkj\.m2\repository\net\minidev\json-smart\2.5.1\json-smart-2.5.1.jar;C:\Users\zhangkj\.m2\repository\net\minidev\accessors-smart\2.5.1\accessors-smart-2.5.1.jar;C:\Users\zhangkj\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\zhangkj\.m2\repository\org\awaitility\awaitility\4.2.1\awaitility-4.2.1.jar;C:\Users\zhangkj\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\zhangkj\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\zhangkj\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\zhangkj\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\zhangkj\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\zhangkj\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\zhangkj\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\zhangkj\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\zhangkj\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\zhangkj\.m2\repository\org\mockito\mockito-core\5.7.0\mockito-core-5.7.0.jar;C:\Users\zhangkj\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.13\byte-buddy-agent-1.14.13.jar;C:\Users\zhangkj\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\zhangkj\.m2\repository\org\mockito\mockito-junit-jupiter\5.7.0\mockito-junit-jupiter-5.7.0.jar;C:\Users\zhangkj\.m2\repository\org\skyscreamer\jsonassert\1.5.1\jsonassert-1.5.1.jar;C:\Users\zhangkj\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\zhangkj\.m2\repository\org\springframework\spring-test\6.1.6\spring-test-6.1.6.jar;C:\Users\zhangkj\.m2\repository\org\xmlunit\xmlunit-core\2.9.1\xmlunit-core-2.9.1.jar;C:\Users\zhangkj\.m2\repository\org\testng\testng\7.10.2\testng-7.10.2.jar;C:\Users\zhangkj\.m2\repository\org\slf4j\slf4j-api\2.0.13\slf4j-api-2.0.13.jar;C:\Users\zhangkj\.m2\repository\com\beust\jcommander\1.82\jcommander-1.82.jar;C:\Users\zhangkj\.m2\repository\org\webjars\jquery\3.7.1\jquery-3.7.1.jar;C:\Users\zhangkj\.m2\repository\io\rest-assured\rest-assured\5.5.0\rest-assured-5.5.0.jar;C:\Users\zhangkj\.m2\repository\org\apache\groovy\groovy\4.0.21\groovy-4.0.21.jar;C:\Users\zhangkj\.m2\repository\org\apache\groovy\groovy-xml\4.0.21\groovy-xml-4.0.21.jar;C:\Users\zhangkj\.m2\repository\org\apache\httpcomponents\httpclient\4.5.13\httpclient-4.5.13.jar;C:\Users\zhangkj\.m2\repository\org\apache\httpcomponents\httpcore\4.4.16\httpcore-4.4.16.jar;C:\Users\zhangkj\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\zhangkj\.m2\repository\commons-codec\commons-codec\1.16.1\commons-codec-1.16.1.jar;C:\Users\zhangkj\.m2\repository\org\apache\httpcomponents\httpmime\4.5.13\httpmime-4.5.13.jar;C:\Users\zhangkj\.m2\repository\org\ccil\cowan\tagsoup\tagsoup\1.2.1\tagsoup-1.2.1.jar;C:\Users\zhangkj\.m2\repository\io\rest-assured\xml-path\5.5.0\xml-path-5.5.0.jar;C:\Users\zhangkj\.m2\repository\org\apache\commons\commons-lang3\3.13.0\commons-lang3-3.13.0.jar;C:\Users\zhangkj\.m2\repository\io\rest-assured\json-path\5.5.0\json-path-5.5.0.jar;C:\Users\zhangkj\.m2\repository\org\apache\groovy\groovy-json\4.0.21\groovy-json-4.0.21.jar;C:\Users\zhangkj\.m2\repository\io\rest-assured\rest-assured-common\5.5.0\rest-assured-common-5.5.0.jar;C:\Users\zhangkj\.m2\repository\io\qameta\allure\allure-testng\2.29.0\allure-testng-2.29.0.jar;C:\Users\zhangkj\.m2\repository\io\qameta\allure\allure-java-commons\2.29.0\allure-java-commons-2.29.0.jar;C:\Users\zhangkj\.m2\repository\io\qameta\allure\allure-model\2.29.0\allure-model-2.29.0.jar;C:\Users\zhangkj\.m2\repository\io\qameta\allure\allure-test-filter\2.29.0\allure-test-filter-2.29.0.jar;C:\Users\zhangkj\.m2\repository\io\qameta\allure\allure-rest-assured\2.29.0\allure-rest-assured-2.29.0.jar;C:\Users\zhangkj\.m2\repository\io\qameta\allure\allure-attachments\2.29.0\allure-attachments-2.29.0.jar;C:\Users\zhangkj\.m2\repository\org\freemarker\freemarker\2.3.32\freemarker-2.3.32.jar;C:\Users\zhangkj\.m2\repository\org\assertj\assertj-core\3.26.3\assertj-core-3.26.3.jar;C:\Users\zhangkj\.m2\repository\net\bytebuddy\byte-buddy\1.14.13\byte-buddy-1.14.13.jar;C:\Users\zhangkj\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.4\jackson-databind-2.15.4.jar;C:\Users\zhangkj\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.4\jackson-annotations-2.15.4.jar;C:\Users\zhangkj\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.4\jackson-core-2.15.4.jar;C:\Users\zhangkj\.m2\repository\org\apache\poi\poi-ooxml\5.2.5\poi-ooxml-5.2.5.jar;C:\Users\zhangkj\.m2\repository\org\apache\poi\poi\5.2.5\poi-5.2.5.jar;C:\Users\zhangkj\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\zhangkj\.m2\repository\com\zaxxer\SparseBitSet\1.3\SparseBitSet-1.3.jar;C:\Users\zhangkj\.m2\repository\org\apache\poi\poi-ooxml-lite\5.2.5\poi-ooxml-lite-5.2.5.jar;C:\Users\zhangkj\.m2\repository\org\apache\xmlbeans\xmlbeans\5.2.0\xmlbeans-5.2.0.jar;C:\Users\zhangkj\.m2\repository\org\apache\commons\commons-compress\1.25.0\commons-compress-1.25.0.jar;C:\Users\zhangkj\.m2\repository\commons-io\commons-io\2.15.0\commons-io-2.15.0.jar;C:\Users\zhangkj\.m2\repository\com\github\virtuald\curvesapi\1.08\curvesapi-1.08.jar;C:\Users\zhangkj\.m2\repository\org\apache\logging\log4j\log4j-api\2.21.1\log4j-api-2.21.1.jar;C:\Users\zhangkj\.m2\repository\org\apache\commons\commons-collections4\4.4\commons-collections4-4.4.jar;C:\Users\zhangkj\.m2\repository\org\projectlombok\lombok\1.18.32\lombok-1.18.32.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\zhangkj"/>
+    <property name="user.language" value="zh"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2024-07-16"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-22"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\zhangkj\login-demo\api-auto-framework"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\zhangkj\AppData\Local\Temp\surefire1763123580142857446\surefirebooter-20260614185954144_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="22.0.2+9-70"/>
+    <property name="user.name" value="zhangkj"/>
+    <property name="stdout.encoding" value="GBK"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\zhangkj\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\zhangkj\AppData\Local\Temp\"/>
+    <property name="java.version" value="22.0.2"/>
+    <property name="user.dir" value="C:\Users\zhangkj\login-demo\api-auto-framework"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="case.excel" value="cases/sample_cases.xlsx"/>
+    <property name="native.encoding" value="GBK"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-22\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Users\zhangkj\bin;D:\git\Git\mingw64\bin;D:\git\Git\usr\local\bin;D:\git\Git\usr\bin;D:\git\Git\usr\bin;D:\git\Git\mingw64\bin;D:\git\Git\usr\bin;C:\Users\zhangkj\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;E:\Xshell;C:\Users\zhangkj\AppData\Local\Programs\Python\Python312;C:\Program Files\MySQL\MySQL Server 8.0\bin;D:\git\Git\cmd;G:\svn\bin;G:\java\Maven\apache-maven-3.9.11\bin;D:\node;C:\ProgramData\chocolatey\bin;D:\node;D:\node\node_cache;D:\node\node_global;C:\Users\zhangkj\.local\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin;C:\Users\zhangkj\AppData\Local\Programs\Python\Python312\Scripts;C:\Users\zhangkj\AppData\Local\Programs\Python\Python312;C:\Users\zhangkj\AppData\Local\Microsoft\WindowsApps;G:\python\pycharm\PyCharm Community Edition 2024.1.3\bin;G:\python\pycharms\PyCharm 2024.1.4\bin;C:\Program Files\Java\jdk-22\bin;G:\Fiddler_01\Fiddler;C:\Users\zhangkj\AppData\Local\Programs\Ollama;G:\java\ideaIU-2020.1.4\IntelliJ IDEA Community Edition 2020.1.4\bin;C:\Users\zhangkj\AppData\Roaming\npm;D:\vsCode\Microsoft VS Code\bin;D:\git\Git\usr\bin\vendor_perl;D:\git\Git\usr\bin\core_perl;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="GBK"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="22.0.2+9-70"/>
+    <property name="api.baseUrl" value="http://localhost:8080"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="66.0"/>
+  </properties>
+  <testcase name="runApiTest[TestCase(caseId=LOGIN_001, caseName=管理员正常登录, apiName=认证模块, method=POST, url=/api/login, templateFile=login.json, headers=, encrypt=0, decrypt=0, extract=token=token, expectedCode=200, expectedField=role, expectedValue=ADMIN, variables={username=admin, password=123456, loginType=user})](1)" classname="com.example.autoframework.tests.BaseApiTest" time="2.01">
+    <system-out><![CDATA[18:59:54,523 |-INFO in ch.qos.logback.classic.LoggerContext[default] - This is logback-classic version 1.4.14
+18:59:54,525 |-INFO in ch.qos.logback.classic.util.ContextInitializer@38102d01 - Here is a list of configurators discovered as a service, by rank: 
+18:59:54,525 |-INFO in ch.qos.logback.classic.util.ContextInitializer@38102d01 -   org.springframework.boot.logging.logback.RootLogLevelConfigurator
+18:59:54,525 |-INFO in ch.qos.logback.classic.util.ContextInitializer@38102d01 - They will be invoked in order until ExecutionStatus.DO_NOT_INVOKE_NEXT_IF_ANY is returned.
+18:59:54,525 |-INFO in ch.qos.logback.classic.util.ContextInitializer@38102d01 - Constructed configurator of type class org.springframework.boot.logging.logback.RootLogLevelConfigurator
+18:59:54,535 |-INFO in ch.qos.logback.classic.util.ContextInitializer@38102d01 - org.springframework.boot.logging.logback.RootLogLevelConfigurator.configure() call lasted 1 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
+18:59:54,535 |-INFO in ch.qos.logback.classic.util.ContextInitializer@38102d01 - Trying to configure with ch.qos.logback.classic.joran.SerializedModelConfigurator
+18:59:54,536 |-INFO in ch.qos.logback.classic.util.ContextInitializer@38102d01 - Constructed configurator of type class ch.qos.logback.classic.joran.SerializedModelConfigurator
+18:59:54,538 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.scmo]
+18:59:54,538 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.scmo]
+18:59:54,538 |-INFO in ch.qos.logback.classic.util.ContextInitializer@38102d01 - ch.qos.logback.classic.joran.SerializedModelConfigurator.configure() call lasted 2 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
+18:59:54,539 |-INFO in ch.qos.logback.classic.util.ContextInitializer@38102d01 - Trying to configure with ch.qos.logback.classic.util.DefaultJoranConfigurator
+18:59:54,539 |-INFO in ch.qos.logback.classic.util.ContextInitializer@38102d01 - Constructed configurator of type class ch.qos.logback.classic.util.DefaultJoranConfigurator
+18:59:54,543 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback-test.xml] at [file:/C:/Users/zhangkj/login-demo/api-auto-framework/target/test-classes/logback-test.xml]
+18:59:54,664 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [CONSOLE]
+18:59:54,664 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+18:59:54,669 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+18:59:54,699 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [FILE]
+18:59:54,699 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+18:59:54,716 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@931675031 - No compression will be used
+18:59:54,717 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@931675031 - Will use the pattern logs/api-auto-framework.%d{yyyy-MM-dd}.%i.log for the active file
+18:59:54,719 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@6ab778a - The date pattern is 'yyyy-MM-dd' from file name pattern 'logs/api-auto-framework.%d{yyyy-MM-dd}.%i.log'.
+18:59:54,719 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@6ab778a - Roll-over at midnight.
+18:59:54,719 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@6ab778a - Setting initial period to 2026-06-14T10:59:54.719Z
+18:59:54,720 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@6ab778a - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+18:59:54,720 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@6ab778a - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+18:59:54,721 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+18:59:54,724 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - Active log file name: logs/api-auto-framework.log
+18:59:54,724 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - File property is set to [logs/api-auto-framework.log]
+18:59:54,725 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [com.example.autoframework] to DEBUG
+18:59:54,728 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting additivity of logger [com.example.autoframework] to false
+18:59:54,728 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [CONSOLE] to Logger[com.example.autoframework]
+18:59:54,729 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [FILE] to Logger[com.example.autoframework]
+18:59:54,729 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [io.restassured] to INFO
+18:59:54,729 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.apache.poi] to WARN
+18:59:54,729 |-INFO in ch.qos.logback.classic.model.processor.RootLoggerModelHandler - Setting level of ROOT logger to INFO
+18:59:54,729 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [CONSOLE] to Logger[ROOT]
+18:59:54,729 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [FILE] to Logger[ROOT]
+18:59:54,729 |-INFO in ch.qos.logback.core.model.processor.DefaultProcessor@4e3958e7 - End of configuration.
+18:59:54,730 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@77f80c04 - Registering current configuration as safe fallback point
+18:59:54,730 |-INFO in ch.qos.logback.classic.util.ContextInitializer@38102d01 - ch.qos.logback.classic.util.DefaultJoranConfigurator.configure() call lasted 191 milliseconds. ExecutionStatus=DO_NOT_INVOKE_NEXT_IF_ANY
+
+2026-06-14 18:59:55.088 [main] INFO  c.e.a.listeners.AllureTestListener - ========== 测试套件启动: API-Auto-Tests ==========
+2026-06-14 18:59:55.122 [main] INFO  c.e.autoframework.core.ApiContext - [ApiContext] 上下文已清空，当前线程所有变量已移除
+2026-06-14 18:59:55.123 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 测试类初始化完成，加载用例文件: cases/sample_cases.xlsx
+2026-06-14 18:59:55.130 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 数据驱动加载中...
+2026-06-14 18:59:55.132 [main] INFO  c.e.autoframework.core.ExcelReader - [ExcelReader] 开始读取 Excel 文件: /C:/Users/zhangkj/login-demo/api-auto-framework/target/test-classes/cases/sample_cases.xlsx
+2026-06-14 18:59:55.634 [main] INFO  c.e.autoframework.core.ExcelReader - [ExcelReader] 发现 1 个 Sheet
+2026-06-14 18:59:55.635 [main] INFO  c.e.autoframework.core.ExcelReader - [ExcelReader] 读取 Sheet[0]: '用户模块'
+2026-06-14 18:59:55.643 [main] DEBUG c.e.autoframework.core.ExcelReader - [ExcelReader] 表头列数: 16, 固定列: 13, 变量列: 3
+2026-06-14 18:59:55.645 [main] DEBUG c.e.autoframework.core.ExcelReader - [ExcelReader] 解析用例: caseId=LOGIN_001, method=POST, url=/api/login, 变量数=3
+2026-06-14 18:59:55.646 [main] DEBUG c.e.autoframework.core.ExcelReader - [ExcelReader] 解析用例: caseId=LOGIN_002, method=POST, url=/api/login, 变量数=3
+2026-06-14 18:59:55.648 [main] DEBUG c.e.autoframework.core.ExcelReader - [ExcelReader] 解析用例: caseId=USER_001, method=GET, url=/api/users, 变量数=0
+2026-06-14 18:59:55.649 [main] DEBUG c.e.autoframework.core.ExcelReader - [ExcelReader] 解析用例: caseId=PROD_001, method=GET, url=/api/products, 变量数=0
+2026-06-14 18:59:55.649 [main] INFO  c.e.autoframework.core.ExcelReader - [ExcelReader] Sheet[0] 解析完成，有效用例数: 4
+2026-06-14 18:59:55.738 [main] INFO  c.e.autoframework.core.ExcelReader - [ExcelReader] Excel 读取完成，总用例数: 4
+2026-06-14 18:59:55.738 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 数据驱动加载完成，共 4 条用例
+2026-06-14 18:59:55.752 [main] INFO  c.e.a.listeners.AllureTestListener - [AllureListener] 用例开始: TestCase(caseId=LOGIN_001, caseName=管理员正常登录, apiName=认证模块, method=POST, url=/api/login, templateFile=login.json, headers=, encrypt=0, decrypt=0, extract=token=token, expectedCode=200, expectedField=role, expectedValue=ADMIN, variables={username=admin, password=123456, loginType=user})
+2026-06-14 18:59:55.754 [main] ERROR io.qameta.allure.AllureLifecycle - Could not start step: no test case running
+2026-06-14 18:59:55.754 [main] ERROR io.qameta.allure.AllureLifecycle - Could not stop step: step with uuid 148025ae-afb0-4ce2-815e-b399ec4eb98f not found
+2026-06-14 18:59:55.784 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 开始执行用例: LOGIN_001 - 管理员正常登录
+2026-06-14 18:59:55.896 [main] INFO  c.e.autoframework.core.ApiEngine - [ApiEngine] 全局配置加载完成: baseUrl=http://localhost:8080, cryptoMode=AES, encryptField='', decryptField=''
+2026-06-14 18:59:55.896 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_001] ========== 用例执行开始 ==========
+2026-06-14 18:59:55.896 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_001] 基本信息: apiName=认证模块, method=POST, url=/api/login, template=login.json
+2026-06-14 18:59:55.897 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_001] 加解密标记: encrypt=false, decrypt=false, extract='token=token'
+2026-06-14 18:59:55.898 [main] DEBUG c.e.autoframework.core.ApiEngine - [LOGIN_001] Excel 变量: {username=admin, password=123456, loginType=user}
+2026-06-14 18:59:55.898 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_001] Step 1/6 - 渲染 JSON 模板...
+2026-06-14 18:59:55.900 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 开始渲染模板: login.json, 可用变量数: 3
+2026-06-14 18:59:55.900 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 加载模板路径: templates/login.json
+2026-06-14 18:59:55.901 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 模板加载成功，大小: 92 字节
+2026-06-14 18:59:55.901 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 第一轮：替换上下文变量 ${__xxx} ...
+2026-06-14 18:59:55.901 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 上下文变量替换完成，共替换 0 处
+2026-06-14 18:59:55.901 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 第二轮：替换 Excel 变量 ${xxx} ...
+2026-06-14 18:59:55.902 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] Excel 变量替换: ${username} -> 'admin'
+2026-06-14 18:59:55.902 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] Excel 变量替换: ${password} -> '123456'
+2026-06-14 18:59:55.902 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] Excel 变量替换: ${loginType} -> 'user'
+2026-06-14 18:59:55.902 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] Excel 变量替换完成，成功 3 处，缺失 0 处
+2026-06-14 18:59:55.902 [main] DEBUG c.e.autoframework.core.ApiEngine - [LOGIN_001] 模板渲染结果: {
+  "username": "admin",
+  "password": "******",
+  "loginType": "user"
+}
+
+2026-06-14 18:59:55.902 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_001] Step 2/6 - 请求体无需加密
+2026-06-14 18:59:55.902 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_001] Step 3/6 - 构建 HTTP 请求...
+2026-06-14 18:59:56.318 [main] DEBUG c.e.autoframework.core.ApiContext - [ApiContext] contains key=token, result=false
+2026-06-14 18:59:56.319 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_001] 上下文中无 token，跳过 Authorization 注入
+2026-06-14 18:59:56.319 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_001] Step 4/6 - 发送 POST 请求到 http://localhost:8080/api/login ...
+Request method:	POST
+Request URI:	http://localhost:8080/api/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "admin",
+    "password": "123456",
+    "loginType": "user"
+}
+2026-06-14 18:59:57.247 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_001] 请求完成，耗时 928 ms，HTTP 状态码: 200
+2026-06-14 18:59:57.247 [main] DEBUG c.e.autoframework.core.ApiEngine - [LOGIN_001] 原始响应体长度: 175 字节
+2026-06-14 18:59:57.247 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_001] Step 5/6 - 响应体无需解密
+2026-06-14 18:59:57.247 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_001] Step 6/6 - 提取响应变量，规则: 'token=token'
+2026-06-14 18:59:57.648 [main] DEBUG c.e.autoframework.core.ApiContext - [ApiContext] put key=token, value=8d4f5144...
+2026-06-14 18:59:57.648 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_001] 提取成功: token = 8d4f5144... (JSON Path: token)
+2026-06-14 18:59:57.648 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_001] ========== 用例执行结束 ==========
+
+2026-06-14 18:59:57.652 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 断言状态码: expected=200, actual=200
+2026-06-14 18:59:57.700 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 状态码断言通过
+2026-06-14 18:59:57.708 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 断言字段值: path='role', expected='ADMIN', actual='ADMIN'
+2026-06-14 18:59:57.710 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 字段断言通过
+2026-06-14 18:59:57.711 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 用例执行完成: LOGIN_001 - 管理员正常登录
+
+]]></system-out>
+  </testcase>
+  <testcase name="runApiTest[TestCase(caseId=LOGIN_002, caseName=密码错误, apiName=认证模块, method=POST, url=/api/login, templateFile=login.json, headers=, encrypt=0, decrypt=0, extract=, expectedCode=401, expectedField=message, expectedValue=密码错误, variables={username=admin, password=wrongPwd, loginType=user})](2)" classname="com.example.autoframework.tests.BaseApiTest" time="0.106">
+    <system-out><![CDATA[2026-06-14 18:59:57.766 [main] INFO  c.e.a.listeners.AllureTestListener - [AllureListener] 用例执行成功: runApiTest
+2026-06-14 18:59:57.766 [main] DEBUG c.e.autoframework.core.ApiContext - [ApiContext] snapshot taken, size=1
+2026-06-14 18:59:57.766 [main] DEBUG c.e.a.listeners.AllureTestListener - [AllureListener] 附加上下文快照到 Allure: 成功时上下文快照，变量数: 1
+2026-06-14 18:59:57.766 [main] ERROR io.qameta.allure.AllureLifecycle - Could not add attachment: no test is running
+2026-06-14 18:59:57.767 [main] INFO  c.e.a.listeners.AllureTestListener - [AllureListener] 用例开始: TestCase(caseId=LOGIN_002, caseName=密码错误, apiName=认证模块, method=POST, url=/api/login, templateFile=login.json, headers=, encrypt=0, decrypt=0, extract=, expectedCode=401, expectedField=message, expectedValue=密码错误, variables={username=admin, password=wrongPwd, loginType=user})
+2026-06-14 18:59:57.768 [main] ERROR io.qameta.allure.AllureLifecycle - Could not start step: no test case running
+2026-06-14 18:59:57.768 [main] ERROR io.qameta.allure.AllureLifecycle - Could not stop step: step with uuid c1d26027-e1dc-4df3-a814-0a15cbd8e306 not found
+2026-06-14 18:59:57.770 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 开始执行用例: LOGIN_002 - 密码错误
+2026-06-14 18:59:57.772 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_002] ========== 用例执行开始 ==========
+2026-06-14 18:59:57.772 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_002] 基本信息: apiName=认证模块, method=POST, url=/api/login, template=login.json
+2026-06-14 18:59:57.772 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_002] 加解密标记: encrypt=false, decrypt=false, extract=''
+2026-06-14 18:59:57.772 [main] DEBUG c.e.autoframework.core.ApiEngine - [LOGIN_002] Excel 变量: {username=admin, password=wrongPwd, loginType=user}
+2026-06-14 18:59:57.772 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_002] Step 1/6 - 渲染 JSON 模板...
+2026-06-14 18:59:57.772 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 开始渲染模板: login.json, 可用变量数: 3
+2026-06-14 18:59:57.772 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 加载模板路径: templates/login.json
+2026-06-14 18:59:57.773 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 模板加载成功，大小: 92 字节
+2026-06-14 18:59:57.773 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 第一轮：替换上下文变量 ${__xxx} ...
+2026-06-14 18:59:57.773 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 上下文变量替换完成，共替换 0 处
+2026-06-14 18:59:57.773 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 第二轮：替换 Excel 变量 ${xxx} ...
+2026-06-14 18:59:57.773 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] Excel 变量替换: ${username} -> 'admin'
+2026-06-14 18:59:57.773 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] Excel 变量替换: ${password} -> 'wrongPwd'
+2026-06-14 18:59:57.773 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] Excel 变量替换: ${loginType} -> 'user'
+2026-06-14 18:59:57.773 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] Excel 变量替换完成，成功 3 处，缺失 0 处
+2026-06-14 18:59:57.773 [main] DEBUG c.e.autoframework.core.ApiEngine - [LOGIN_002] 模板渲染结果: {
+  "username": "admin",
+  "password": "******",
+  "loginType": "user"
+}
+
+2026-06-14 18:59:57.773 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_002] Step 2/6 - 请求体无需加密
+2026-06-14 18:59:57.773 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_002] Step 3/6 - 构建 HTTP 请求...
+2026-06-14 18:59:57.774 [main] DEBUG c.e.autoframework.core.ApiContext - [ApiContext] contains key=token, result=true
+2026-06-14 18:59:57.774 [main] DEBUG c.e.autoframework.core.ApiContext - [ApiContext] get key=token, hit=true
+2026-06-14 18:59:57.774 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_002] 自动注入 Authorization: Bearer 8d4f51***...
+2026-06-14 18:59:57.775 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_002] Step 4/6 - 发送 POST 请求到 http://localhost:8080/api/login ...
+Request method:	POST
+Request URI:	http://localhost:8080/api/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer 8d4f514403734da188f82f408fc97fa4
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "username": "admin",
+    "password": "wrongPwd",
+    "loginType": "user"
+}
+2026-06-14 18:59:57.864 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_002] 请求完成，耗时 89 ms，HTTP 状态码: 401
+2026-06-14 18:59:57.864 [main] DEBUG c.e.autoframework.core.ApiEngine - [LOGIN_002] 原始响应体长度: 89 字节
+2026-06-14 18:59:57.864 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_002] Step 5/6 - 响应体无需解密
+2026-06-14 18:59:57.864 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_002] Step 6/6 - 无需提取响应变量
+2026-06-14 18:59:57.865 [main] INFO  c.e.autoframework.core.ApiEngine - [LOGIN_002] ========== 用例执行结束 ==========
+
+2026-06-14 18:59:57.865 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 断言状态码: expected=401, actual=401
+2026-06-14 18:59:57.866 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 状态码断言通过
+2026-06-14 18:59:57.873 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 断言字段值: path='message', expected='密码错误', actual='密码错误'
+2026-06-14 18:59:57.873 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 字段断言通过
+2026-06-14 18:59:57.873 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 用例执行完成: LOGIN_002 - 密码错误
+
+]]></system-out>
+  </testcase>
+  <testcase name="runApiTest[TestCase(caseId=USER_001, caseName=查询用户列表, apiName=用户模块, method=GET, url=/api/users, templateFile=empty.json, headers=, encrypt=0, decrypt=0, extract=, expectedCode=200, expectedField=[0].username, expectedValue=admin, variables={})](3)" classname="com.example.autoframework.tests.BaseApiTest" time="0.11">
+    <system-out><![CDATA[2026-06-14 18:59:57.874 [main] INFO  c.e.a.listeners.AllureTestListener - [AllureListener] 用例执行成功: runApiTest
+2026-06-14 18:59:57.875 [main] DEBUG c.e.autoframework.core.ApiContext - [ApiContext] snapshot taken, size=1
+2026-06-14 18:59:57.875 [main] DEBUG c.e.a.listeners.AllureTestListener - [AllureListener] 附加上下文快照到 Allure: 成功时上下文快照，变量数: 1
+2026-06-14 18:59:57.875 [main] ERROR io.qameta.allure.AllureLifecycle - Could not add attachment: no test is running
+2026-06-14 18:59:57.876 [main] INFO  c.e.a.listeners.AllureTestListener - [AllureListener] 用例开始: TestCase(caseId=USER_001, caseName=查询用户列表, apiName=用户模块, method=GET, url=/api/users, templateFile=empty.json, headers=, encrypt=0, decrypt=0, extract=, expectedCode=200, expectedField=[0].username, expectedValue=admin, variables={})
+2026-06-14 18:59:57.876 [main] ERROR io.qameta.allure.AllureLifecycle - Could not start step: no test case running
+2026-06-14 18:59:57.876 [main] ERROR io.qameta.allure.AllureLifecycle - Could not stop step: step with uuid ad5d0a69-ad0f-4578-b2f1-93b423959c72 not found
+2026-06-14 18:59:57.878 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 开始执行用例: USER_001 - 查询用户列表
+2026-06-14 18:59:57.879 [main] INFO  c.e.autoframework.core.ApiEngine - [USER_001] ========== 用例执行开始 ==========
+2026-06-14 18:59:57.879 [main] INFO  c.e.autoframework.core.ApiEngine - [USER_001] 基本信息: apiName=用户模块, method=GET, url=/api/users, template=empty.json
+2026-06-14 18:59:57.879 [main] INFO  c.e.autoframework.core.ApiEngine - [USER_001] 加解密标记: encrypt=false, decrypt=false, extract=''
+2026-06-14 18:59:57.879 [main] DEBUG c.e.autoframework.core.ApiEngine - [USER_001] Excel 变量: {}
+2026-06-14 18:59:57.879 [main] INFO  c.e.autoframework.core.ApiEngine - [USER_001] Step 1/6 - 渲染 JSON 模板...
+2026-06-14 18:59:57.879 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 开始渲染模板: empty.json, 可用变量数: 0
+2026-06-14 18:59:57.880 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 加载模板路径: templates/empty.json
+2026-06-14 18:59:57.880 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 模板加载成功，大小: 3 字节
+2026-06-14 18:59:57.880 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 第一轮：替换上下文变量 ${__xxx} ...
+2026-06-14 18:59:57.880 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 上下文变量替换完成，共替换 0 处
+2026-06-14 18:59:57.880 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 第二轮：替换 Excel 变量 ${xxx} ...
+2026-06-14 18:59:57.880 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] Excel 变量替换完成，成功 0 处，缺失 0 处
+2026-06-14 18:59:57.880 [main] DEBUG c.e.autoframework.core.ApiEngine - [USER_001] 模板渲染结果: {}
+
+2026-06-14 18:59:57.880 [main] INFO  c.e.autoframework.core.ApiEngine - [USER_001] Step 2/6 - 请求体无需加密
+2026-06-14 18:59:57.880 [main] INFO  c.e.autoframework.core.ApiEngine - [USER_001] Step 3/6 - 构建 HTTP 请求...
+2026-06-14 18:59:57.881 [main] DEBUG c.e.autoframework.core.ApiContext - [ApiContext] contains key=token, result=true
+2026-06-14 18:59:57.881 [main] DEBUG c.e.autoframework.core.ApiContext - [ApiContext] get key=token, hit=true
+2026-06-14 18:59:57.881 [main] INFO  c.e.autoframework.core.ApiEngine - [USER_001] 自动注入 Authorization: Bearer 8d4f51***...
+2026-06-14 18:59:57.881 [main] INFO  c.e.autoframework.core.ApiEngine - [USER_001] Step 4/6 - 发送 GET 请求到 http://localhost:8080/api/users ...
+2026-06-14 18:59:57.905 [main] DEBUG c.e.autoframework.core.ApiEngine - [USER_001] GET Query 参数: {}
+Request method:	GET
+Request URI:	http://localhost:8080/api/users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer 8d4f514403734da188f82f408fc97fa4
+				Accept=*/*
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+2026-06-14 18:59:57.941 [main] INFO  c.e.autoframework.core.ApiEngine - [USER_001] 请求完成，耗时 60 ms，HTTP 状态码: 200
+2026-06-14 18:59:57.941 [main] DEBUG c.e.autoframework.core.ApiEngine - [USER_001] 原始响应体长度: 1212 字节
+2026-06-14 18:59:57.941 [main] INFO  c.e.autoframework.core.ApiEngine - [USER_001] Step 5/6 - 响应体无需解密
+2026-06-14 18:59:57.941 [main] INFO  c.e.autoframework.core.ApiEngine - [USER_001] Step 6/6 - 无需提取响应变量
+2026-06-14 18:59:57.941 [main] INFO  c.e.autoframework.core.ApiEngine - [USER_001] ========== 用例执行结束 ==========
+
+2026-06-14 18:59:57.942 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 断言状态码: expected=200, actual=200
+2026-06-14 18:59:57.942 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 状态码断言通过
+2026-06-14 18:59:57.985 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 断言字段值: path='[0].username', expected='admin', actual='admin'
+2026-06-14 18:59:57.985 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 字段断言通过
+2026-06-14 18:59:57.985 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 用例执行完成: USER_001 - 查询用户列表
+
+]]></system-out>
+  </testcase>
+  <testcase name="runApiTest[TestCase(caseId=PROD_001, caseName=查询商品列表, apiName=商品模块, method=GET, url=/api/products, templateFile=empty.json, headers=, encrypt=0, decrypt=0, extract=, expectedCode=200, expectedField=[0].name, expectedValue=2B铅笔, variables={})](4)" classname="com.example.autoframework.tests.BaseApiTest" time="0.041">
+    <system-out><![CDATA[2026-06-14 18:59:57.987 [main] INFO  c.e.a.listeners.AllureTestListener - [AllureListener] 用例执行成功: runApiTest
+2026-06-14 18:59:57.987 [main] DEBUG c.e.autoframework.core.ApiContext - [ApiContext] snapshot taken, size=1
+2026-06-14 18:59:57.987 [main] DEBUG c.e.a.listeners.AllureTestListener - [AllureListener] 附加上下文快照到 Allure: 成功时上下文快照，变量数: 1
+2026-06-14 18:59:57.987 [main] ERROR io.qameta.allure.AllureLifecycle - Could not add attachment: no test is running
+2026-06-14 18:59:57.988 [main] INFO  c.e.a.listeners.AllureTestListener - [AllureListener] 用例开始: TestCase(caseId=PROD_001, caseName=查询商品列表, apiName=商品模块, method=GET, url=/api/products, templateFile=empty.json, headers=, encrypt=0, decrypt=0, extract=, expectedCode=200, expectedField=[0].name, expectedValue=2B铅笔, variables={})
+2026-06-14 18:59:57.988 [main] ERROR io.qameta.allure.AllureLifecycle - Could not start step: no test case running
+2026-06-14 18:59:57.988 [main] ERROR io.qameta.allure.AllureLifecycle - Could not stop step: step with uuid 4aa92516-67fc-48f7-a1c9-11a3509d6948 not found
+2026-06-14 18:59:57.990 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 开始执行用例: PROD_001 - 查询商品列表
+2026-06-14 18:59:57.991 [main] INFO  c.e.autoframework.core.ApiEngine - [PROD_001] ========== 用例执行开始 ==========
+2026-06-14 18:59:57.992 [main] INFO  c.e.autoframework.core.ApiEngine - [PROD_001] 基本信息: apiName=商品模块, method=GET, url=/api/products, template=empty.json
+2026-06-14 18:59:57.992 [main] INFO  c.e.autoframework.core.ApiEngine - [PROD_001] 加解密标记: encrypt=false, decrypt=false, extract=''
+2026-06-14 18:59:57.992 [main] DEBUG c.e.autoframework.core.ApiEngine - [PROD_001] Excel 变量: {}
+2026-06-14 18:59:57.992 [main] INFO  c.e.autoframework.core.ApiEngine - [PROD_001] Step 1/6 - 渲染 JSON 模板...
+2026-06-14 18:59:57.992 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 开始渲染模板: empty.json, 可用变量数: 0
+2026-06-14 18:59:57.992 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 加载模板路径: templates/empty.json
+2026-06-14 18:59:57.992 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 模板加载成功，大小: 3 字节
+2026-06-14 18:59:57.992 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 第一轮：替换上下文变量 ${__xxx} ...
+2026-06-14 18:59:57.992 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 上下文变量替换完成，共替换 0 处
+2026-06-14 18:59:57.992 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] 第二轮：替换 Excel 变量 ${xxx} ...
+2026-06-14 18:59:57.992 [main] DEBUG c.e.autoframework.core.JsonTemplate - [JsonTemplate] Excel 变量替换完成，成功 0 处，缺失 0 处
+2026-06-14 18:59:57.992 [main] DEBUG c.e.autoframework.core.ApiEngine - [PROD_001] 模板渲染结果: {}
+
+2026-06-14 18:59:57.992 [main] INFO  c.e.autoframework.core.ApiEngine - [PROD_001] Step 2/6 - 请求体无需加密
+2026-06-14 18:59:57.993 [main] INFO  c.e.autoframework.core.ApiEngine - [PROD_001] Step 3/6 - 构建 HTTP 请求...
+2026-06-14 18:59:57.993 [main] DEBUG c.e.autoframework.core.ApiContext - [ApiContext] contains key=token, result=true
+2026-06-14 18:59:57.993 [main] DEBUG c.e.autoframework.core.ApiContext - [ApiContext] get key=token, hit=true
+2026-06-14 18:59:57.993 [main] INFO  c.e.autoframework.core.ApiEngine - [PROD_001] 自动注入 Authorization: Bearer 8d4f51***...
+2026-06-14 18:59:57.994 [main] INFO  c.e.autoframework.core.ApiEngine - [PROD_001] Step 4/6 - 发送 GET 请求到 http://localhost:8080/api/products ...
+2026-06-14 18:59:57.994 [main] DEBUG c.e.autoframework.core.ApiEngine - [PROD_001] GET Query 参数: {}
+Request method:	GET
+Request URI:	http://localhost:8080/api/products
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer 8d4f514403734da188f82f408fc97fa4
+				Accept=*/*
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+2026-06-14 18:59:58.011 [main] INFO  c.e.autoframework.core.ApiEngine - [PROD_001] 请求完成，耗时 17 ms，HTTP 状态码: 200
+2026-06-14 18:59:58.012 [main] DEBUG c.e.autoframework.core.ApiEngine - [PROD_001] 原始响应体长度: 362 字节
+2026-06-14 18:59:58.012 [main] INFO  c.e.autoframework.core.ApiEngine - [PROD_001] Step 5/6 - 响应体无需解密
+2026-06-14 18:59:58.012 [main] INFO  c.e.autoframework.core.ApiEngine - [PROD_001] Step 6/6 - 无需提取响应变量
+2026-06-14 18:59:58.012 [main] INFO  c.e.autoframework.core.ApiEngine - [PROD_001] ========== 用例执行结束 ==========
+
+2026-06-14 18:59:58.013 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 断言状态码: expected=200, actual=200
+2026-06-14 18:59:58.013 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 状态码断言通过
+2026-06-14 18:59:58.028 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 断言字段值: path='[0].name', expected='2B铅笔', actual='2B铅笔'
+2026-06-14 18:59:58.028 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 字段断言通过
+2026-06-14 18:59:58.028 [main] INFO  c.e.autoframework.tests.BaseApiTest - [BaseApiTest] 用例执行完成: PROD_001 - 查询商品列表
+
+]]></system-out>
+  </testcase>
+</testsuite>

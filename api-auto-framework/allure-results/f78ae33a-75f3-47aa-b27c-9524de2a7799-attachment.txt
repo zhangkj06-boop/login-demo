@@ -1,0 +1,7 @@
+{
+    "studentId": "A1",
+    "name": "张玉",
+    "age": "${age}",
+    "gender": "男",
+    "className": "高二1班"
+}

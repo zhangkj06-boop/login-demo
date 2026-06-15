@@ -1,0 +1,274 @@
+<div>POST to http://localhost:8080/api/teacher-schedules/batch</div>
+
+    <h4>Body</h4>
+    <div>
+    <pre class="preformated-text">
+{
+    &quot;schedules&quot;: [
+        {
+            &quot;className&quot;: &quot;高二1班&quot;,
+            &quot;items&quot;: [
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 1,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;英语&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 2,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;语文&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 3,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;数学&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 1,
+                    &quot;teacherId&quot;: 2,
+                    &quot;subject&quot;: &quot;数学&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 2,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;数学&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 3,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;数学&quot;
+                }
+            ]
+        },
+        {
+            &quot;className&quot;: &quot;高二2班&quot;,
+            &quot;items&quot;: [
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 1,
+                    &quot;teacherId&quot;: 2,
+                    &quot;subject&quot;: &quot;语文&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 2,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;数学&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 3,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;数学&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 1,
+                    &quot;teacherId&quot;: 2,
+                    &quot;subject&quot;: &quot;历史&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 2,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;数学&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 3,
+                    &quot;teacherId&quot;: 2,
+                    &quot;subject&quot;: &quot;数学&quot;
+                }
+            ]
+        },
+        {
+            &quot;className&quot;: &quot;高二3班&quot;,
+            &quot;items&quot;: [
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 1,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;数学&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 2,
+                    &quot;teacherId&quot;: 3,
+                    &quot;subject&quot;: &quot;数学&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 3,
+                    &quot;teacherId&quot;: 4,
+                    &quot;subject&quot;: &quot;英语&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 1,
+                    &quot;teacherId&quot;: 2,
+                    &quot;subject&quot;: &quot;英语&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 2,
+                    &quot;teacherId&quot;: 2,
+                    &quot;subject&quot;: &quot;语文&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 3,
+                    &quot;teacherId&quot;: 4,
+                    &quot;subject&quot;: &quot;英语&quot;
+                }
+            ]
+        }
+    ]
+}    </pre>
+    </div>
+
+    <h4>Headers</h4>
+    <div>
+            <div>Authorization: Bearer d3cba601ea644d30b35e548186f69fb2</div>
+            <div>Accept: */*</div>
+            <div>Content-Type: application/json; charset=UTF-8</div>
+    </div>
+
+
+
+    <h4>Curl</h4>
+    <div>
+        curl -v -X POST &#39;http://localhost:8080/api/teacher-schedules/batch&#39; -H &#39;Authorization: Bearer d3cba601ea644d30b35e548186f69fb2&#39; -H &#39;Accept: */*&#39; -H &#39;Content-Type: application/json; charset=UTF-8&#39; -d &#39;{
+    &quot;schedules&quot;: [
+        {
+            &quot;className&quot;: &quot;高二1班&quot;,
+            &quot;items&quot;: [
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 1,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;英语&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 2,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;语文&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 3,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;数学&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 1,
+                    &quot;teacherId&quot;: 2,
+                    &quot;subject&quot;: &quot;数学&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 2,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;数学&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 3,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;数学&quot;
+                }
+            ]
+        },
+        {
+            &quot;className&quot;: &quot;高二2班&quot;,
+            &quot;items&quot;: [
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 1,
+                    &quot;teacherId&quot;: 2,
+                    &quot;subject&quot;: &quot;语文&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 2,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;数学&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 3,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;数学&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 1,
+                    &quot;teacherId&quot;: 2,
+                    &quot;subject&quot;: &quot;历史&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 2,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;数学&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 3,
+                    &quot;teacherId&quot;: 2,
+                    &quot;subject&quot;: &quot;数学&quot;
+                }
+            ]
+        },
+        {
+            &quot;className&quot;: &quot;高二3班&quot;,
+            &quot;items&quot;: [
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 1,
+                    &quot;teacherId&quot;: 1,
+                    &quot;subject&quot;: &quot;数学&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 2,
+                    &quot;teacherId&quot;: 3,
+                    &quot;subject&quot;: &quot;数学&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 1,
+                    &quot;period&quot;: 3,
+                    &quot;teacherId&quot;: 4,
+                    &quot;subject&quot;: &quot;英语&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 1,
+                    &quot;teacherId&quot;: 2,
+                    &quot;subject&quot;: &quot;英语&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 2,
+                    &quot;teacherId&quot;: 2,
+                    &quot;subject&quot;: &quot;语文&quot;
+                },
+                {
+                    &quot;dayOfWeek&quot;: 2,
+                    &quot;period&quot;: 3,
+                    &quot;teacherId&quot;: 4,
+                    &quot;subject&quot;: &quot;英语&quot;
+                }
+            ]
+        }
+    ]
+}&#39;
+    </div>
+

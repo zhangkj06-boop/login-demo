@@ -1,0 +1,130 @@
+{
+    "schedules": [
+        {
+            "className": "高二1班",
+            "dayOfWeek": 1,
+            "period": 1,
+            "teacherId": 2,
+            "subject": "英语"
+        },
+        {
+            "className": "高二1班",
+            "dayOfWeek": 2,
+            "period": 1,
+            "teacherId": 2,
+            "subject": "数学"
+        },
+        {
+            "className": "高二2班",
+            "dayOfWeek": 1,
+            "period": 1,
+            "teacherId": 2,
+            "subject": "语文"
+        },
+        {
+            "className": "高二2班",
+            "dayOfWeek": 2,
+            "period": 1,
+            "teacherId": 2,
+            "subject": "历史"
+        },
+        {
+            "className": "高二3班",
+            "dayOfWeek": 1,
+            "period": 1,
+            "teacherId": 1,
+            "subject": "数学"
+        },
+        {
+            "className": "高二3班",
+            "dayOfWeek": 2,
+            "period": 1,
+            "teacherId": 2,
+            "subject": "英语"
+        },
+        {
+            "className": "高二1班",
+            "dayOfWeek": 1,
+            "period": 2,
+            "teacherId": 1,
+            "subject": "语文"
+        },
+        {
+            "className": "高二1班",
+            "dayOfWeek": 2,
+            "period": 2,
+            "teacherId": 1,
+            "subject": "数学"
+        },
+        {
+            "className": "高二2班",
+            "dayOfWeek": 1,
+            "period": 2,
+            "teacherId": 1,
+            "subject": "数学"
+        },
+        {
+            "className": "高二2班",
+            "dayOfWeek": 2,
+            "period": 2,
+            "teacherId": 1,
+            "subject": "数学"
+        },
+        {
+            "className": "高二3班",
+            "dayOfWeek": 1,
+            "period": 2,
+            "teacherId": 3,
+            "subject": "数学"
+        },
+        {
+            "className": "高二3班",
+            "dayOfWeek": 2,
+            "period": 2,
+            "teacherId": 2,
+            "subject": "语文"
+        },
+        {
+            "className": "高二1班",
+            "dayOfWeek": 1,
+            "period": 3,
+            "teacherId": 3,
+            "subject": "数学"
+        },
+        {
+            "className": "高二1班",
+            "dayOfWeek": 2,
+            "period": 3,
+            "teacherId": 1,
+            "subject": "数学"
+        },
+        {
+            "className": "高二2班",
+            "dayOfWeek": 1,
+            "period": 3,
+            "teacherId": 1,
+            "subject": "数学"
+        },
+        {
+            "className": "高二2班",
+            "dayOfWeek": 2,
+            "period": 3,
+            "teacherId": 2,
+            "subject": "数学"
+        },
+        {
+            "className": "高二3班",
+            "dayOfWeek": 1,
+            "period": 3,
+            "teacherId": 4,
+            "subject": "英语"
+        },
+        {
+            "className": "高二3班",
+            "dayOfWeek": 2,
+            "period": 3,
+            "teacherId": 4,
+            "subject": "英语"
+        }
+    ]
+}

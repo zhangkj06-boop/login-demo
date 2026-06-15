@@ -1,0 +1,6 @@
+{
+  "userId": "${__userId}",
+  "productId": "${productId}",
+  "quantity": "${quantity}",
+  "remark": "${remark}"
+}

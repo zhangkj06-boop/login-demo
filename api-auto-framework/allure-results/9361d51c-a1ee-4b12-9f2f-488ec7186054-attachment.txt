@@ -1,0 +1,1 @@
+{"success":true,"message":"登录成功","token":"f59d704871b342ee904f89ca127b9f96","username":"admin","avatar":"/uploads/avatars/858b1da34d4f4288be54ab68489fe760.jpg","role":"ADMIN"}

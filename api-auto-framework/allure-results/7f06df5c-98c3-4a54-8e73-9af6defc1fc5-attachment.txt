@@ -1,0 +1,20 @@
+/**
+ * 登录请求 JSON 模板
+ *
+ * 说明：
+ *   1. ${username}、${password}、${loginType} 为占位符，执行时会被 Excel 中对应列的值替换。
+ *   2. 模板只定义请求结构，具体数据由 Excel 维护，实现"结构与数据分离"。
+ *   3. 若某字段在 Excel 中为空，渲染后该字段值为空字符串 ""（非 null）。
+ *
+ * 示例渲染结果（Excel 中 username=admin, password=123456, loginType=user）：
+ *   {
+ *     "username": "admin",
+ *     "password": "123456",
+ *     "loginType": "user"
+ *   }
+ */
+{
+  "username": "${username}",
+  "password": "${password}",
+  "loginType": "${loginType}"
+}

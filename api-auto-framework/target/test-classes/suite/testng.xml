@@ -1,0 +1,28 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<!--
+  TestNG 测试套件配置文件
+
+  作用：
+    1. 定义测试套件的名称、并行策略、监听器等全局配置。
+    2. 指定要执行的测试类（此处为 BaseApiTest）。
+    3. 注册全局监听器 AllureTestListener，自动捕获用例生命周期事件。
+
+  扩展方式：
+    - 如需按模块拆分执行，可新增 <test> 标签引入 ModuleApiTest
+    - 如需并行执行，修改 suite 标签的 parallel 属性为 "methods" 或 "classes"
+-->
+<suite name="API-Automation-Suite" verbose="1" parallel="none">
+
+    <!-- 注册全局监听器：测试成功/失败时自动附加上下文快照到 Allure 报告 -->
+    <listeners>
+        <listener class-name="com.example.autoframework.listeners.AllureTestListener"/>
+    </listeners>
+
+    <!-- 测试分组：可配置多个 <test> 以支持环境隔离或模块分批执行 -->
+    <test name="API-Auto-Tests">
+        <classes>
+            <!-- 统一测试入口：单类执行 Excel 中的全部用例 -->
+            <class name="com.example.autoframework.tests.BaseApiTest"/>
+        </classes>
+    </test>
+</suite>

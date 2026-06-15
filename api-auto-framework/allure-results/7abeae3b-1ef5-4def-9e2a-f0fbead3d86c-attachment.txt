@@ -1,0 +1,12 @@
+/**
+ * 空请求体模板
+ *
+ * 说明：
+ *   1. 当 HTTP 方法为 GET 或 DELETE 且无需 body 时使用此模板。
+ *   2. ApiEngine 对 GET 请求会将此 JSON 转为 Query 参数 Map；
+ *      由于 {} 转为 Map 后是空的，因此不会附加任何 Query 参数。
+ *   3. 若 GET 请求需要带 Query 参数，可在模板中定义：
+ *        {"page":"${page}","size":"${size}"}
+ *      ApiEngine 会自动将其拼接到 URL 后：?page=1&size=10
+ */
+{}

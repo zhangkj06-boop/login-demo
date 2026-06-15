@@ -1,0 +1,30 @@
+<div>POST to http://localhost:8080/api/login</div>
+
+    <h4>Body</h4>
+    <div>
+    <pre class="preformated-text">
+{
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;password&quot;: &quot;wrongPwd&quot;,
+    &quot;loginType&quot;: &quot;user&quot;
+}    </pre>
+    </div>
+
+    <h4>Headers</h4>
+    <div>
+            <div>Authorization: Bearer 615f010eb8ed41e7a0292e02f4776685</div>
+            <div>Accept: */*</div>
+            <div>Content-Type: application/json; charset=UTF-8</div>
+    </div>
+
+
+
+    <h4>Curl</h4>
+    <div>
+        curl -v -X POST &#39;http://localhost:8080/api/login&#39; -H &#39;Authorization: Bearer 615f010eb8ed41e7a0292e02f4776685&#39; -H &#39;Accept: */*&#39; -H &#39;Content-Type: application/json; charset=UTF-8&#39; -d &#39;{
+    &quot;username&quot;: &quot;admin&quot;,
+    &quot;password&quot;: &quot;wrongPwd&quot;,
+    &quot;loginType&quot;: &quot;user&quot;
+}&#39;
+    </div>
+

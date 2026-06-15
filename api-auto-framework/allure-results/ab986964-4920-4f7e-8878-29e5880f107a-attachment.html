@@ -1,0 +1,61 @@
+<div>POST to http://localhost:8080/api/login</div>
+
+    <h4>Body</h4>
+    <div>
+    <pre class="preformated-text">
+/**
+ * 登录请求 JSON 模板
+ *
+ * 说明：
+ *   1. admin、wrongPwd、user 为占位符，执行时会被 Excel 中对应列的值替换。
+ *   2. 模板只定义请求结构，具体数据由 Excel 维护，实现&quot;结构与数据分离&quot;。
+ *   3. 若某字段在 Excel 中为空，渲染后该字段值为空字符串 &quot;&quot;（非 null）。
+ *
+ * 示例渲染结果（Excel 中 username=admin, password=123456, loginType=user）：
+ *   {
+ *     &quot;username&quot;: &quot;admin&quot;,
+ *     &quot;password&quot;: &quot;123456&quot;,
+ *     &quot;loginType&quot;: &quot;user&quot;
+ *   }
+ */
+{
+  &quot;username&quot;: &quot;admin&quot;,
+  &quot;password&quot;: &quot;wrongPwd&quot;,
+  &quot;loginType&quot;: &quot;user&quot;
+}
+    </pre>
+    </div>
+
+    <h4>Headers</h4>
+    <div>
+            <div>Accept: */*</div>
+            <div>Content-Type: application/json; charset=UTF-8</div>
+    </div>
+
+
+
+    <h4>Curl</h4>
+    <div>
+        curl -v -X POST &#39;http://localhost:8080/api/login&#39; -H &#39;Accept: */*&#39; -H &#39;Content-Type: application/json; charset=UTF-8&#39; -d &#39;/**
+ * 登录请求 JSON 模板
+ *
+ * 说明：
+ *   1. admin、wrongPwd、user 为占位符，执行时会被 Excel 中对应列的值替换。
+ *   2. 模板只定义请求结构，具体数据由 Excel 维护，实现&quot;结构与数据分离&quot;。
+ *   3. 若某字段在 Excel 中为空，渲染后该字段值为空字符串 &quot;&quot;（非 null）。
+ *
+ * 示例渲染结果（Excel 中 username=admin, password=123456, loginType=user）：
+ *   {
+ *     &quot;username&quot;: &quot;admin&quot;,
+ *     &quot;password&quot;: &quot;123456&quot;,
+ *     &quot;loginType&quot;: &quot;user&quot;
+ *   }
+ */
+{
+  &quot;username&quot;: &quot;admin&quot;,
+  &quot;password&quot;: &quot;wrongPwd&quot;,
+  &quot;loginType&quot;: &quot;user&quot;
+}
+&#39;
+    </div>
+

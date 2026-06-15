@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  api-auto-framework 日志配置文件（测试环境）
+
+  说明：
+    1. 本文件仅在测试阶段生效（文件名 logback-test.xml 优先于 logback.xml）。
+    2. 控制台输出 INFO 及以上级别，方便 CI 环境中快速浏览。
+    3. 文件输出 DEBUG 及以上级别，保留完整执行细节用于问题排查。
+    4. 框架自身包（com.example.autoframework）统一设置为 DEBUG，确保核心链路全量记录。
+-->
+<configuration>
+
+    <!-- 控制台输出 Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 文件输出 Appender（按日期滚动） -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/api-auto-framework.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/api-auto-framework.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 框架自身包：DEBUG 级别，记录完整执行链路 -->
+    <logger name="com.example.autoframework" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <!-- RestAssured 请求/响应日志：INFO 级别即可，DEBUG 会产生大量二进制输出 -->
+    <logger name="io.restassured" level="INFO" />
+
+    <!-- Apache POI：WARN 级别，避免解析时产生过多 INFO 噪音 -->
+    <logger name="org.apache.poi" level="WARN" />
+
+    <!-- Root 日志级别：INFO -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </root>
+
+</configuration>

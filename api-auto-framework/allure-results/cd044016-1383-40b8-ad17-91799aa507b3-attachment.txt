@@ -1,0 +1,1 @@
+[{"id":1,"name":"2B铅笔","price":1.00,"quantity":28,"type":"笔"},{"id":2,"name":"钢笔","price":20.00,"quantity":2,"type":"笔"},{"id":3,"name":"三国演义","price":100.00,"quantity":2,"type":"书"},{"id":4,"name":"水浒传","price":60.00,"quantity":0,"type":"书"},{"id":5,"name":"笔记本","price":1.00,"quantity":2,"type":"本"},{"id":6,"name":"作文本","price":1.00,"quantity":10,"type":"本"}]
